@@ -18,7 +18,7 @@
 								fill="#BDBDBD"
 							/>
 						</svg>
-						<p class="text">Street Name, City Name</p>
+						<p class="text">Scheveningseweg 60-8, 2517KW, The Hague</p>
 					</li>
 					<li class="flex items-center gap-1">
 						<svg
@@ -48,7 +48,7 @@
 								fill="#BDBDBD"
 							/>
 						</svg>
-						<a href="mailto:contact@company.com">contact@company.com</a>
+						<a href="mailto:contact@company.com">info[at]daistra.com</a>
 					</li>
 				</ul>
 			</div>
@@ -70,7 +70,7 @@
 		<hr class="my-6 sm:mx-auto border-gray-700 lg:my-8" />
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<span class="text-sm sm:text-center text-gray-400"
-				>© 2023 <a href="#" class="hover:underline">Company Name™</a>. All Rights Reserved.
+				>© 2023 <a href="#" class="hover:underline">Daistra™</a>. All Rights Reserved.
 			</span>
 			<div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
 				<a href="#" class="text-gray-500 hover:text-white">

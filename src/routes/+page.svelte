@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Real Estate Svelte & TailwindCSS Template: Modern Home & Property Listings</title>
+	<title>Daistra | Data & AI Strategy</title>
 	<meta
 		name="description"
 		content="Template with Svelte and TailwindCss"
@@ -9,67 +9,14 @@
 <section id="hero" class=" px-6 pt-12 bg-gray-100">
 	<div class="grid max-w-screen-xl py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-12">
 		<div class="mr-auto place-self-center lg:col-span-7">
-			<h1
-				class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl"
-			>
-				Real Estate Svelte tst
-				<span class="underline underline-offset-2 decoration-8 decoration-purple-400">Template</span
-				>
-			</h1>
-			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">
-				Real Estate Svelte Template is a free, open source template made by <a
-					class="text-purple-400"
-					href="https://x.com/melu1s"><strong>@melu1s</strong></a
-				>. Feel free to use it for your next project.
-			</p>
-
+			<h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">Daistra</h1>
+			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Delivering Data & AI Strategy</p>
 			<form>
-				<label
-					for="default-search"
-					class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label
-				>
-				<div class="relative">
-					<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							width="28"
-							height="28"
-							viewBox="0 0 28 28"
-							fill="none"
-						>
-							<path
-								d="M13.6668 14.9774C15.5452 14.9774 17.0679 13.4547 17.0679 11.5763C17.0679 9.69799 15.5452 8.17529 13.6668 8.17529C11.7885 8.17529 10.2658 9.69799 10.2658 11.5763C10.2658 13.4547 11.7885 14.9774 13.6668 14.9774Z"
-								stroke="#AEAEAE"
-								stroke-width="2.26736"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-							<path
-								d="M13.667 2.50684C11.2616 2.50684 8.95476 3.46236 7.25391 5.16321C5.55306 6.86406 4.59753 9.1709 4.59753 11.5763C4.59753 13.7212 5.05327 15.1247 6.29805 16.6778L13.667 25.1804L21.0359 16.6778C22.2807 15.1247 22.7364 13.7212 22.7364 11.5763C22.7364 9.1709 21.7809 6.86406 20.08 5.16321C18.3792 3.46236 16.0723 2.50684 13.667 2.50684V2.50684Z"
-								stroke="#AEAEAE"
-								stroke-width="2.26736"
-								stroke-linecap="round"
-								stroke-linejoin="round"
-							/>
-						</svg>
-					</div>
-					<input
-						type="search"
-						id="default-search"
-						class="block w-full p-4 pl-12 md:p-6 md:pl-12 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-purple-500 focus:border-purple-500"
-						placeholder="Search by Location"
-						required
-					/>
-					<button
-						type="submit"
-						class="text-white absolute right-1.5 bottom-1.5 md:bottom-2.5 bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm md:text-lg px-3 md:px-10 py-3"
-						>Search</button
-					>
-				</div>
+				<div class="relative"></div>
 			</form>
 		</div>
 		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-			<img src="/images/house1.png" width="617" height="697" alt="House" />
+			<img src="https://placehold.co/600x600" width="600" height="600" alt="Placeholder" />
 		</div>
 	</div>
 </section>
@@ -95,7 +42,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">Best Price</h3>
+			<h3 class="font-bold text-lg">Data Strategy</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -116,7 +63,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">Construction</h3>
+			<h3 class="font-bold text-lg">DataOps</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -135,7 +82,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">Design</h3>
+			<h3 class="font-bold text-lg">MLOps</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -146,16 +93,15 @@
 <section id="contact" class="px-6 py-12 bg-gray-100">
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
 		<img
-			src="/images/house2.png"
-			class="h-full lg:w-10/12"
+			src="/images/logo.png"
+			class="w-full lg:w-10/12"
 			width="996"
 			height="662"
-			alt="A House"
+			alt="logo"
 		/>
 		<div>
-			<h3 class="font-bold text-2xl">Find the right one for you!</h3>
+			<h3 class="font-bold text-2xl">Get in contact with us</h3>
 			<p class="font-light text-sm py-2 mb-3 text-gray-500">
-				Schedule a consultation with an agent
 			</p>
 			<form>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
@@ -197,7 +143,7 @@
 					placeholder="Description"
 					required
 				/>
-				<p class="font-light text-gray-500 mb-6">We don't send you spam</p>
+				<p class="font-light text-gray-500 mb-6"></p>
 				<button
 					type="button"
 					class="w-full text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0"
