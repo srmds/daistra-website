@@ -3,10 +3,8 @@
 		<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 			<a href="/" class="flex items-center">
 				<span class="self-center text-2xl font-semibold whitespace-nowrap">
-				<img src="/images/logo-header.png"
+				<img src="https://placehold.co/140"
 					class="lg:w-10/12"
-					width="200"
-					height="200"
 					alt="logo">
 				</span>
 			</a>
@@ -20,25 +18,25 @@
 					<li>
 						<a
 							href="/"
-							class="block py-2 pl-3 pr-4 text-white bg-purple-700 rounded md:bg-transparent md:text-purple-700 md:p-0"
+							class="block py-2 pl-3 pr-4 text-white text-3xl bg-purple-700 rounded md:bg-transparent md:text-purple-700 md:p-0"
 							aria-current="page">Home
 						</a>
 					</li>
 					<li>
 						<a 	href="#service"
-							class=" block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
+							class=" block py-2 pl-3 pr-4 text-gray-900 text-3xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
 							>Service
 						</a>
 					</li>
 					<li>
 						<a href="#about"
-						   class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
+						   class="block py-2 pl-3 pr-4 text-gray-900 text-3xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
 							>About
 						</a>
 					</li>
 					<li>
 						<a href="#contact"
-							class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
+							class="block py-2 pl-3 pr-4 text-gray-900 text-3xl rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-purple-700 md:p-0"
 							>Contact
 						</a>
 					</li>

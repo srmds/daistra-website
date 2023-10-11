@@ -16,7 +16,7 @@
 			</form>
 		</div>
 		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-			<img src="https://placehold.co/600x600" width="600" height="600" alt="Placeholder" />
+			<img src="https://placehold.co/500" height="500"  alt="Placeholder"/>
 		</div>
 	</div>
 </section>
@@ -42,7 +42,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">Data Strategy</h3>
+			<h3 class="font-bold text-3xl">Data Strategy</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -63,7 +63,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">DataOps</h3>
+			<h3 class="font-bold text-3xl">DataOps</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -82,7 +82,7 @@
 					fill="currentColor"
 				/>
 			</svg>
-			<h3 class="font-bold text-lg">MLOps</h3>
+			<h3 class="font-bold text-3xl">MLOps</h3>
 			<p class="text-gray-500">
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
 			</p>
@@ -93,7 +93,7 @@
 <section id="contact" class="px-6 py-12 bg-gray-100">
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
 		<img
-			src="/images/logo.png"
+			src="https://placehold.co/100"
 			class="w-full lg:w-10/12"
 			width="996"
 			height="662"
