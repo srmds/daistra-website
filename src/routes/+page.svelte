@@ -6,23 +6,23 @@
 	/>
 </svelte:head>
 
-<section id="hero" class=" px-6 pt-12 bg-gray-100">
+<section id="about" class=" px-6 pt-24 bg-gray-100">
 	<div class="grid max-w-screen-xl py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-12">
 		<div class="mr-auto place-self-center lg:col-span-7">
 			<h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">Daistra</h1>
-			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Delivering Data & AI Strategy</p>
+			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Delivering Data & AI Strategies</p>
 			<form>
 				<div class="relative"></div>
 			</form>
 		</div>
-		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-			<img src="https://placehold.co/500" height="500"  alt="Placeholder"/>
+		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex my-8">
+			<img src="https://placehold.co/250" width="250"  alt="Placeholder"/>
 		</div>
 	</div>
 </section>
 
 <section id="service" class="px-6 bg-white py-12">
-	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Service</h2>
+	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 	<div
 		class="grid max-w-screen-xl grid-cols-1 place-items-center px-4 py-8 mx-auto gap-8 xl:gap-0 lg:py-16 md:grid-cols-3"
 	>
@@ -93,10 +93,7 @@
 <section id="contact" class="px-6 py-12 bg-gray-100">
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
 		<img
-			src="https://placehold.co/100"
-			class="w-full lg:w-10/12"
-			width="996"
-			height="662"
+			src="https://placehold.co/250"
 			alt="logo"
 		/>
 		<div>
