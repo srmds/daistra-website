@@ -39,7 +39,7 @@
 				<div>
 					<ul class=" text-gray-400 font-medium">
 						<li class="mb-4">
-							<a href="https://www.kvk.nl/zoeken/handelsregister/?kvknummer=87654321" class="hover:underline">KVK: 91660165</a>
+							<a href="https://www.kvk.nl/zoeken/handelsregister/?kvknummer=91660165" class="hover:underline">KVK: 91660165</a>
 						</li>
 						<li>
 							<a href="https://ec.europa.eu/taxation_customs/vies/rest-api/ms/NL/vat/NL0087654321B99" class="hover:underline">VAT: NL00000000B00 </a>
