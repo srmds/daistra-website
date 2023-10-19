@@ -42,7 +42,7 @@
 							<a href="https://www.kvk.nl/zoeken/handelsregister/?kvknummer=91660165" class="hover:underline">KVK: 91660165</a>
 						</li>
 						<li>
-							<a href="https://ec.europa.eu/taxation_customs/vies/rest-api/ms/NL/vat/NL0087654321B99" class="hover:underline">VAT: NL00000000B00 </a>
+							<a href="https://ec.europa.eu/taxation_customs/vies/rest-api/ms/NL/vat/NL865728318B01" class="hover:underline">VAT: NL865728318B01 </a>
 						</li>
 					</ul>
 				</div>
