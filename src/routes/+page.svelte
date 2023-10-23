@@ -10,13 +10,13 @@
 	<div class="grid max-w-screen-xl py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-12">
 		<div class="mr-auto place-self-center lg:col-span-7">
 			<h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl">Daistra</h1>
-			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Delivering Data & AI Strategies</p>
+			<p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl">Strategic partner for delivering Data & AI Strategies</p>
 			<form>
 				<div class="relative"></div>
 			</form>
 		</div>
 		<div class="hidden lg:mt-0 lg:col-span-5 lg:flex my-8">
-			<img src="https://placehold.co/250" width="250"  alt="Placeholder"/>
+			<img src="images/logo_page.png" width="250"  alt="Placeholder"/>
 		</div>
 	</div>
 </section>
@@ -24,72 +24,100 @@
 <section id="service" class="px-6 bg-white py-12">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 	<div
-		class="grid max-w-screen-xl grid-cols-1 place-items-center px-4 py-8 mx-auto gap-8 xl:gap-0 lg:py-16 md:grid-cols-3">
-		<div class="flex flex-col space-y-2 items-start px-6 py-6">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="55"
-				height="58"
-				viewBox="0 0 55 58"
+		class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0  md:grid-cols-3">
+		<div class="flex flex-col  items-start px-6 py-6">
+			<div class="flex mb-4">
+				<svg xmlns="http://www.w3.org/2000/svg" 
+				width="100"
+				height=""
+				viewBox="0 0 25 25"
 				fill="none"
 				class="text-indigo-500">
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M45.2856 28.6429C45.2856 30.5749 46.8164 32.1469 48.6979 32.1469C49.6466 32.1469 50.4166 32.9376 50.4166 33.9119V40.2681C50.4166 45.6431 46.1587 50.0155 40.9246 50.0155H14.0777C8.84352 50.0155 4.58331 45.6431 4.58331 40.2681V33.9119C4.58331 32.9376 5.35331 32.1469 6.30206 32.1469C8.18581 32.1469 9.71665 30.5749 9.71665 28.6429C9.71665 26.7602 8.24769 25.3435 6.30206 25.3435C5.84602 25.3435 5.4106 25.1576 5.08748 24.8258C4.76435 24.494 4.58331 24.0445 4.58331 23.5786L4.5879 17.0152C4.5879 11.6403 8.84581 7.2655 14.08 7.2655H40.92C46.1541 7.2655 50.4144 11.6403 50.4144 17.0152L50.4166 23.3738C50.4166 23.8398 50.2356 24.2916 49.9148 24.6211C49.5916 24.9529 49.1562 25.1388 48.6979 25.1388C46.8164 25.1388 45.2856 26.7108 45.2856 28.6429ZM32.6607 30.1797L35.3626 27.4781C35.8324 27.0121 35.9951 26.325 35.7912 25.6896C35.5895 25.0542 35.0624 24.6024 34.4253 24.5106L30.6922 23.9505L29.0216 20.477C28.7351 19.8793 28.153 19.5075 27.5045 19.5051H27.4999C26.8537 19.5051 26.2716 19.8769 25.9805 20.4747L24.3099 23.9505L20.5837 24.5082C19.9397 24.6024 19.4126 25.0542 19.2087 25.6896C19.007 26.325 19.1697 27.0121 19.6372 27.4781L22.3391 30.1797L21.702 33.9991C21.592 34.658 21.851 35.3122 22.378 35.7052C22.676 35.9241 23.022 36.037 23.3726 36.037C23.6407 36.037 23.9112 35.9688 24.1587 35.8346L27.4999 34.032L30.8343 35.8299C31.4118 36.1476 32.097 36.0982 32.6218 35.7029C33.1512 35.3122 33.4101 34.658 33.3001 33.9991L32.6607 30.1797Z"
-					fill="currentColor"/>
-			</svg>
+			   <path 
+				   stroke-linecap="round" 
+				   stroke-linejoin="round" 
+				   d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" 
+				   fill="currentColor"
+			   />
+			 </svg>
+			  </div>
 			<h3 class="font-bold text-3xl">Data Strategy</h3>
-			<p class="text-gray-500">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+			<p class="text-gray-500 whitespace-pre-line">
+				A data strategy serves as blueprint, encompassing technology, processes, people and governance. It sets out the high-level vision for data, identification of data sources, data quality standards, data governance, strategic goals for data utilization and alignmet with overall business goals
+				<br>
+			</p>
+			<p class="text-gray-800 whitespace-pre-line">
+				Our mission is to be a strategic partner in designing and implementing data strategies that align with your business goals, crafting realistic roadmaps that empower your organization to collect, govern, manage, and leverage data effectively
 			</p>
 		</div>
-		<div class="flex flex-col space-y-2 items-start px-6 py-6">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="51"
-				height="51"
-				viewBox="0 0 51 51"
+		<div class="flex flex-col  items-start px-6 py-6">
+			<div class="flex mb-4">
+				<svg xmlns="http://www.w3.org/2000/svg" 
+				width="100"
+				height=""
+				viewBox="0 0 25 25"
 				fill="none"
 				class="text-indigo-500">
-				<path
-					fill-rule="evenodd"
-					clip-rule="evenodd"
-					d="M7.4375 21.6358C7.4375 12.0527 15.6057 4.30713 25.4861 4.30713C35.3943 4.30713 43.5625 12.0527 43.5625 21.6358C43.5625 26.4648 41.7711 30.948 38.8227 34.7479C35.57 38.9395 31.5608 42.5914 27.0482 45.458C26.0153 46.1205 25.0832 46.1705 23.9497 45.458C19.4113 42.5914 15.4022 38.9395 12.1773 34.7479C9.22671 30.948 7.4375 26.4648 7.4375 21.6358ZM19.5377 22.1754C19.5377 25.3857 22.2098 27.9106 25.4861 27.9106C28.7645 27.9106 31.4622 25.3857 31.4622 22.1754C31.4622 18.9901 28.7645 16.3422 25.4861 16.3422C22.2098 16.3422 19.5377 18.9901 19.5377 22.1754Z"
-					fill="currentColor"/>
-			</svg>
+				<path 
+					stroke-linecap="round" 
+					stroke-linejoin="round" 
+					d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" 
+					fill="currentColor"
+				/>
+			  </svg>
+			</div>
 			<h3 class="font-bold text-3xl">DataOps</h3>
-			<p class="text-gray-500">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+			<p class="text-gray-500 whitespace-pre-line">
+				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making. 
+				<br>
+			</p>
+			<p class="text-gray-800 whitespace-pre-line">
+				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
 			</p>
 		</div>
-		<div class="flex flex-col space-y-2 items-start px-6 py-6">
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				width="42"
-				height="42"
-				viewBox="0 0 42 42"
+		<div class="flex flex-col  items-start px-6 py-6">
+			<div class="flex mb-4">
+				<svg xmlns="http://www.w3.org/2000/svg" 
+				width="100"
+				height=""
+				viewBox="-5 -5 50 50"
 				fill="none"
 				class="text-indigo-500">
-				<path
+				<path 
+					stroke-linecap="round" 
+					stroke-linejoin="round" 
 					d="M20.6679 0.65332C16.1173 14.2562 8.26773 31.1598 0 41.6277L20.6679 33.3768L41.3844 41.6277C33.1182 31.1598 25.263 14.2562 20.6679 0.65332Z"
 					fill="currentColor"
 				/>
-			</svg>
+			  </svg>
+			</div>
 			<h3 class="font-bold text-3xl">MLOps</h3>
-			<p class="text-gray-500">
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+			<p class="text-gray-500 whitespace-pre-line">
+				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization. 
+				<br>
 			</p>
+			<p class="text-gray-800 whitespace-pre-line">
+				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
 	</div>
 </section>
 
 <section id="contact" class="px-6 py-12 bg-gray-100">
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
-		<img
-			src="https://placehold.co/250"
-			alt="logo"
-		/>
+		<div class="flex flex-col  items-start px-6 py-6 bg-gray">
+			<svg xmlns="http://www.w3.org/2000/svg" 
+				fill="none" 
+				viewBox="0 0 10 " 
+				stroke-width="1.5" 
+				stroke="currentColor" 
+				class="text-indigo-500">
+				<path 
+					stroke-linecap="round" 
+					stroke-linejoin="round" 
+					d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+				/>
+			</svg>
+		  </div>
 		<div>
 			<h3 class="font-bold text-2xl">Get in contact with us</h3>
 			<p class="font-light text-sm py-2 mb-3 text-gray-500">

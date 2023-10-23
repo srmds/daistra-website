@@ -1,3 +1,6 @@
+<script>
+	let year = new Date().getFullYear();
+</script>
 <footer class="bg-[#001246] ">
 	<div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
 		<div class="md:flex md:justify-between">
@@ -30,7 +33,7 @@
 								fill="#BDBDBD"
 							/>
 						</svg>
-						<a href="mailto:contact@company.com">info[at]daistra.com</a>
+						info[at]daistra.com
 					</li>
 				</ul>
 			</div>
@@ -39,10 +42,10 @@
 				<div>
 					<ul class=" text-gray-400 font-medium">
 						<li class="mb-4">
-							<a href="https://www.kvk.nl/zoeken/handelsregister/?kvknummer=91660165" class="hover:underline">KVK: 91660165</a>
+							KVK: 91660165
 						</li>
 						<li>
-							<a href="https://ec.europa.eu/taxation_customs/vies/rest-api/ms/NL/vat/NL865728318B01" class="hover:underline">VAT: NL865728318B01 </a>
+							VAT: NL865728318B01
 						</li>
 					</ul>
 				</div>
@@ -50,9 +53,7 @@
 		</div>
 		<hr class="my-6 sm:mx-auto border-gray-700 lg:my-8" />
 		<div class="sm:flex sm:items-center sm:justify-between">
-			<span class="text-gray-400"
-				>© 2023 <a href="/" class="hover:underline">Daistra</a>. All Rights Reserved.
-			</span>
+			<span class="text-gray-400">© {year} <a href="/" class="hover:underline">Daistra</a>. All Rights Reserved.</span>
 			<div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
 				<a href="https://www.linkedin.com/in/srmds/" class="text-gray-500 hover:text-white">
 					<svg

@@ -34,5 +34,8 @@
 		"vite": "^4.4.2",
 		"wrangler": "^3.11.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"create-cloudflare": "^2.6.0"
+	}
 }
