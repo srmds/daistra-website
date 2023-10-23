@@ -3,9 +3,8 @@
 </script>
 <header class="mb-12" >
 	<Navbar  >
-		<NavBrand href="/">
-		  <img src="https://placehold.co/75" class="mr-3 h-6 sm:h-9" alt="Flowbite Logo" />
-		  <span class="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Daistra</span>
+		<NavBrand href="https://daistra.com">
+			<img src="/images/logo-header.png" class="mr-3 h-24 sm:h-24" alt="Daistra Logo" />
 		</NavBrand>
 		<NavHamburger  />
 		<NavUl >
