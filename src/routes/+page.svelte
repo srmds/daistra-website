@@ -6,16 +6,15 @@
 	/>
 </svelte:head>
 
-<section id="about" class=" px-6 pt-0">
-	<h1 class="text-6xl lg:text-7xl xl:text-8xl text-gray-700 tracking-wider font-bold font-serif mt-12 text-center">Coming Soon</h1>
-	<div class="grid max-w-screen-lg py-12 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-1">
+<section id="about" class="px-6 py-12 bg-gray-100">
+		<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h2>
+		<div class="grid max-w-screen-lg py-12 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-1">
 		<img 
 			src="images/banner.gif" 
 			class="loop=once"
 			alt="banner"
 		/>
 	</div>
-	
 </section>
 
 <section id="service" class="px-6 bg-white py-12">

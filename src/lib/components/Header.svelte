@@ -10,7 +10,7 @@
 		<NavUl >
 		  <NavLi href="/">Home</NavLi>
 		  <NavLi href="#about">About</NavLi>
-		  <NavLi href="#services">Services</NavLi>
+		  <NavLi href="#service">Services</NavLi>
 		  <NavLi href="#contact">Contact</NavLi>
 		</NavUl>
 	  </Navbar>
