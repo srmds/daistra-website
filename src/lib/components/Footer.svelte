@@ -55,7 +55,7 @@
 		<div class="sm:flex sm:items-center sm:justify-between">
 			<span class="text-gray-400">© {year} <a href="/" class="hover:underline">Daistra</a>. All Rights Reserved.</span>
 			<div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
-				<a href="https://www.linkedin.com/in/srmds/" class="text-gray-500 hover:text-white">
+				<a href="https://www.linkedin.com/company/daistra" class="text-gray-500 hover:text-white">
 					<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-20"
