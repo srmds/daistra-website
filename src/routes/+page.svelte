@@ -32,20 +32,21 @@
 </svelte:head>
 
 <section id="about" class="px-6 py-12 bg-gray-100">
-		<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h2>
-		<div class="grid max-w-screen-lg py-12 mx-auto lg:gap-8 xl:gap-0 lg:py-0 lg:pt-16 lg:grid-cols-1">
-		<img 
-			src="images/banner.gif" 
-			class="loop=once"
-			alt="banner"
-		/>
-	</div>
+	<!-- <h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h2> -->
+	<div
+		class="relative" style="padding-top: 36.5%">
+		<iframe 
+			title="daistra-banner"
+			loading="lazy"
+			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyHTkrLLE&#x2F;view?embed" 
+			class="absolute inset-0 w-full h-full" frameborder="0">
+		</iframe>
+		</div>
 </section>
-
 <section id="service" class="px-6 bg-white py-12">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 	<div
-		class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0  md:grid-cols-3">
+		class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
 		<div class="flex flex-col  items-start px-6 py-6">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
@@ -62,7 +63,7 @@
 			 </svg>
 			  </div>
 			<h3 class="font-bold text-3xl">Data Strategy</h3>
-			<p class="text-gray-500 whitespace-pre-line">
+			<p class="text-gray-500 whitespace-pre-line py-5">
 				A data strategy serves as blueprint, encompassing technology, processes, people and governance. It sets out the high-level vision for data, identification of data sources, data quality standards, data governance, strategic goals for data utilization and alignment with overall business goals
 				<br>
 			</p>
@@ -86,7 +87,7 @@
 			  </svg>
 			</div>
 			<h3 class="font-bold text-3xl">DataOps</h3>
-			<p class="text-gray-500 whitespace-pre-line">
+			<p class="text-gray-500 whitespace-pre-line py-5">
 				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making. 
 				<br>
 			</p>
@@ -110,7 +111,7 @@
 			  </svg>
 			</div>
 			<h3 class="font-bold text-3xl">MLOps</h3>
-			<p class="text-gray-500 whitespace-pre-line">
+			<p class="text-gray-500 whitespace-pre-line py-5">
 				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization. 
 				<br>
 			</p>
