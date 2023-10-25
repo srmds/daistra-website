@@ -35,7 +35,7 @@
 </svelte:head>
 
 <section id="about" class="bg-gray-100">
-	<h1 class="hidden font-bold text-2xl md:text-4xl lg:text-5xl text-center">About Daistra</h1>
+	<h1 class="hidden font-bold text-2xl md:text-4xl lg:text-5xl text-center">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
 	<div class="relative" style="padding-top: 36.5%">
 		<iframe 
 			title="daistra-banner"
