@@ -1,5 +1,7 @@
 <script>
 	import { PUBLIC_API_KEY } from '$env/static/public';
+	import GoToTop from "$lib/components/GoToTop.svelte"
+
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
@@ -21,27 +23,28 @@
 		  status = result.message || "Success"
 	  }
 	}
-	</script>
-	
+</script>
+<GoToTop showAtPixel={600} />
+
 <svelte:head>
 	<title>Daistra | Data & AI Strategy</title>
 	<meta
 		name="description"
-		content="Daistra | Data & AI Strategy"
+		content="Delivering Data and AI Strategies, empowering DataOps & MLOps with expert Data & ML Engineers"
 	/>
 </svelte:head>
 
-<section id="about" class="px-6 py-12 bg-gray-100">
+<section id="about" class="bg-gray-100">
 	<!-- <h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h2> -->
-	<div
-		class="relative" style="padding-top: 36.5%">
+	<div class="relative" style="padding-top: 36.5%">
 		<iframe 
 			title="daistra-banner"
 			loading="lazy"
 			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyHTkrLLE&#x2F;view?embed" 
-			class="absolute inset-0 w-full h-full" frameborder="0">
+			class="absolute inset-0 w-full h-full" 
+			frameborder="0">
 		</iframe>
-		</div>
+	</div>
 </section>
 <section id="service" class="px-6 bg-white py-12">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
@@ -91,7 +94,7 @@
 				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making. 
 				<br>
 			</p>
-			<p class="text-gray-800 whitespace-pre-line">
+			<p class="text-gray-800 whitespace-pre-line  py-12">
 				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
 			</p>
 		</div>
@@ -115,7 +118,7 @@
 				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization. 
 				<br>
 			</p>
-			<p class="text-gray-800 whitespace-pre-line">
+			<p class="text-gray-800 whitespace-pre-line py-10">
 				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
 	</div>
@@ -200,13 +203,10 @@
 				<div class="h-captcha" data-captcha="true"></div>
 				<button 
 					type="submit"
-					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0"
+					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0 my-5"
 					>Send Message</button
 				>
-				
 			</form>
-
-			
 			<script src="https://web3forms.com/client/script.js" async defer></script>
 		</div>
 	</div>
