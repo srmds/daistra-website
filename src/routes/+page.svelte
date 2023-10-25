@@ -35,13 +35,13 @@
 </svelte:head>
 
 <section id="about" class="bg-gray-100">
-	<!-- <h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h2> -->
+	<h1 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Coming soon</h1>
 	<div class="relative" style="padding-top: 36.5%">
 		<iframe 
 			title="daistra-banner"
 			loading="lazy"
 			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyHTkrLLE&#x2F;view?embed" 
-			class="absolute inset-0 w-full h-full" 
+			class="absolute inset-0 w-full h-full py-5" 
 			frameborder="0">
 		</iframe>
 	</div>
