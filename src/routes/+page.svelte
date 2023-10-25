@@ -1,3 +1,28 @@
+<script>
+	import { PUBLIC_API_KEY } from '$env/static/public';
+	let status = "";
+	const handleSubmit = async data => {
+	  status = 'Submitting...'
+	  const formData = new FormData(data.currentTarget)
+	  const object = Object.fromEntries(formData);
+	  const json = JSON.stringify(object);
+	
+	  const response = await fetch("https://api.web3forms.com/submit", {
+		  method: "POST",
+		  headers: {
+			  "Content-Type": "application/json",
+			  Accept: "application/json",
+		  },
+		  body: json
+	  });
+	  const result = await response.json();
+	  if (result.success) {
+		  console.log(result);
+		  status = result.message || "Success"
+	  }
+	}
+	</script>
+	
 <svelte:head>
 	<title>Daistra | Data & AI Strategy</title>
 	<meta
@@ -25,7 +50,6 @@
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
-				height=""
 				viewBox="0 0 25 25"
 				fill="none"
 				class="text-indigo-500">
@@ -50,7 +74,6 @@
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
-				height=""
 				viewBox="0 0 25 25"
 				fill="none"
 				class="text-indigo-500">
@@ -75,7 +98,6 @@
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
-				height=""
 				viewBox="-5 -5 50 50"
 				fill="none"
 				class="text-indigo-500">
@@ -120,56 +142,71 @@
 			/>
 		  </div>
 		<div>
-			<h3 class="font-bold text-2xl">Get in contact with us</h3>
+			<h3 class="font-bold text-2xl">Contact Us</h3>
+			<p class="text-gray-400 dark:text-gray-400">
+				Fill up the form below to send us a message.
+			  </p>
 			<p class="font-light text-sm py-2 mb-3 text-gray-500">
 			</p>
-			<form>
+			<form action="https://api.web3forms.com/submit" method="POST" id="form">
+				<input type="hidden" name="subject" value="New website contact submission">
+				<input type="hidden" name="redirect" value="https://web3forms.com/success">
+				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
+				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Full Name</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<input
+				<input
 						type="text"
-						id="firstName"
+						id="name"
+						name="name"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="First Name"
+						placeholder="Jane Doe"
 						required
-					/>
-					<input
-						type="text"
-						id="lastName"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="Last Name"
-						required
-					/>
+				/>
 				</div>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 					<input
 						type="email"
 						id="email"
+						name="email-address"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="Email address"
+						placeholder="you@domain.com"
 						required
-					/>
-					<input
-						type="tel"
-						id="phone"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="Phone Number"
-						required
-					/>
+				/>
 				</div>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Phone Number</label>
+				<div class="mb-6 flex flex-col md:flex-row gap-5">
+					<input
+						type="text"
+						id="phone"
+						name="phone"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+						placeholder="+316 0000 0000"
+						required
+				/>
+				</div>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Message</label>
 				<textarea
-					id="comment"
+					id="message"
+					name="message"
 					rows="4"
 					class="w-full px-3 py-3 text-sm text-gray-900 bg-gray-50 border rounded-lg border-gray-300 focus:ring-0"
-					placeholder="Description"
+					placeholder="Your Message"
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
-				<button
-					type="button"
+				<div class="h-captcha" data-captcha="true"></div>
+				<button 
+					type="submit"
 					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0"
-					>Contact Us</button
+					>Send Message</button
 				>
+				
 			</form>
+
+			
+			<script src="https://web3forms.com/client/script.js" async defer></script>
 		</div>
 	</div>
 </section>
