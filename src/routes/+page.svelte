@@ -36,7 +36,9 @@
 
 <section id="about" class="bg-gray-100 my-10">
 	<h1 class="hidden font-bold text-2xl md:text-4xl lg:text-5xl text-center">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
-	<div class="relative" style="padding-top: 20%">
+		<!-- <div class="relative" style="padding-top: 0"> -->
+		<!-- <div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center"> -->
+		<div class="relative" style="padding-top: 20%">
 		<iframe 
 			title="daistra-banner"
 			loading="lazy" 
@@ -45,12 +47,16 @@
 			class="absolute inset-0 w-full h-full" 
 			>
 		</iframe>
+		<!-- <img class="" 
+		src="images/daistra-banner.gif" 
+		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+		alt="business strategy algined data strategy incorporating dataops mlops diagram"> -->
 	</div>
 </section>
 <section id="service" class="px-6 bg-white py-40">
-	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
-	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
+	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center  py-20">Services</h2>
 
+	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
 		<div class="flex flex-col  items-start px-6 py-6">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
@@ -122,30 +128,32 @@
 			<p class="text-gray-800 whitespace-pre-line py-10">
 				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
-		
+
+	</div>
+	<div class="grid max-w-screen-xxl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center my-10">
+		<img class="" 
+		src="images/data-strategy-diagram.svg" 
+		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+		alt="business strategy algined data strategy incorporating dataops mlops diagram">
 	</div>
 </section>
 
 <section id="contact" class="px-6 py-12 bg-gray-100">
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
 		<div class="flex flex-col  items-start px-6 py-6 bg-gray">
-			<!-- <svg xmlns="http://www.w3.org/2000/svg" 
-				fill="none" 
-				viewBox="0 0 10 " 
-				stroke-width="1.5" 
-				stroke="currentColor" 
-				class="text-indigo-500">
-				<path 
-					stroke-linecap="round" 
-					stroke-linejoin="round" 
-					d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-				/>
-			</svg> -->
-			<img 
+			<div style="position: relative; width: 100%; height: 0; padding-top: 56.3415%; padding-bottom: 0;">
+			 <iframe 
+			 	title="contact-us"
+			 	loading="lazy" 
+				style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+			    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyZTRgprE&#x2F;view?embed" >
+			 </iframe>
+		   </div>
+			<!-- <img 
 				src="images/logo-page.png" 
 				class="loop=once"
 				alt="banner"
-			/>
+			/> -->
 		  </div>
 		<div>
 			<h3 class="font-bold text-2xl">Contact Us</h3>
