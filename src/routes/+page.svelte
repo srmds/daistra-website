@@ -34,22 +34,23 @@
 	/>
 </svelte:head>
 
-<section id="about" class="bg-gray-100">
+<section id="about" class="bg-gray-100 my-10">
 	<h1 class="hidden font-bold text-2xl md:text-4xl lg:text-5xl text-center">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
-	<div class="relative" style="padding-top: 36.5%">
+	<div class="relative" style="padding-top: 20%">
 		<iframe 
 			title="daistra-banner"
-			loading="lazy"
-			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyHTkrLLE&#x2F;view?embed" 
+			loading="lazy" 
+			style="position: absolute; width: 100%; height: 130%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyXCMhD7E&#x2F;view?embed"
 			class="absolute inset-0 w-full h-full" 
-			frameborder="0">
+			>
 		</iframe>
 	</div>
 </section>
-<section id="service" class="px-6 bg-white py-12">
+<section id="service" class="px-6 bg-white py-40">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
-	<div
-		class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
+	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
+
 		<div class="flex flex-col  items-start px-6 py-6">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
@@ -121,6 +122,7 @@
 			<p class="text-gray-800 whitespace-pre-line py-10">
 				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
+		
 	</div>
 </section>
 
@@ -208,6 +210,8 @@
 				>
 			</form>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
+	
 		</div>
 	</div>
+
 </section>
