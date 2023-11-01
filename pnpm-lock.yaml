@@ -14,6 +14,9 @@ devDependencies:
   '@sveltejs/kit':
     specifier: ^1.20.4
     version: 1.20.4(svelte@4.0.5)(vite@4.4.2)
+  '@types/gtag.js':
+    specifier: ^0.0.17
+    version: 0.0.17
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.31)
@@ -764,6 +767,10 @@ packages:
 
   /@types/estree@1.0.2:
     resolution: {integrity: sha512-VeiPZ9MMwXjO32/Xu7+OwflfmeoRwkE/qzndw42gGtgJwZopBnzy2gD//NN1+go1mADzkDcqf/KnFRSjTJ8xJA==}
+    dev: true
+
+  /@types/gtag.js@0.0.17:
+    resolution: {integrity: sha512-OsSO6Yyuygr3DeeTovOY0ppLiAVHoXg4CSanO9/vzDQCV+e8pkZNE+HR2dVxGJfUbtRe2IqzC97PYuHSNUepJw==}
     dev: true
 
   /@types/pug@2.0.7:

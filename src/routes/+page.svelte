@@ -32,6 +32,14 @@
 		name="description"
 		content="Delivering Data and AI Strategies, empowering DataOps & MLOps with expert Data & ML Engineers"
 	/>
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-73RC0XF497');
+	</script>
 </svelte:head>
 
 <section id="about" class="bg-gray-100 my-10">
