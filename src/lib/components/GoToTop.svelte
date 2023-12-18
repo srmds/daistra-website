@@ -47,7 +47,7 @@
     .goto__top {
       position: fixed;
       right: 1rem;
-      bottom: 1rem;
+      bottom: 5rem;
       cursor: pointer;
       color: #999;
       border-radius: 0.15rem;

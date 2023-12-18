@@ -23,6 +23,7 @@
 		  status = result.message || "Success"
 	  }
 	}
+	
 </script>
 <GoToTop showAtPixel={600} />
 
@@ -35,36 +36,33 @@
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
 	<script>
-	window.dataLayer = window.dataLayer || [];
-	function gtag(){dataLayer.push(arguments);}
-	gtag('js', new Date());
-	gtag('config', 'G-73RC0XF497');
-	</script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-73RC0XF497');
+  </script>
 </svelte:head>
 
-<section id="about" class="bg-gray-100 my-10">
-	<h1 class="hidden font-bold text-2xl md:text-4xl lg:text-5xl text-center">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
+<section id="about" class="bg-gray-100">
+	<h1 class="hidden font-bold ">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
 		<!-- <div class="relative" style="padding-top: 0"> -->
 		<!-- <div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center"> -->
-		<div class="relative" style="padding-top: 20%">
-		<iframe 
+
+			<img class="" src="images/daistra-banner.png" 
+			style="position: relative; width: 100%;  top: 0; left: 0; border: white; padding: 0; margin: 0;" alt="business strategy algined data strategy incorporating dataops mlops diagram">
+		<!-- <iframe 
 			title="daistra-banner"
 			loading="lazy" 
 			style="position: absolute; width: 100%; height: 130%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
 			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyXCMhD7E&#x2F;view?embed"
 			class="absolute inset-0 w-full h-full" 
 			>
-		</iframe>
-		<!-- <img class="" 
-		src="images/daistra-banner.gif" 
-		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
-		alt="business strategy algined data strategy incorporating dataops mlops diagram"> -->
-	</div>
+		</iframe> -->
 </section>
-<section id="service" class="px-6 bg-white py-40">
-	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center  py-20">Services</h2>
+<section id="service" class="px-6 bg-white py-20">
+	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 
-	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-8 xl:gap-0 md:grid-cols-3">
+	<div class="grid max-w-screen-xl grid-cols-2 px-4 py-8 mx-auto gap-2 xl:gap-8 md:grid-cols-2">
 		<div class="flex flex-col  items-start px-6 py-6">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
@@ -80,40 +78,16 @@
 			   />
 			 </svg>
 			  </div>
-			<h3 class="font-bold text-3xl">Data Strategy</h3>
-			<p class="text-gray-500 whitespace-pre-line py-5">
+			<h3 class="font-bold text-4xl">Data Strategy</h3>
+			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
 				A data strategy serves as blueprint, encompassing technology, processes, people and governance. It sets out the high-level vision for data, identification of data sources, data quality standards, data governance, strategic goals for data utilization and alignment with overall business goals
 				<br>
 			</p>
-			<p class="text-gray-800 whitespace-pre-line">
+			<p class="text-gray-800 text-xl whitespace-pre-line py-5">
 				Our mission is to be a strategic partner in designing and implementing data strategies that align with your business goals, crafting realistic road maps that empower your organization to collect, govern, manage, and leverage data effectively
 			</p>
 		</div>
-		<div class="flex flex-col  items-start px-6 py-6">
-			<div class="flex mb-4">
-				<svg xmlns="http://www.w3.org/2000/svg" 
-				width="100"
-				viewBox="0 0 25 25"
-				fill="none"
-				class="text-indigo-500">
-				<path 
-					stroke-linecap="round" 
-					stroke-linejoin="round" 
-					d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" 
-					fill="currentColor"
-				/>
-			  </svg>
-			</div>
-			<h3 class="font-bold text-3xl">DataOps</h3>
-			<p class="text-gray-500 whitespace-pre-line py-5">
-				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making. 
-				<br>
-			</p>
-			<p class="text-gray-800 whitespace-pre-line  py-12">
-				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
-			</p>
-		</div>
-		<div class="flex flex-col  items-start px-6 py-6">
+		<div class="flex flex-col  items-start px-6 py-4">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
@@ -128,19 +102,42 @@
 				/>
 			  </svg>
 			</div>
-			<h3 class="font-bold text-3xl">MLOps</h3>
-			<p class="text-gray-500 whitespace-pre-line py-5">
-				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization. 
+			<h3 class="font-bold text-4xl">AI Strategy</h3>
+			<p class="text-gray-500 text-xl whitespace-pre-line py-6">
+				An Artifical Intelligence (AI) strategy services, same as with a data strategy, acts as a blueprint. It sets out the high-level vision on how AI technologies will be implemented across the organization to achieve business objectives. It also addresses ethical considerations, regulatory compliance, and risk management related to the use of AI
 				<br>
 			</p>
-			<p class="text-gray-800 whitespace-pre-line py-10">
+			<p class="text-gray-800 text-xl whitespace-pre-line">
+				We believe that a fundamentally strong data strategy is a key pillar to build good AI strategies, because data is the foundation for AI initiatives. Our unique approach to defining, designing, and incorporating responsible AI strategies positions us as your strategic partner in navigating the transformative journey of artificial intelligence  
+			</p>
+		</div>
+		<div class="flex flex-col  items-start px-6 py-6">
+		
+			<h3 class="font-bold text-4xl">DataOps</h3>
+			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
+				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making
+				<br>
+			</p>
+			<p class="text-gray-800 text-xl whitespace-pre-line py-6">
+				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
+			</p>
+		</div>
+		<div class="flex flex-col  items-start px-6 py-5">
+			
+			<h3 class="font-bold text-4xl">MLOps</h3>
+			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
+				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization
+				<br>
+			</p>
+			<p class="text-gray-800 text-xl whitespace-pre-line py-6">
 				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
-
+		<h3 class="hidden font-bold ">Daistra | Data & AI strategies | DataOps & MLOps | Classical Machine Learning &#40;ML&#41;, Natural Language Processing &#40;NLP&#41;, Computer Vision &#40;CV&#41;, Generative AI &#40;LLM&#41; | AWS, Azure, Google</h3>
 	</div>
-	<div class="grid max-w-screen-xxl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center my-10">
-		<img class="" 
-		src="images/data-strategy-diagram.svg" 
+	<div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center my-10">
+		<h3 class="text-xl font-bold justify-self-center my-10">Data & AI strategies need to be algined with business strategies</h3>
+		<img class="relative" 
+		src="images/data-ai-strategy.svg" 
 		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
 		alt="business strategy algined data strategy incorporating dataops mlops diagram">
 	</div>
@@ -229,5 +226,4 @@
 	
 		</div>
 	</div>
-
 </section>
