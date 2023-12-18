@@ -62,8 +62,8 @@
 <section id="service" class="px-6 bg-white py-20">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 
-	<div class="grid max-w-screen-xl grid-cols-2 px-4 py-8 mx-auto gap-2 xl:gap-8 md:grid-cols-2">
-		<div class="flex flex-col  items-start px-6 py-6">
+	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
+		<div class="flex flex-col  items-start">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
@@ -81,13 +81,21 @@
 			<h3 class="font-bold text-4xl">Data Strategy</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
 				A data strategy serves as blueprint, encompassing technology, processes, people and governance. It sets out the high-level vision for data, identification of data sources, data quality standards, data governance, strategic goals for data utilization and alignment with overall business goals
-				<br>
 			</p>
-			<p class="text-gray-800 text-xl whitespace-pre-line py-5">
+			<p class="text-gray-800 text-xl whitespace-pre-line">
 				Our mission is to be a strategic partner in designing and implementing data strategies that align with your business goals, crafting realistic road maps that empower your organization to collect, govern, manage, and leverage data effectively
 			</p>
 		</div>
-		<div class="flex flex-col  items-start px-6 py-4">
+		<div class="flex flex-col  items-start py-5">
+			<h3 class="font-bold text-4xl">DataOps</h3>
+			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
+				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making
+			</p>
+			<p class="text-gray-800 text-xl whitespace-pre-line">
+				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
+			</p>
+		</div>
+		<div class="flex flex-col  items-start py-5">
 			<div class="flex mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" 
 				width="100"
@@ -105,31 +113,18 @@
 			<h3 class="font-bold text-4xl">AI Strategy</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-6">
 				An Artifical Intelligence (AI) strategy services, same as with a data strategy, acts as a blueprint. It sets out the high-level vision on how AI technologies will be implemented across the organization to achieve business objectives. It also addresses ethical considerations, regulatory compliance, and risk management related to the use of AI
-				<br>
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
 				We believe that a fundamentally strong data strategy is a key pillar to build good AI strategies, because data is the foundation for AI initiatives. Our unique approach to defining, designing, and incorporating responsible AI strategies positions us as your strategic partner in navigating the transformative journey of artificial intelligence  
 			</p>
 		</div>
-		<div class="flex flex-col  items-start px-6 py-6">
 		
-			<h3 class="font-bold text-4xl">DataOps</h3>
-			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
-				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making
-				<br>
-			</p>
-			<p class="text-gray-800 text-xl whitespace-pre-line py-6">
-				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
-			</p>
-		</div>
-		<div class="flex flex-col  items-start px-6 py-5">
-			
+		<div class="flex flex-col  items-start">
 			<h3 class="font-bold text-4xl">MLOps</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
 				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization
-				<br>
 			</p>
-			<p class="text-gray-800 text-xl whitespace-pre-line py-6">
+			<p class="text-gray-800 text-xl whitespace-pre-line">
 				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
 		</div>
 		<h3 class="hidden font-bold ">Daistra | Data & AI strategies | DataOps & MLOps | Classical Machine Learning &#40;ML&#41;, Natural Language Processing &#40;NLP&#41;, Computer Vision &#40;CV&#41;, Generative AI &#40;LLM&#41; | AWS, Azure, Google</h3>
