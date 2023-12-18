@@ -112,7 +112,7 @@
 			</div>
 			<h3 class="font-bold text-4xl">AI Strategy</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-6">
-				An Artifical Intelligence (AI) strategy services, same as with a data strategy, acts as a blueprint. It sets out the high-level vision on how AI technologies will be implemented across the organization to achieve business objectives. It also addresses ethical considerations, regulatory compliance, and risk management related to the use of AI
+				An Artifical Intelligence (AI) strategy, same as with a data strategy, acts as a blueprint. It sets out the high-level vision on how AI technologies will be implemented across the organization to achieve business objectives. It also addresses ethical considerations, regulatory compliance, and risk management related to the use of AI
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
 				We believe that a fundamentally strong data strategy is a key pillar to build good AI strategies, because data is the foundation for AI initiatives. Our unique approach to defining, designing, and incorporating responsible AI strategies positions us as your strategic partner in navigating the transformative journey of artificial intelligence  
