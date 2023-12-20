@@ -9,13 +9,13 @@
 			<div class="mb-6 md:mb-0">
 				<span class="text-white font-bold text-3xl">{i("page_title")}</span>
 
-				<ul class="text-gray-400 font-medium mt-3 space-y-2">
+				<ul class="text-gray-400 font-medium mt-3 space-y-2 text-lg">
 					<li class="flex items-center gap-1">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="40"
 							height="40"
-							viewBox="0 0 24 24"
+							viewBox="0 0 24 18"
 							fill="none">
 							<path
 								d="M7.49998 1.16669C5.04998 1.16669 2.83331 3.04502 2.83331 5.95002C2.83331 7.80502 4.26248 9.98669 7.11498 12.5009C7.33665 12.6934 7.66915 12.6934 7.89081 12.5009C10.7375 9.98669 12.1666 7.80502 12.1666 5.95002C12.1666 3.04502 9.94998 1.16669 7.49998 1.16669ZM7.49998 7.00002C6.85831 7.00002 6.33331 6.47502 6.33331 5.83335C6.33331 5.19169 6.85831 4.66669 7.49998 4.66669C8.14165 4.66669 8.66665 5.19169 8.66665 5.83335C8.66665 6.47502 8.14165 7.00002 7.49998 7.00002Z"
@@ -28,7 +28,7 @@
 							xmlns="http://www.w3.org/2000/svg"
 							width="40"
 							height="40"
-							viewBox="0 0 24 24"
+							viewBox="0 0 24 16"
 							fill="none">
 							<path
 								d="M12.1667 2.33334H2.83335C2.19169 2.33334 1.67252 2.85834 1.67252 3.50001L1.66669 10.5C1.66669 11.1417 2.19169 11.6667 2.83335 11.6667H12.1667C12.8084 11.6667 13.3334 11.1417 13.3334 10.5V3.50001C13.3334 2.85834 12.8084 2.33334 12.1667 2.33334ZM12.1667 4.66668L7.50002 7.58334L2.83335 4.66668V3.50001L7.50002 6.41668L12.1667 3.50001V4.66668Z"
@@ -42,7 +42,7 @@
 
 			<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 py-8">
 				<div>
-					<ul class=" text-gray-400 font-medium">
+					<ul class=" text-gray-400 font-medium text-lg">
 						<li class="mb-4">
 							<br>
 							{i("footer_chamber_of_commerce")}: 91660165
@@ -70,7 +70,7 @@
 					<span class="sr-only">Linkedin</span>
 				</a>
 
-				<a href="https://github.com//srmds" class="text-gray-500 hover:text-white">
+				<a href="https://github.com/srmds/daistra-website" class="text-gray-500 hover:text-white">
 					<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-20"
