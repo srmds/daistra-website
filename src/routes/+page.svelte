@@ -94,6 +94,10 @@
 			<p class="text-gray-800 text-xl whitespace-pre-line">
 				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
 			</p>
+			<img class="relative" 
+			src="images/business-data-ai-strategy.svg"
+			style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+			alt="business strategy algined with data and ai strategy venn diagram">
 		</div>
 		<div class="flex flex-col  items-start py-5">
 			<div class="flex mb-4">
@@ -131,10 +135,14 @@
 	</div>
 	<div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center my-10">
 		<h3 class="text-xl font-bold justify-self-center my-10">Data & AI strategies need to be algined with business strategies</h3>
+		<p class="text-xl whitespace-pre-line py-5">
+			We recognize that data is the lifeblood of modern enterprises. It holds the key to informed decision-making and innovation.
+			Our approach revolves around aligning your business strategies with sound Data and AI strategies.
+		</p>
 		<img class="relative" 
-		src="images/data-ai-strategy.svg" 
+		src="images/data-ai-strategy.svg"
 		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
-		alt="business strategy algined data strategy incorporating dataops mlops diagram">
+		alt="business strategy algined with data and ai strategy incorporating dataops mlops diagram">
 	</div>
 </section>
 
