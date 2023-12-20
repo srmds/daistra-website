@@ -2,6 +2,15 @@
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
     import {i, language } from '@inlang/sdk-js';
+    import SvelteSeo from "svelte-seo";
+    import { onMount } from 'svelte';
+
+    let curUrl = ``;
+    
+    onMount(() => curUrl = window.location.href.replace('/'+ language, ''));
+
+    curUrl = curUrl.replace(language, '')
+
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
@@ -30,6 +39,36 @@
 </script>
 <GoToTop showAtPixel={600} />
 
+<SvelteSeo
+  title={i("page_title")}
+  description={i("page_description")}
+  canonical={curUrl}
+  keywords="primal movement, natural movement, squatting, lunging, crawling, jumping, fitness"
+  openGraph={{
+    title: i('page_title'),
+    description: i("page_description"),
+    image: String(curUrl) + "/images/logo-header.png",
+    url: {curUrl},
+    type: "website",
+    images: [
+      {
+        url: String(curUrl) + "/images/daistra-banner.png",
+        width: 1557,
+        height: 400,
+        alt: "Daistra banner",
+      },
+      {
+        url: String(curUrl) + "/images/business-data-ai-strategy.svg",
+        alt: "Venn diagram business data AI strategy",
+      },
+      {
+        url: String(curUrl) + "/images/data-ai-strategy.svg",
+        alt: "Data & AI strategy aligned with business strategy"
+      },
+    ],
+    site_name: i('page_title'),
+  }}
+/>
 
 <svelte:head>
 	<title>{i("page_title")}</title>
