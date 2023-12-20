@@ -1,11 +1,13 @@
 <script>
+    import { i } from "@inlang/sdk-js";
+
 	let year = new Date().getFullYear();
 </script>
 <footer class="bg-[#001246] ">
 	<div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
 		<div class="md:flex md:justify-between">
 			<div class="mb-6 md:mb-0">
-				<span class="text-white font-bold text-3xl">Daistra | Data AI Strategy </span>
+				<span class="text-white font-bold text-3xl">{i("page_title")}</span>
 
 				<ul class="text-gray-400 font-medium mt-3 space-y-2">
 					<li class="flex items-center gap-1">
@@ -19,7 +21,7 @@
 								d="M7.49998 1.16669C5.04998 1.16669 2.83331 3.04502 2.83331 5.95002C2.83331 7.80502 4.26248 9.98669 7.11498 12.5009C7.33665 12.6934 7.66915 12.6934 7.89081 12.5009C10.7375 9.98669 12.1666 7.80502 12.1666 5.95002C12.1666 3.04502 9.94998 1.16669 7.49998 1.16669ZM7.49998 7.00002C6.85831 7.00002 6.33331 6.47502 6.33331 5.83335C6.33331 5.19169 6.85831 4.66669 7.49998 4.66669C8.14165 4.66669 8.66665 5.19169 8.66665 5.83335C8.66665 6.47502 8.14165 7.00002 7.49998 7.00002Z"
 								fill="#BDBDBD"/>
 						</svg>
-						<p class="text">Scheveningseweg 60-8, 2517KW, The Hague</p>
+						<p class="text">{i("footer_address")}</p>
 					</li>
 					<li class="flex items-center gap-1">
 						<svg
@@ -33,19 +35,20 @@
 								fill="#BDBDBD"
 							/>
 						</svg>
-						info[at]daistra.com
+						{i("footer_email_address")}
 					</li>
 				</ul>
 			</div>
 
-			<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2">
+			<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 py-8">
 				<div>
 					<ul class=" text-gray-400 font-medium">
 						<li class="mb-4">
-							KVK: 91660165
+							<br>
+							{i("footer_chamber_of_commerce")}: 91660165
 						</li>
 						<li>
-							VAT: NL865728318B01
+							{i("footer_value_added_tax")}: NL865728318B01
 						</li>
 					</ul>
 				</div>
@@ -53,7 +56,7 @@
 		</div>
 		<hr class="my-6 sm:mx-auto border-gray-700 lg:my-8" />
 		<div class="sm:flex sm:items-center sm:justify-between">
-			<span class="text-gray-400">© {year} <a href="/" class="hover:underline">Daistra</a>. All Rights Reserved.</span>
+			<span class="text-gray-400">© {year} <a href="/" class="hover:underline">Daistra</a>. {i("footer_copyright")}</span>
 			<div class="flex mt-4 space-x-5 sm:justify-center sm:mt-0">
 				<a href="https://www.linkedin.com/company/daistra" class="text-gray-500 hover:text-white">
 					<svg

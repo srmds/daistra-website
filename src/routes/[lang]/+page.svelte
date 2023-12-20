@@ -1,14 +1,14 @@
 <script>
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
-
+    import {i, language } from '@inlang/sdk-js';
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
 	  const formData = new FormData(data.currentTarget)
 	  const object = Object.fromEntries(formData);
 	  const json = JSON.stringify(object);
-	
+
 	  const response = await fetch("https://api.web3forms.com/submit", {
 		  method: "POST",
 		  headers: {
@@ -23,15 +23,19 @@
 		  status = result.message || "Success"
 	  }
 	}
-	
+    
+    //Set the lang attribute on the html tag
+    // document.documentElement.setAttribute('lang',language);
+
 </script>
 <GoToTop showAtPixel={600} />
 
+
 <svelte:head>
-	<title>Daistra | Data & AI Strategy</title>
+	<title>{i("page_title")}</title>
 	<meta
 		name="description"
-		content="Delivering Data and AI Strategies, empowering DataOps & MLOps with expert Data & ML Engineers"
+		content="{i("page_description")}"
 	/>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
@@ -43,19 +47,20 @@
   </script>
 </svelte:head>
 
+
 <section id="about" class="bg-gray-100">
-	<h1 class="hidden font-bold ">Daistra | Delivering Data & AI strategies, incorporating DataOps & MLOps and creating data- & machine learning engineering teams</h1>
+    <h1 class="hidden font-bold ">{i("seo_h1")}</h1>
 		<!-- <div class="relative" style="padding-top: 0"> -->
 		<!-- <div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center"> -->
 
-			<img class="" src="images/daistra-banner.png" 
+			<img class="" src="images/daistra-banner.png"
 			style="position: relative; width: 100%;  top: 0; left: 0; border: white; padding: 0; margin: 0;" alt="business strategy algined data strategy incorporating dataops mlops diagram">
-		<!-- <iframe 
+		<!-- <iframe
 			title="daistra-banner"
-			loading="lazy" 
+			loading="lazy"
 			style="position: absolute; width: 100%; height: 130%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
 			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyXCMhD7E&#x2F;view?embed"
-			class="absolute inset-0 w-full h-full" 
+			class="absolute inset-0 w-full h-full"
 			>
 		</iframe> -->
 </section>
@@ -65,83 +70,82 @@
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col  items-start">
 			<div class="flex mb-4">
-				<svg xmlns="http://www.w3.org/2000/svg" 
+				<svg xmlns="http://www.w3.org/2000/svg"
 				width="100"
 				viewBox="0 0 25 25"
 				fill="none"
 				class="text-indigo-500">
-			   <path 
-				   stroke-linecap="round" 
-				   stroke-linejoin="round" 
-				   d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" 
+			   <path
+				   stroke-linecap="round"
+				   stroke-linejoin="round"
+				   d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z"
 				   fill="currentColor"
 			   />
 			 </svg>
 			  </div>
-			<h3 class="font-bold text-4xl">Data Strategy</h3>
+			<h3 class="font-bold text-4xl">{i("data_strategy_title")}</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
-				A data strategy serves as blueprint, encompassing technology, processes, people and governance. It sets out the high-level vision for data, identification of data sources, data quality standards, data governance, strategic goals for data utilization and alignment with overall business goals
+				{i("data_strategy_intro")}
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
-				Our mission is to be a strategic partner in designing and implementing data strategies that align with your business goals, crafting realistic road maps that empower your organization to collect, govern, manage, and leverage data effectively
+				{i("data_strategy_main")}
 			</p>
 		</div>
 		<div class="flex flex-col  items-start py-5">
 			<h3 class="font-bold text-4xl">DataOps</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
-				Part of a good data strategy is implementing Data Operations, DataOps. It is the engine that drives a sound and solid data strategy, ensuring your data is consistently available, reliable, and ready for strategic decision-making
+				{i("dataops_intro")}
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
-				Explore how we can be your partner in achieving data excellence, by formalizing, building, maturing & scaling talented and performant Data engineering teams
+				{i("dataops_main")}
 			</p>
-			<img class="relative" 
+			<img class="relative"
 			src="images/business-data-ai-strategy.svg"
-			style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+			style="position: relative; width: 100%; height: 100%; top: 50px; left: 0; border: white; padding: 0; margin: 0;"
 			alt="business strategy algined with data and ai strategy venn diagram">
 		</div>
 		<div class="flex flex-col  items-start py-5">
 			<div class="flex mb-4">
-				<svg xmlns="http://www.w3.org/2000/svg" 
+				<svg xmlns="http://www.w3.org/2000/svg"
 				width="100"
 				viewBox="-5 -5 50 50"
 				fill="none"
 				class="text-indigo-500">
-				<path 
-					stroke-linecap="round" 
-					stroke-linejoin="round" 
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
 					d="M20.6679 0.65332C16.1173 14.2562 8.26773 31.1598 0 41.6277L20.6679 33.3768L41.3844 41.6277C33.1182 31.1598 25.263 14.2562 20.6679 0.65332Z"
 					fill="currentColor"
 				/>
 			  </svg>
 			</div>
-			<h3 class="font-bold text-4xl">AI Strategy</h3>
+			<h3 class="font-bold text-4xl">{i("ai_strategy_title")}</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-6">
-				An Artifical Intelligence (AI) strategy, same as with a data strategy, acts as a blueprint. It sets out the high-level vision on how AI technologies will be implemented across the organization to achieve business objectives. It also addresses ethical considerations, regulatory compliance, and risk management related to the use of AI
+				{i("ai_strategy_intro")}
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
-				We believe that a fundamentally strong data strategy is a key pillar to build good AI strategies, because data is the foundation for AI initiatives. Our unique approach to defining, designing, and incorporating responsible AI strategies positions us as your strategic partner in navigating the transformative journey of artificial intelligence  
+				{i("ai_strategy_main")}
 			</p>
 		</div>
-		
+
 		<div class="flex flex-col  items-start">
 			<h3 class="font-bold text-4xl">MLOps</h3>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
-				Machine Learning Operations, MLOps, is a crucial and pivotal element in a comprehensive data strategy. It enables stream-lined deployment, management, and optimization of machine learning models within an organization
+				{i("mlops_intro")}
 			</p>
 			<p class="text-gray-800 text-xl whitespace-pre-line">
-				As your strategic ally, we specialize in architecting MLOps solutions that seamlessly integrate into your data strategy. Our expertise extends creating high-performing machine learning engineering teams, ensuring your Machine Learning models are seamlessly integrated for insights and innovation. Join us in transforming your data-driven, data-informed descision-making future, where AI, Data strategy, DataOps, MLOps, and data and ml engineering teams emerge, evolve and mature</p>
+				{i("mlops_main")}
 		</div>
-		<h3 class="hidden font-bold ">Daistra | Data & AI strategies | DataOps & MLOps | Classical Machine Learning &#40;ML&#41;, Natural Language Processing &#40;NLP&#41;, Computer Vision &#40;CV&#41;, Generative AI &#40;LLM&#41; | AWS, Azure, Google</h3>
 	</div>
 	<div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center my-10">
-		<h3 class="text-xl font-bold justify-self-center my-10">Data & AI strategies need to be algined with business strategies</h3>
+		<h3 class="text-xl font-bold justify-self-center my-10">{i("business_alignment_title")}</h3>
 		<p class="text-xl whitespace-pre-line py-5">
-			We recognize that data is the lifeblood of modern enterprises. It holds the key to informed decision-making and innovation.
-			Our approach revolves around aligning your business strategies with sound Data and AI strategies.
+			{i("business_alignment_intro")} <br>
+			{i("business_alignment_main")}
 		</p>
-		<img class="relative" 
+		<img class="relative"
 		src="images/data-ai-strategy.svg"
-		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
+		style="position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0 0 50px 0;"
 		alt="business strategy algined with data and ai strategy incorporating dataops mlops diagram">
 	</div>
 </section>
@@ -150,23 +154,23 @@
 	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
 		<div class="flex flex-col  items-start px-6 py-6 bg-gray">
 			<div style="position: relative; width: 100%; height: 0; padding-top: 56.3415%; padding-bottom: 0;">
-			 <iframe 
+			 <iframe
 			 	title="contact-us"
-			 	loading="lazy" 
+			 	loading="lazy"
 				style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
 			    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyZTRgprE&#x2F;view?embed" >
 			 </iframe>
 		   </div>
-			<!-- <img 
-				src="images/logo-page.png" 
+			<!-- <img
+				src="images/logo-page.png"
 				class="loop=once"
 				alt="banner"
 			/> -->
 		  </div>
 		<div>
-			<h3 class="font-bold text-2xl">Contact Us</h3>
+			<h3 class="font-bold text-2xl">{i("contact_us")}</h3>
 			<p class="text-gray-400 dark:text-gray-400">
-				Fill up the form below to send us a message.
+				{i("fill_form")}
 			  </p>
 			<p class="font-light text-sm py-2 mb-3 text-gray-500">
 			</p>
@@ -175,7 +179,7 @@
 				<input type="hidden" name="redirect" value="https://web3forms.com/success">
 				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
 				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Full Name</label>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("full_name")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 				<input
 						type="text"
@@ -186,7 +190,7 @@
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Email Address</label>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("email_address")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 					<input
 						type="email"
@@ -197,7 +201,7 @@
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Phone Number</label>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 					<input
 						type="text"
@@ -208,25 +212,25 @@
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">Message</label>
+				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("message")}</label>
 				<textarea
 					id="message"
 					name="message"
 					rows="4"
 					class="w-full px-3 py-3 text-sm text-gray-900 bg-gray-50 border rounded-lg border-gray-300 focus:ring-0"
-					placeholder="Your Message"
+					placeholder={i("message_text")}
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
 				<div class="h-captcha" data-captcha="true"></div>
-				<button 
+				<button
 					type="submit"
 					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0 my-5"
-					>Send Message</button
+					>{i("send_message")}</button
 				>
 			</form>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
-	
+
 		</div>
 	</div>
 </section>
