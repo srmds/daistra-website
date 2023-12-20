@@ -43,7 +43,7 @@
   title={i("page_title")}
   description={i("page_description")}
   canonical={curUrl}
-  keywords="primal movement, natural movement, squatting, lunging, crawling, jumping, fitness"
+  keywords="data strategy, ai strategy, business strategy, xops, dataops, mlops, data engineering, machine learning engineering, ml engineering, data engineer, ml engineer"
   openGraph={{
     title: i('page_title'),
     description: i("page_description"),
