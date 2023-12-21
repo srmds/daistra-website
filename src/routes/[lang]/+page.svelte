@@ -5,9 +5,14 @@
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
 
-    let curUrl = ``;
+    var curUrl = ``;
+	// strip off localization path
     onMount(() => curUrl = window.location.hostname.replace(language, ''));
-	
+
+	// if language is nl, then we have removed the nl domain, add it back, yes this is ugly and buggy
+	if (window.location.hostname.includes(".nl") === true) {
+		curUrl = curUrl + "nl"
+	}
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
