@@ -98,7 +98,7 @@
 		<!-- <div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center"> -->
 
 			<img class="" src="images/daistra-banner.png"
-			style="position: relative; width: 100%;  top: 0; left: 0; border: white; padding: 0; margin: 0;" alt="business strategy algined data strategy incorporating dataops mlops diagram">
+			style="position: relative; width: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;" alt="daistra banner">
 		<!-- <iframe
 			title="daistra-banner"
 			loading="lazy"
@@ -108,7 +108,7 @@
 			>
 		</iframe> -->
 </section>
-<section id="service" class="px-6 bg-white py-20">
+<section id="service" class="px-6 bg-white py-10">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
 	
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
@@ -201,10 +201,13 @@
                
 		    </div>
 		</div> -->
-		<div class="flex flex-col items-start px-20 bg-gray">
-			<div style="position: relative; margin-bottom: 50px">
+		<div class="flex flex-col items-start bg-gray">
+			<div style="position: relative; position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0 0 50px 0;">
 				<a href="https://www.linkedin.com/in/srmds" target="_blank">
-                <img src="images/business-card-steven-ramdas.png" alt="Steven Ramdas | Founder | AI Solution architect | Senior Data- & ML Engineer"/></a>
+                <img 
+					src="images/business-card-steven-ramdas.png" 
+					alt="Steven Ramdas | Founder | AI Solution architect | Senior Data- & ML Engineer"/>
+				</a>
 		    </div>
 		</div>
 		<div class="max-w-2xl items-start max-w-4xl bg-gray">

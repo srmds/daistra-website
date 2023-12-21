@@ -4,7 +4,7 @@
 	import { page } from "$app/stores"
 
 </script>
-<header class="mb-12" >
+<header class="mb-1" >
 	<Navbar >
 		<NavBrand href={$page.url.pathname}>
 			<img src="/images/logo-header.png" class="mr-5 h-24 sm:h-24" alt="Daistra Logo" />
