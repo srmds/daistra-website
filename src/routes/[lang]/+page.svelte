@@ -7,10 +7,11 @@
 
     let curUrl = ``;
     
-    onMount(() => curUrl = window.location.href.replace('/'+ language, ''));
+    onMount(() => curUrl = window.location.hostname.replace(language, ''));
 
-    curUrl = curUrl.replace(language, '')
-
+    
+	
+	console.log("HOST: " + curUrl)
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
@@ -103,7 +104,7 @@
 </section>
 <section id="service" class="px-6 bg-white py-20">
 	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
-
+	
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col  items-start">
 			<div class="flex mb-4">
