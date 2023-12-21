@@ -7,12 +7,17 @@
 
     var curUrl = ``;
 	// strip off localization path
-    onMount(() => curUrl = window.location.hostname.replace(language, ''));
+    onMount(() => curUrl = window.location.hostname);
 
 	// if language is nl, then we have removed the nl domain, add it back, yes this is ugly and buggy
-	if (window.location.hostname.includes(".nl") === true) {
-		curUrl = String(curUrl) + "nl"
+	if (window.location.hostname.includes(".nl") === false) {
+		curUrl = String(curUrl).replace(language, '')
+	} else {
+		curUrl = String(curUrl).substring(0, curUrl.length - 2);
 	}
+
+	console.log("HOSt: " + curUrl)
+
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
