@@ -65,6 +65,10 @@
         url: String(curUrl) + "/images/data-ai-strategy.svg",
         alt: "Data & AI strategy aligned with business strategy"
       },
+      {
+        url: String(curUrl) + "/images/business-card-steven-ramdas.png",
+        alt: "Steven Ramdas - Founder | AI Solution Architect | Senior Data- & ML Engineer"
+      },
     ],
     site_name: i('page_title'),
   }}
@@ -184,28 +188,23 @@
 </section>
 
 <section id="contact" class="px-6 py-12 bg-gray-100">
-	<div class="grid max-w-screen-xl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
-		<div class="flex flex-col  items-start px-6 py-6 bg-gray">
-			<div style="position: relative; width: 100%; height: 0; padding-top: 56.3415%; padding-bottom: 0;">
-			 <iframe
-			 	title="contact-us"
-			 	loading="lazy"
-				style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-			    src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyZTRgprE&#x2F;view?embed" >
-			 </iframe>
-		   </div>
-			<!-- <img
-				src="images/logo-page.png"
-				class="loop=once"
-				alt="banner"
-			/> -->
-		  </div>
-		<div>
+	<div class="grid max-w-screen-xxl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
+        <!-- <div class="flex flex-col items-start px-20 bg-gray">
+			<div>
+               
+		    </div>
+		</div> -->
+		<div class="flex flex-col items-start px-20 bg-gray">
+			<div style="position: relative;">
+                <img src="images/business-card-steven-ramdas.png" alt="business card Steven Ramdas"/>
+		    </div>
+		</div>
+		<div class="max-w-2xl items-start max-w-4xl bg-gray">
 			<h3 class="font-bold text-2xl">{i("contact_us")}</h3>
 			<p class="text-gray-400 dark:text-gray-400">
 				{i("fill_form")}
 			  </p>
-			<p class="font-light text-sm py-2 mb-3 text-gray-500">
+			<p class="font-light text-sm  mb-3 text-gray-500">
 			</p>
 			<form action="https://api.web3forms.com/submit" method="POST" id="form">
 				<input type="hidden" name="subject" value="New website contact submission">
