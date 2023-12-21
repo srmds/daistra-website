@@ -196,7 +196,8 @@
 		</div> -->
 		<div class="flex flex-col items-start px-20 bg-gray">
 			<div style="position: relative; margin-bottom: 50px">
-                <img src="images/business-card-steven-ramdas.png" alt="business card Steven Ramdas"/>
+				<a href="https://www.linkedin.com/in/srmds" target="_blank">
+                <img src="images/business-card-steven-ramdas.png" alt="Steven Ramdas | Founder | AI Solution architect | Senior Data- & ML Engineer"/></a>
 		    </div>
 		</div>
 		<div class="max-w-2xl items-start max-w-4xl bg-gray">
