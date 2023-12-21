@@ -43,7 +43,7 @@
   title={i("page_title")}
   description={i("page_description")}
   canonical={curUrl}
-  keywords="data strategy, ai strategy, business strategy, xops, dataops, mlops, data engineering, machine learning engineering, ml engineering, data engineer, ml engineer"
+  keywords="data, ai, artificial intelligence, data strategy, ai strategy, business strategy, xops, dataops, mlops, data engineering, machine learning engineering, ml engineering, data engineer, ml engineer, data excellence, data course, ml course, machine learning course, data strategie, ai strategie, kunstmatige intelligentie, data-gedreven, data-geinformeerd, data excellentie, data architectuur, data cursus, ai cursus, machine learning cursus, data talent"
   openGraph={{
     title: i('page_title'),
     description: i("page_description"),

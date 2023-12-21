@@ -35,7 +35,7 @@
 								fill="#BDBDBD"
 							/>
 						</svg>
-						{i("footer_email_address")}
+						<a href="mailto:{i("footer_email_address")}" target="_blank" onmouseover="this.href=this.href.replace('@+@','.')"> {i("footer_mail_us")}</a>
 					</li>
 				</ul>
 			</div>
