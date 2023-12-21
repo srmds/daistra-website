@@ -6,12 +6,8 @@
     import { onMount } from 'svelte';
 
     let curUrl = ``;
-    
     onMount(() => curUrl = window.location.hostname.replace(language, ''));
-
-    
 	
-	console.log("HOST: " + curUrl)
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
@@ -48,26 +44,26 @@
   openGraph={{
     title: i('page_title'),
     description: i("page_description"),
-    image: String(curUrl) + "/images/logo-header.png",
+    image: "https://" + String(curUrl) + "/images/logo-header.png",
     url: {curUrl},
     type: "website",
     images: [
       {
-        url: String(curUrl) + "/images/daistra-banner.png",
+        url: "https://" + String(curUrl) + "/images/daistra-banner.png",
         width: 1557,
         height: 400,
         alt: "Daistra banner",
       },
       {
-        url: String(curUrl) + "/images/business-data-ai-strategy.svg",
+        url: "https://" + String(curUrl) + "/images/business-data-ai-strategy.svg",
         alt: "Venn diagram business data AI strategy",
       },
       {
-        url: String(curUrl) + "/images/data-ai-strategy.svg",
+        url: "https://" + String(curUrl) + "/images/data-ai-strategy.svg",
         alt: "Data & AI strategy aligned with business strategy"
       },
       {
-        url: String(curUrl) + "/images/business-card-steven-ramdas.png",
+        url: "https://" + String(curUrl) + "/images/business-card-steven-ramdas.png",
         alt: "Steven Ramdas - Founder | AI Solution Architect | Senior Data- & ML Engineer"
       },
     ],
