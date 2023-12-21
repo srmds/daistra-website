@@ -11,7 +11,7 @@
 
 	// if language is nl, then we have removed the nl domain, add it back, yes this is ugly and buggy
 	if (window.location.hostname.includes(".nl") === true) {
-		curUrl = curUrl + "nl"
+		curUrl = String(curUrl) + "nl"
 	}
 	let status = "";
 	const handleSubmit = async data => {
