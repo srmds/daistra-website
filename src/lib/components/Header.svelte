@@ -6,7 +6,7 @@
 </script>
 <header class="mb-12" >
 	<Navbar >
-		<NavBrand href={$page.url.pathname + "/" + language}>
+		<NavBrand href={$page.url.pathname}>
 			<img src="/images/logo-header.png" class="mr-5 h-24 sm:h-24" alt="Daistra Logo" />
 		</NavBrand>
 		<NavHamburger  />
