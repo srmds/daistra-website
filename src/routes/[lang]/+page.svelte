@@ -195,61 +195,61 @@
 		    </div>
 		</div> -->
 		<div class="flex flex-col items-start px-20 bg-gray">
-			<div style="position: relative;">
+			<div style="position: relative; margin-bottom: 50px">
                 <img src="images/business-card-steven-ramdas.png" alt="business card Steven Ramdas"/>
 		    </div>
 		</div>
 		<div class="max-w-2xl items-start max-w-4xl bg-gray">
-			<h3 class="font-bold text-2xl">{i("contact_us")}</h3>
-			<p class="text-gray-400 dark:text-gray-400">
+			<h3 class="font-bold text-3xl">{i("contact_us")}</h3>
+			<p class="text-gray-400 dark:text-gray-400 text-2xl">
 				{i("fill_form")}
 			  </p>
-			<p class="font-light text-sm  mb-3 text-gray-500">
+			<p class="font-light text-sm mb-3 text-gray-500">
 			</p>
 			<form action="https://api.web3forms.com/submit" method="POST" id="form">
 				<input type="hidden" name="subject" value="New website contact submission">
 				<input type="hidden" name="redirect" value="https://web3forms.com/success">
 				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
 				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("full_name")}</label>
+				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("full_name")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 				<input
 						type="text"
 						id="name"
 						name="name"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
 						placeholder="Jane Doe"
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("email_address")}</label>
+				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 					<input
 						type="email"
 						id="email"
 						name="email-address"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
 						placeholder="you@domain.com"
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
+				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 					<input
 						type="text"
 						id="phone"
 						name="phone"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
 						placeholder="+316 0000 0000"
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-400">{i("message")}</label>
+				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("message")}</label>
 				<textarea
 					id="message"
 					name="message"
 					rows="4"
-					class="w-full px-3 py-3 text-sm text-gray-900 bg-gray-50 border rounded-lg border-gray-300 focus:ring-0"
+					class="w-full px-3 py-3 text-lg text-gray-900 bg-gray-50 border rounded-lg border-gray-300 focus:ring-0"
 					placeholder={i("message_text")}
 					required
 				/>
@@ -257,7 +257,7 @@
 				<div class="h-captcha" data-captcha="true"></div>
 				<button
 					type="submit"
-					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-4 text-center mr-3 md:mr-0 my-5"
+					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-xl px-4 py-4 text-center mr-3 md:mr-0 my-5"
 					>{i("send_message")}</button
 				>
 			</form>
