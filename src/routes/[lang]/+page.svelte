@@ -71,11 +71,6 @@
 />
 
 <svelte:head>
-	<title>{i("page_title")}</title>
-	<meta
-		name="description"
-		content="{i("page_description")}"
-	/>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
 	<script>
@@ -85,7 +80,6 @@
 		gtag('config', 'G-73RC0XF497');
   </script>
 </svelte:head>
-
 
 <section id="about" class="bg-gray-100">
     <h1 class="hidden font-bold ">{i("seo_h1")}</h1>
