@@ -57,12 +57,6 @@
     type: "website",
     images: [
       {
-        url: "https://" + String(curUrl) + "/images/daistra-banner.png",
-        width: 1557,
-        height: 400,
-        alt: "Daistra banner",
-      },
-      {
         url: "https://" + String(curUrl) + "/images/business-data-ai-strategy.svg",
         alt: "Venn diagram business data AI strategy",
       },
