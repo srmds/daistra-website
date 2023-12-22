@@ -144,7 +144,7 @@
 			</p>
 			<img class="relative"
 			src="images/business-data-ai-strategy.svg"
-			style="position: relative; width: 0%; height: 80%; top: 50px; left: 0; border: white; padding: 0; margin: 0;"
+			style="position: relative; width: 80%; height: 80%; top: 50px; left: 0; border: white; padding: 0; margin: 0;"
 			alt="business strategy algined with data and ai strategy venn diagram">
 		</div>
 		<div class="flex flex-col  items-start py-5">
