@@ -110,7 +110,7 @@
 	</script>
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col  items-start">
-			<p class=" text-4xl text-center">{i("abount_extended")}</p>
+			<p class=" text-4xl text-center">{i("about_extended")}</p>
 		</div>
 	</div>
 </section>
