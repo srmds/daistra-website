@@ -82,9 +82,6 @@
 <svelte:head>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
-		integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
-		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
@@ -95,18 +92,14 @@
 
 <section id="about" class="z-[-1]">
 	<h1 class="hidden font-bold ">{i("seo_h1")}</h1>
-	<div id="particles" class="relative  before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-0 before:z-10">
-		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 650px;">
-			<div id="particles-js" class="absolute inset-0">
-					<p class="absolute my-40 font-venus justify-self-center tracking-wider sm:text-7xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
-					<p class="absolute my-80 font-venus justify-self-center tracking-widest sm:text-6xl lg:text-6xl font-thin mb-6 text-center text-white inset-0" style="padding-top: 0px">data & ai<br>{i("banner_subscript")}<p>
-			</div>
+	<div id="banner" class="relative before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-0 ">
+		
+		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 650px; background-image: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))">
+				<p class="absolute my-40 font-venus justify-self-center tracking-wider sm:text-7xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
+				<p class="absolute my-80 font-venus justify-self-center tracking-widest sm:text-6xl lg:text-6xl font-thin mb-6 text-center text-white inset-0" style="padding-top: 0px">data & ai<br>{i("banner_subscript")}<p>
 		</div>
 		
 	<script>
-	particlesJS.load("particles-js", "assets/particles.json", function() {
-		// console.log("callback - particles loaded")
-	})
 	</script>
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 px-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col items-start">
@@ -151,7 +144,7 @@
 			</p>
 			<img class="relative"
 			src="images/business-data-ai-strategy.svg"
-			style="position: relative; width: 100%; height: 100%; top: 50px; left: 0; border: white; padding: 0; margin: 0;"
+			style="position: relative; width: 0%; height: 80%; top: 50px; left: 0; border: white; padding: 0; margin: 0;"
 			alt="business strategy algined with data and ai strategy venn diagram">
 		</div>
 		<div class="flex flex-col  items-start py-5">
