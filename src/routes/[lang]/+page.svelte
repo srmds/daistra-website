@@ -93,12 +93,12 @@
   </script>
 </svelte:head>
 
-<section id="about" class="px-0 py-10 z-[-1]">
+<section id="about" class="z-[-1]">
 	<div id="particles" class="relative font-venus before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-0 before:z-10">
-		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 600px;">
+		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 650px;">
 			<div id="particles-js" class="absolute inset-0">
-					<p class="absolute my-40 justify-self-center tracking-wider  sm:text-4xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
-					<p class="absolute my-80 justify-self-center tracking-wider sm:text-3xl lg:text-8xl font-bold mb-6 text-center text-white inset-0" style="padding-top: 0px">Data & AI<br>Strategies<p>
+					<p class="absolute my-40 justify-self-center tracking-wider sm:text-7xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
+					<p class="absolute my-80 justify-self-center tracking-widest sm:text-6xl lg:text-6xl font-thin mb-6 text-center text-white inset-0" style="padding-top: 0px">data & ai<br>{i("banner_subscript")}<p>
 			</div>
 		</div>
 		
