@@ -1,6 +1,5 @@
 <script>
     import { i } from "@inlang/sdk-js";
-
 	let year = new Date().getFullYear();
 </script>
 <footer class="bg-[#001246] ">
@@ -8,7 +7,6 @@
 		<div class="md:flex md:justify-between">
 			<div class="mb-6 md:mb-0">
 				<span class="text-white font-bold text-3xl">{i("page_title")}</span>
-
 				<ul class="text-gray-400 font-medium mt-3 space-y-2 text-lg">
 					<li class="flex items-center gap-1">
 						<svg
@@ -39,7 +37,6 @@
 					</li>
 				</ul>
 			</div>
-
 			<div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-2 py-8">
 				<div>
 					<ul class=" text-gray-400 font-medium text-lg">
@@ -69,7 +66,6 @@
 					</svg>
 					<span class="sr-only">Linkedin</span>
 				</a>
-
 				<a href="https://github.com/srmds/daistra-website" class="text-gray-500 hover:text-white">
 					<svg
 					xmlns="http://www.w3.org/2000/svg"
