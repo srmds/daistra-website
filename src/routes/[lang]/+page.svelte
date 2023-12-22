@@ -16,8 +16,6 @@
 		curUrl = String(curUrl).substring(0, curUrl.length - 2);
 	}
 
-	console.log("HOSt: " + curUrl)
-
 	let status = "";
 	const handleSubmit = async data => {
 	  status = 'Submitting...'
@@ -84,6 +82,9 @@
 <svelte:head>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"
+		integrity="sha512-Kef5sc7gfTacR7TZKelcrRs15ipf7+t+n7Zh6mKNJbmW+/RRdCW9nwfLn4YX0s2nO6Kv5Y2ChqgIakaC6PW09A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
@@ -92,24 +93,23 @@
   </script>
 </svelte:head>
 
-<section id="about" class="bg-gray-100">
-    <h1 class="hidden font-bold ">{i("seo_h1")}</h1>
-		<!-- <div class="relative" style="padding-top: 0"> -->
-		<!-- <div class="grid max-w-screen-xl grid-cols-1 mx-auto lg:grid-cols-1 justify-self-center"> -->
-
-			<img class="" src="images/daistra-banner.png"
-			style="position: relative; width: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0;" alt="daistra banner">
-		<!-- <iframe
-			title="daistra-banner"
-			loading="lazy"
-			style="position: absolute; width: 100%; height: 130%; top: 0; left: 0; border: white; padding: 0; margin: 0;"
-			src="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAFyXCMhD7E&#x2F;view?embed"
-			class="absolute inset-0 w-full h-full"
-			>
-		</iframe> -->
+<section id="about" class="px-0 py-10 z-[-1]">
+	<div id="particles" class="relative font-venus before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-0 before:z-10">
+		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 600px;">
+			<div id="particles-js" class="absolute inset-0">
+					<p class="absolute my-40 justify-self-center tracking-wider  sm:text-4xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
+					<p class="absolute my-80 justify-self-center tracking-wider sm:text-3xl lg:text-8xl font-bold mb-6 text-center text-white inset-0" style="padding-top: 0px">Data & AI<br>Strategies<p>
+			</div>
+		</div>
+		
+	<script>
+	particlesJS.load("particles-js", "assets/particles.json", function() {
+		// console.log("callback - particles loaded")
+	})
+	</script>	
 </section>
 <section id="service" class="px-6 bg-white py-10">
-	<h2 class="font-bold text-2xl md:text-4xl lg:text-5xl text-center">Services</h2>
+	<h2 class="font-bold text-5xl text-center">Services</h2>
 	
 	<div class="grid max-w-screen-xl grid-cols-1 py-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col  items-start">
@@ -136,7 +136,7 @@
 			</p>
 		</div>
 		<div class="flex flex-col  items-start py-5">
-			<h3 class="font-bold text-4xl">DataOps</h3>
+			<h4 class="font-bold text-4xl">DataOps</h4>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
 				{i("dataops_intro")}
 			</p>
@@ -173,7 +173,7 @@
 		</div>
 
 		<div class="flex flex-col  items-start">
-			<h3 class="font-bold text-4xl">MLOps</h3>
+			<h4 class="font-bold text-4xl">MLOps</h4>
 			<p class="text-gray-500 text-xl whitespace-pre-line py-5">
 				{i("mlops_intro")}
 			</p>
