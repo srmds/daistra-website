@@ -42,6 +42,8 @@
     // document.documentElement.setAttribute('lang',language);
 
 </script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
+
 <GoToTop showAtPixel={600} />
 
 <SvelteSeo
@@ -265,7 +267,7 @@
 					>{i("send_message")}</button
 				>
 			</form>
-			<script src="https://web3forms.com/client/script.js" async defer></script>
+			
 
 		</div>
 	</div>
