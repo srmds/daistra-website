@@ -549,6 +549,7 @@
 				</div>
 				<label for="email" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
+		
 					<div class="w-full">
 						<input
 							type="email"
@@ -557,7 +558,6 @@
 							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
 							placeholder="you@domain.com"
 							required
-							pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
 							title="Please enter a valid email address"
 							on:input={handleEmailInput}
 						/>
