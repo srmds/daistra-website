@@ -580,7 +580,7 @@
 							bind:value={phoneNumber}
 							on:input={handlePhoneInput}
 							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-							placeholder="+316 0000 0000"
+							placeholder="612345678"
 							required
 						/>
 					</div>
