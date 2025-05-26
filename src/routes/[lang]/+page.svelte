@@ -579,7 +579,7 @@
 						>
 							{#each countries as country}
 								<option value={country}>
-									{country} (+{parsePhoneNumberFromString('', country).countryCallingCode})
+									{country} (+{parsePhoneNumberFromString('', country)?.countryCallingCode})
 								</option>
 							{/each}
 						</select>
