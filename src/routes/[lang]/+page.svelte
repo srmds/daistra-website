@@ -1,13 +1,3 @@
-// Add type declaration for hCaptcha
-declare module global {
-	interface Window {
-		hcaptcha?: {
-			reset: () => void;
-			render: (element: HTMLElement, options: any) => void;
-		};
-	}
-}
-
 <script lang="ts">
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
@@ -15,16 +5,6 @@ declare module global {
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
     import { parsePhoneNumberFromString, CountryCode, getCountries } from 'libphonenumber-js';
-
-    // Extend Window interface
-    type HCaptcha = {
-        reset: () => void;
-        render: (element: HTMLElement, options: any) => void;
-    };
-    
-    interface Window {
-        hcaptcha?: HCaptcha;
-    }
 
     var curUrl = ``;
 	// strip off localization path
