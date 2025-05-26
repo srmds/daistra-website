@@ -33,6 +33,16 @@
 	}
 
 	function initializeCaptcha() {
+		// Reset states
+		captchaLoaded = false;
+		captchaError = false;
+
+		// Remove existing CAPTCHA if it exists
+		const existingCaptcha = document.querySelector('.h-captcha');
+		if (existingCaptcha) {
+			existingCaptcha.innerHTML = '';
+		}
+
 		if (!document.querySelector('script[src="https://js.hcaptcha.com/1/api.js"]')) {
 			const script = document.createElement('script');
 			script.src = 'https://js.hcaptcha.com/1/api.js';
@@ -60,6 +70,7 @@
 				window.hcaptcha.render(captchaContainer as HTMLElement, {
 					sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
 				});
+				captchaLoaded = true;
 			}
 		}
 	}
@@ -76,6 +87,14 @@
 
 	// Watch for language changes
 	$: if (language) {
+		// Reset form state
+		formSubmitted = false;
+		if (submissionTimeout) {
+			clearTimeout(submissionTimeout);
+			submissionTimeout = null;
+		}
+		status = "";
+		
 		// Small delay to ensure DOM is updated
 		setTimeout(() => {
 			initializeCaptcha();
