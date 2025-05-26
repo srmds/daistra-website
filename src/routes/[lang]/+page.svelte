@@ -53,9 +53,7 @@
 				// Re-render CAPTCHA after script loads
 				const captchaContainer = document.querySelector('.h-captcha');
 				if (captchaContainer && window.hcaptcha) {
-					window.hcaptcha.render(captchaContainer as HTMLElement, {
-						sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
-					});
+					window.hcaptcha.render(captchaContainer as HTMLElement, {});
 				}
 			};
 			script.onerror = () => {
@@ -66,9 +64,7 @@
 			// If script already exists, just re-render
 			const captchaContainer = document.querySelector('.h-captcha');
 			if (captchaContainer && window.hcaptcha) {
-				window.hcaptcha.render(captchaContainer as HTMLElement, {
-					sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
-				});
+				window.hcaptcha.render(captchaContainer as HTMLElement, {});
 				captchaLoaded = true;
 			}
 		}
@@ -94,10 +90,8 @@
 		}
 		status = "";
 		
-		// Small delay to ensure DOM is updated
-		setTimeout(() => {
-			initializeCaptcha();
-		}, 100);
+		// Re-initialize CAPTCHA immediately
+		initializeCaptcha();
 	}
 
 	function isValidName(name: string): boolean {
