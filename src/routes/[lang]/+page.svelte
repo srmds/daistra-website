@@ -17,25 +17,96 @@
 	}
 
 	let status = "";
-	const handleSubmit = async data => {
-	  status = 'Submitting...'
-	  const formData = new FormData(data.currentTarget)
-	  const object = Object.fromEntries(formData);
-	  const json = JSON.stringify(object);
+	let captchaLoaded = false;
+	let captchaError = false;
+	let formSubmitted = false;
+	let submissionTimeout = null;
 
-	  const response = await fetch("https://api.web3forms.com/submit", {
-		  method: "POST",
-		  headers: {
-			  "Content-Type": "application/json",
-			  Accept: "application/json",
-		  },
-		  body: json
-	  });
-	  const result = await response.json();
-	  if (result.success) {
-		//   console.log(result);
-		  status = result.message || "Success"
-	  }
+	onMount(() => {
+		// Load hCaptcha script
+		const script = document.createElement('script');
+		script.src = 'https://js.hcaptcha.com/1/api.js';
+		script.async = true;
+		script.defer = true;
+		script.onload = () => {
+			captchaLoaded = true;
+			captchaError = false;
+		};
+		script.onerror = () => {
+			captchaError = true;
+		};
+		document.head.appendChild(script);
+
+		// Initialize form validation
+		const form = document.getElementById('form');
+		if (form) {
+			form.addEventListener('submit', handleSubmit);
+		}
+	});
+
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		
+		if (formSubmitted) {
+			status = 'Please wait before submitting again...';
+			return;
+		}
+
+		if (!captchaLoaded || captchaError) {
+			status = 'Please wait for CAPTCHA to load...';
+			return;
+		}
+
+		const hCaptchaResponse = document.querySelector('textarea[name=h-captcha-response]');
+		if (!hCaptchaResponse || !hCaptchaResponse.value) {
+			status = 'Please complete the CAPTCHA verification';
+			return;
+		}
+		
+		status = 'Submitting...'
+		formSubmitted = true;
+		
+		const formData = new FormData(event.target);
+		const object = Object.fromEntries(formData);
+		
+		// Sanitize inputs
+		Object.keys(object).forEach(key => {
+			if (typeof object[key] === 'string') {
+				object[key] = object[key].trim();
+			}
+		});
+
+		const json = JSON.stringify(object);
+
+		try {
+			const response = await fetch("https://api.web3forms.com/submit", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				body: json
+			});
+			const result = await response.json();
+			if (result.success) {
+				status = result.message || "Success"
+				// Reset form after successful submission
+				event.target.reset();
+				// Reset CAPTCHA
+				if (window.hcaptcha) {
+					window.hcaptcha.reset();
+				}
+			} else {
+				status = "Error: " + (result.message || "Something went wrong")
+			}
+		} catch (error) {
+			status = "Error submitting form. Please try again."
+		} finally {
+			// Prevent multiple submissions within 30 seconds
+			submissionTimeout = setTimeout(() => {
+				formSubmitted = false;
+			}, 30000);
+		}
 	}
     
     //Set the lang attribute on the html tag
@@ -210,11 +281,19 @@
 			  </p>
 			<p class="font-light text-sm mb-3 text-gray-500">
 			</p>
-			<form action="https://api.web3forms.com/submit" method="POST" id="form">
+			<form id="form" class="space-y-4">
 				<input type="hidden" name="subject" value="New website contact submission">
 				<input type="hidden" name="redirect" value="https://web3forms.com/success">
 				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
+				<!-- Enhanced bot protection -->
+				<input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+				<input type="hidden" name="from_name" value="Daistra Contact Form">
+				<input type="hidden" name="form_id" value="daistra_contact">
+				<input type="hidden" name="rate_limit" value="1">
+				<input type="hidden" name="rate_limit_period" value="3600">
+				<input type="hidden" name="spam_protection" value="true">
+				<input type="hidden" name="spam_score_threshold" value="0.5">
 				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("full_name")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 				<input
@@ -258,15 +337,51 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
-				<div class="h-captcha" data-captcha="true"></div>
+				{#if !captchaLoaded}
+					<div class="text-gray-500 mb-4">Loading CAPTCHA...</div>
+				{:else if captchaError}
+					<div class="text-red-500 mb-4">Error loading CAPTCHA. Please refresh the page.</div>
+				{:else}
+					<div class="h-captcha" data-captcha="true" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+				{/if}
+				
+				{#if status}
+					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
+						{status}
+					</div>
+				{/if}
+
 				<button
 					type="submit"
 					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-xl px-4 py-4 text-center mr-3 md:mr-0 my-5"
-					>{i("send_message")}</button
-				>
+					disabled={!captchaLoaded || captchaError || formSubmitted}
+				>{i("send_message")}</button>
 			</form>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
+			<script>
+				function validateForm(event) {
+					// Check if honeypot field is filled
+					const honeypot = document.querySelector('input[name="website"]');
+					if (honeypot.value) {
+						event.preventDefault();
+						return false;
+					}
 
+					// Check if hCaptcha is filled
+					const hCaptcha = document.querySelector('textarea[name=h-captcha-response]');
+					if (!hCaptcha || !hCaptcha.value) {
+						event.preventDefault();
+						alert("Please complete the CAPTCHA verification");
+						return false;
+					}
+
+					return true;
+				}
+
+				// Add event listener for form submission
+				const form = document.getElementById('form');
+				form.addEventListener('submit', validateForm);
+			</script>
 		</div>
 	</div>
 </section>
