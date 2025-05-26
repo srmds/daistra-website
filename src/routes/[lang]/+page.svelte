@@ -30,6 +30,8 @@
 	let emailWarning = '';
 	let isCheckingDomain = false;
 
+	let captchaContainer: HTMLElement | null = null;
+
 	// Watch for language changes
 	$: if (language) {
 		// Reset form state
@@ -39,6 +41,9 @@
 			submissionTimeout = null;
 		}
 		status = "";
+		
+		// Re-initialize CAPTCHA after a short delay to ensure DOM is ready
+		setTimeout(initializeCaptcha, 100);
 	}
 
 	function isValidName(name: string): boolean {
@@ -279,13 +284,31 @@
     //Set the lang attribute on the html tag
     // document.documentElement.setAttribute('lang',language);
 
-    // Ensure the CAPTCHA is initialized correctly on page load and when switching languages
+    // Function to initialize hCaptcha
+    function initializeCaptcha() {
+        if (typeof window === 'undefined') return;
+        
+        // Remove existing hCaptcha if it exists
+        if (captchaContainer) {
+            captchaContainer.innerHTML = '';
+        }
+        
+        // Create new hCaptcha container
+        captchaContainer = document.createElement('div');
+        captchaContainer.className = 'h-captcha';
+        captchaContainer.setAttribute('data-captcha', 'true');
+        
+        // Find the form and insert the hCaptcha before the submit button
+        const form = document.getElementById('form');
+        const submitButton = form?.querySelector('button[type="submit"]');
+        if (form && submitButton) {
+            form.insertBefore(captchaContainer, submitButton);
+        }
+    }
+
+    // Initialize on mount
     onMount(() => {
-      // Initialize form validation
-      const form = document.getElementById('form');
-      if (form) {
-        form.addEventListener('submit', handleSubmit);
-      }
+        initializeCaptcha();
     });
 
 </script>
@@ -539,8 +562,7 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
-				<!-- hCaptcha widget for spam protection -->
-				<div class="h-captcha" data-captcha="true"></div>
+				<!-- hCaptcha will be inserted here by JavaScript -->
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
 						{status}
