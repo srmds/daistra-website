@@ -447,10 +447,7 @@
 				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
 				<input type="hidden" name="from_name" value="Daistra Contact Form">
 				<input type="hidden" name="form_id" value="daistra_contact">
-				<input type="hidden" name="rate_limit" value="1">
-				<input type="hidden" name="rate_limit_period" value="3600">
-				<input type="hidden" name="spam_protection" value="true">
-				<input type="hidden" name="spam_score_threshold" value="0.5">
+		
 				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("full_name")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
 				<input
@@ -523,6 +520,7 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
+				<div class="h-captcha" data-captcha="true"></div>
 				
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
