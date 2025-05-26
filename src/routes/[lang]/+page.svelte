@@ -28,6 +28,9 @@
 	let phoneError = '';
 	let countries = getCountries();
 
+	let emailWarning = '';
+	let isCheckingDomain = false;
+
 	// Add type declaration for hCaptcha
 	declare global {
 		interface Window {
@@ -139,6 +142,26 @@
 		return validNamePattern.test(name);
 	}
 
+	function isValidEmail(email: string): boolean {
+		// Basic email format validation
+		const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+		if (!emailRegex.test(email)) return false;
+
+		// Additional checks
+		const [localPart, domain] = email.split('@');
+		
+		// Check local part length (before @)
+		if (localPart.length > 64) return false;
+		
+		// Check domain length
+		if (domain.length > 255) return false;
+		
+		// Check for consecutive dots
+		if (email.includes('..')) return false;
+
+		return true;
+	}
+
 	function validatePhoneNumber(phone: string, country: CountryCode): boolean {
 		try {
 			const phoneNumberObj = parsePhoneNumberFromString(phone, country);
@@ -181,6 +204,51 @@
 		}
 	}
 
+	async function checkDomainExists(domain: string): Promise<boolean> {
+		try {
+			const response = await fetch(`https://dns.google/resolve?name=${domain}&type=MX`);
+			const data = await response.json();
+			return data.Answer && data.Answer.length > 0;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	async function validateEmailWithDomain(email: string): Promise<boolean> {
+		const [localPart, domain] = email.split('@');
+		
+		// Basic validation first
+		if (!isValidEmail(email)) return false;
+
+		// Check domain existence
+		isCheckingDomain = true;
+		emailWarning = '';
+		
+		try {
+			const domainExists = await checkDomainExists(domain);
+			if (!domainExists) {
+				emailWarning = 'Warning: This email domain might not exist. Please double-check your email address.';
+			}
+		} catch (error) {
+			emailWarning = 'Warning: Could not verify email domain. Please double-check your email address.';
+		} finally {
+			isCheckingDomain = false;
+		}
+
+		return true;
+	}
+
+	async function handleEmailInput(event: Event) {
+		const input = event.target as HTMLInputElement;
+		const email = input.value.trim();
+		
+		if (email) {
+			await validateEmailWithDomain(email);
+		} else {
+			emailWarning = '';
+		}
+	}
+
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
 		
@@ -208,6 +276,13 @@
 		const name = (object.name as string).trim();
 		if (!isValidName(name)) {
 			status = 'Please enter a valid name';
+			return;
+		}
+
+		// Validate email
+		const email = (object['email-address'] as string).trim();
+		if (!isValidEmail(email)) {
+			status = 'Please enter a valid email address';
 			return;
 		}
 
@@ -472,16 +547,27 @@
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
+				<label for="email" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<input
-						type="email"
-						id="email"
-						name="email-address"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="you@domain.com"
-						required
-				/>
+					<div class="w-full">
+						<input
+							type="email"
+							id="email"
+							name="email-address"
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+							placeholder="you@domain.com"
+							required
+							pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+							title="Please enter a valid email address"
+							on:input={handleEmailInput}
+						/>
+						{#if isCheckingDomain}
+							<div class="text-gray-500 text-sm mt-1">Checking domain...</div>
+						{/if}
+						{#if emailWarning}
+							<div class="text-yellow-600 text-sm mt-1">{emailWarning}</div>
+						{/if}
+					</div>
 				</div>
 				<label for="phone" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
