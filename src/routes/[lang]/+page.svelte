@@ -603,7 +603,7 @@
 				{:else if captchaError}
 					<div class="text-red-500 mb-4">Error loading CAPTCHA. Please refresh the page.</div>
 				{:else}
-					<div class="h-captcha" data-captcha="true" data-sitekey="50b2fe65-b00b-4b9e-ad62-3ba471098be2"></div>
+					<div class="h-captcha" data-captcha="true"></div>
 				{/if}
 				
 				{#if status}
