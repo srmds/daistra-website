@@ -42,7 +42,6 @@
     // document.documentElement.setAttribute('lang',language);
 
 </script>
-<script src="https://web3forms.com/client/script.js" async defer></script>
 
 <GoToTop showAtPixel={600} />
 
@@ -268,6 +267,7 @@
 				>
 			</form>
 			
+                          <script src="https://web3forms.com/client/script.js" async defer></script>
 
 		</div>
 	</div>
