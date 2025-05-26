@@ -319,6 +319,7 @@
 		gtag('js', new Date());
 		gtag('config', 'G-73RC0XF497');
   </script>
+  <script src="https://web3forms.com/client/script.js" async defer></script>
 </svelte:head>
 
 <section id="about" class="z-[-1]">
@@ -528,7 +529,9 @@
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
 				<!-- hCaptcha widget for spam protection -->
-				<div class="h-captcha" data-captcha="true"></div>
+				{#if typeof window !== 'undefined'}
+					<div class="h-captcha" data-captcha="true"></div>
+				{/if}
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
 						{status}
@@ -540,7 +543,6 @@
 					disabled={formSubmitted}
 				>{i("send_message")}</button>
 			</form>
-			<script src="https://web3forms.com/client/script.js" async defer></script>
 		</div>
 	</div>
 </section>
