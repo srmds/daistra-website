@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
     import {i, language } from '@inlang/sdk-js';
@@ -16,26 +16,56 @@
 		curUrl = String(curUrl).substring(0, curUrl.length - 2);
 	}
 
-	let status = "";
 	let captchaLoaded = false;
 	let captchaError = false;
 	let formSubmitted = false;
-	let submissionTimeout = null;
+	let submissionTimeout: ReturnType<typeof setTimeout> | null = null;
+	let status = "";
+
+	// Add type declaration for hCaptcha
+	declare global {
+		interface Window {
+			hcaptcha?: {
+				reset: () => void;
+				render: (element: HTMLElement, options: any) => void;
+			};
+		}
+	}
+
+	function initializeCaptcha() {
+		if (!document.querySelector('script[src="https://js.hcaptcha.com/1/api.js"]')) {
+			const script = document.createElement('script');
+			script.src = 'https://js.hcaptcha.com/1/api.js';
+			script.async = true;
+			script.defer = true;
+			script.onload = () => {
+				captchaLoaded = true;
+				captchaError = false;
+				// Re-render CAPTCHA after script loads
+				const captchaContainer = document.querySelector('.h-captcha');
+				if (captchaContainer && window.hcaptcha) {
+					window.hcaptcha.render(captchaContainer as HTMLElement, {
+						sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
+					});
+				}
+			};
+			script.onerror = () => {
+				captchaError = true;
+			};
+			document.head.appendChild(script);
+		} else {
+			// If script already exists, just re-render
+			const captchaContainer = document.querySelector('.h-captcha');
+			if (captchaContainer && window.hcaptcha) {
+				window.hcaptcha.render(captchaContainer as HTMLElement, {
+					sitekey: '50b2fe65-b00b-4b9e-ad62-3ba471098be2'
+				});
+			}
+		}
+	}
 
 	onMount(() => {
-		// Load hCaptcha script
-		const script = document.createElement('script');
-		script.src = 'https://js.hcaptcha.com/1/api.js';
-		script.async = true;
-		script.defer = true;
-		script.onload = () => {
-			captchaLoaded = true;
-			captchaError = false;
-		};
-		script.onerror = () => {
-			captchaError = true;
-		};
-		document.head.appendChild(script);
+		initializeCaptcha();
 
 		// Initialize form validation
 		const form = document.getElementById('form');
@@ -44,7 +74,15 @@
 		}
 	});
 
-	const handleSubmit = async (event) => {
+	// Watch for language changes
+	$: if (language) {
+		// Small delay to ensure DOM is updated
+		setTimeout(() => {
+			initializeCaptcha();
+		}, 100);
+	}
+
+	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
 		
 		if (formSubmitted) {
@@ -57,8 +95,8 @@
 			return;
 		}
 
-		const hCaptchaResponse = document.querySelector('textarea[name=h-captcha-response]');
-		if (!hCaptchaResponse || !hCaptchaResponse.value) {
+		const hCaptchaResponse = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement;
+		if (!hCaptchaResponse?.value) {
 			status = 'Please complete the CAPTCHA verification';
 			return;
 		}
@@ -66,13 +104,14 @@
 		status = 'Submitting...'
 		formSubmitted = true;
 		
-		const formData = new FormData(event.target);
+		const form = event.target as HTMLFormElement;
+		const formData = new FormData(form);
 		const object = Object.fromEntries(formData);
 		
 		// Sanitize inputs
 		Object.keys(object).forEach(key => {
 			if (typeof object[key] === 'string') {
-				object[key] = object[key].trim();
+				object[key] = (object[key] as string).trim();
 			}
 		});
 
@@ -91,7 +130,7 @@
 			if (result.success) {
 				status = result.message || "Success"
 				// Reset form after successful submission
-				event.target.reset();
+				form.reset();
 				// Reset CAPTCHA
 				if (window.hcaptcha) {
 					window.hcaptcha.reset();
@@ -113,6 +152,7 @@
     // document.documentElement.setAttribute('lang',language);
 
 </script>
+
 <GoToTop showAtPixel={600} />
 
 <SvelteSeo
