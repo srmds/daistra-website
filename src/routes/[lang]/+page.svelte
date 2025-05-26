@@ -17,8 +17,6 @@
 		curUrl = String(curUrl).substring(0, curUrl.length - 2);
 	}
 
-	let captchaLoaded = false;
-	let captchaError = false;
 	let formSubmitted = false;
 	let submissionTimeout: ReturnType<typeof setTimeout> | null = null;
 	let status = "";
@@ -31,55 +29,6 @@
 	let emailWarning = '';
 	let isCheckingDomain = false;
 
-	function initializeCaptcha() {
-		// Reset states
-		captchaLoaded = false;
-		captchaError = false;
-
-		// Remove existing CAPTCHA if it exists
-		const existingCaptcha = document.querySelector('.h-captcha');
-		if (existingCaptcha) {
-			existingCaptcha.innerHTML = '';
-		}
-
-		if (!document.querySelector('script[src="https://js.hcaptcha.com/1/api.js"]')) {
-			const script = document.createElement('script');
-			script.src = 'https://js.hcaptcha.com/1/api.js';
-			script.async = true;
-			script.defer = true;
-			script.onload = () => {
-				captchaLoaded = true;
-				captchaError = false;
-				// Re-render CAPTCHA after script loads
-				const captchaContainer = document.querySelector('.h-captcha');
-				if (captchaContainer && window.hcaptcha) {
-					window.hcaptcha.render(captchaContainer as HTMLElement, {});
-				}
-			};
-			script.onerror = () => {
-				captchaError = true;
-			};
-			document.head.appendChild(script);
-		} else {
-			// If script already exists, just re-render
-			const captchaContainer = document.querySelector('.h-captcha');
-			if (captchaContainer && window.hcaptcha) {
-				window.hcaptcha.render(captchaContainer as HTMLElement, {});
-				captchaLoaded = true;
-			}
-		}
-	}
-
-	onMount(() => {
-		initializeCaptcha();
-
-		// Initialize form validation
-		const form = document.getElementById('form');
-		if (form) {
-			form.addEventListener('submit', handleSubmit);
-		}
-	});
-
 	// Watch for language changes
 	$: if (language) {
 		// Reset form state
@@ -89,9 +38,6 @@
 			submissionTimeout = null;
 		}
 		status = "";
-		
-		// Re-initialize CAPTCHA immediately
-		initializeCaptcha();
 	}
 
 	function isValidName(name: string): boolean {
@@ -241,17 +187,6 @@
 			return;
 		}
 
-		if (!captchaLoaded || captchaError) {
-			status = 'Please wait for CAPTCHA to load...';
-			return;
-		}
-
-		const hCaptchaResponse = document.querySelector('textarea[name="h-captcha-response"]') as HTMLTextAreaElement;
-		if (!hCaptchaResponse?.value) {
-			status = 'Please complete the CAPTCHA verification';
-			return;
-		}
-		
 		const form = event.target as HTMLFormElement;
 		const formData = new FormData(form);
 		const object = Object.fromEntries(formData);
@@ -312,10 +247,6 @@
 						input.value = '';
 					}
 				});
-				// Reset CAPTCHA
-				if (window.hcaptcha) {
-					window.hcaptcha.reset();
-				}
 				// Reset form state
 				formSubmitted = false;
 				if (submissionTimeout) {
@@ -592,13 +523,6 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
-				{#if !captchaLoaded}
-					<div class="text-gray-500 mb-4">Loading CAPTCHA...</div>
-				{:else if captchaError}
-					<div class="text-red-500 mb-4">Error loading CAPTCHA. Please refresh the page.</div>
-				{:else}
-					<div class="h-captcha" data-captcha="true"></div>
-				{/if}
 				
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
@@ -609,7 +533,7 @@
 				<button
 					type="submit"
 					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-xl px-4 py-4 text-center mr-3 md:mr-0 my-5"
-					disabled={!captchaLoaded || captchaError || formSubmitted}
+					disabled={formSubmitted}
 				>{i("send_message")}</button>
 			</form>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
@@ -619,14 +543,6 @@
 					const honeypot = document.querySelector('input[name="website"]');
 					if (honeypot.value) {
 						event.preventDefault();
-						return false;
-					}
-
-					// Check if hCaptcha is filled
-					const hCaptcha = document.querySelector('textarea[name=h-captcha-response]');
-					if (!hCaptcha || !hCaptcha.value) {
-						event.preventDefault();
-						alert("Please complete the CAPTCHA verification");
 						return false;
 					}
 
