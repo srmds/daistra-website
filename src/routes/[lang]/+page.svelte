@@ -268,6 +268,15 @@
     //Set the lang attribute on the html tag
     // document.documentElement.setAttribute('lang',language);
 
+    // Ensure the CAPTCHA is initialized correctly on page load and when switching languages
+    onMount(() => {
+      // Initialize form validation
+      const form = document.getElementById('form');
+      if (form) {
+        form.addEventListener('submit', handleSubmit);
+      }
+    });
+
 </script>
 
 <GoToTop showAtPixel={600} />
@@ -438,30 +447,28 @@
 			  </p>
 			<p class="font-light text-sm mb-3 text-gray-500">
 			</p>
-			<form id="form" class="space-y-4" on:submit|preventDefault={handleSubmit}>
+			<form id="form" class="space-y-4" method="POST" action="https://api.web3forms.com/submit" on:submit|preventDefault={handleSubmit}>
+				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
 				<input type="hidden" name="subject" value="New website contact submission">
 				<input type="hidden" name="redirect" value="https://web3forms.com/success">
-				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
+				<input type="hidden" name="from_name" value="Daistra Contact Form">
+				<input type="hidden" name="form_id" value="daistra_contact">
 				<!-- Enhanced bot protection -->
 				<input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
 				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-				<input type="hidden" name="from_name" value="Daistra Contact Form">
-				<input type="hidden" name="form_id" value="daistra_contact">
-		
 				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("full_name")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
-				<input
+					<input
 						type="text"
 						id="name"
 						name="name"
 						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
 						placeholder="Jane Doe"
 						required
-				/>
+					/>
 				</div>
 				<label for="email" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
-		
 					<div class="w-full">
 						<input
 							type="email"
@@ -520,14 +527,13 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
+				<!-- hCaptcha widget for spam protection -->
 				<div class="h-captcha" data-captcha="true"></div>
-				
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
 						{status}
 					</div>
 				{/if}
-
 				<button
 					type="submit"
 					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-xl px-4 py-4 text-center mr-3 md:mr-0 my-5"
@@ -535,22 +541,6 @@
 				>{i("send_message")}</button>
 			</form>
 			<script src="https://web3forms.com/client/script.js" async defer></script>
-			<script>
-				function validateForm(event) {
-					// Check if honeypot field is filled
-					const honeypot = document.querySelector('input[name="website"]');
-					if (honeypot.value) {
-						event.preventDefault();
-						return false;
-					}
-
-					return true;
-				}
-
-				// Add event listener for form submission
-				const form = document.getElementById('form');
-				form.addEventListener('submit', validateForm);
-			</script>
 		</div>
 	</div>
 </section>
