@@ -4,7 +4,8 @@
     import {i, language } from '@inlang/sdk-js';
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
-    import { parsePhoneNumberFromString, CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+    import { parsePhoneNumberFromString, getCountries, getCountryCallingCode } from 'libphonenumber-js';
+    import type { CountryCode } from 'libphonenumber-js';
 
     var curUrl = ``;
 	// strip off localization path
@@ -190,6 +191,16 @@
 		const form = event.target as HTMLFormElement;
 		const formData = new FormData(form);
 		const object = Object.fromEntries(formData);
+		
+		// Get hCaptcha token
+		const hcaptchaToken = (window as any).hcaptcha.getResponse();
+		if (!hcaptchaToken) {
+			status = 'Please complete the CAPTCHA';
+			return;
+		}
+		
+		// Add hCaptcha token to the submission
+		object['h-captcha-response'] = hcaptchaToken;
 		
 		// Validate name
 		const name = (object.name as string).trim();
