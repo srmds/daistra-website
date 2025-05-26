@@ -1,3 +1,13 @@
+// Add type declaration for hCaptcha
+declare module global {
+	interface Window {
+		hcaptcha?: {
+			reset: () => void;
+			render: (element: HTMLElement, options: any) => void;
+		};
+	}
+}
+
 <script lang="ts">
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
@@ -5,6 +15,16 @@
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
     import { parsePhoneNumberFromString, CountryCode, getCountries } from 'libphonenumber-js';
+
+    // Extend Window interface
+    type HCaptcha = {
+        reset: () => void;
+        render: (element: HTMLElement, options: any) => void;
+    };
+    
+    interface Window {
+        hcaptcha?: HCaptcha;
+    }
 
     var curUrl = ``;
 	// strip off localization path
@@ -23,23 +43,13 @@
 	let submissionTimeout: ReturnType<typeof setTimeout> | null = null;
 	let status = "";
 
-	let selectedCountry: CountryCode = 'NL';
+	let selectedCountry: CountryCode = language === 'nl' ? 'NL' : 'US';
 	let phoneNumber = '';
 	let phoneError = '';
 	let countries = getCountries();
 
 	let emailWarning = '';
 	let isCheckingDomain = false;
-
-	// Add type declaration for hCaptcha
-	declare global {
-		interface Window {
-			hcaptcha?: {
-				reset: () => void;
-				render: (element: HTMLElement, options: any) => void;
-			};
-		}
-	}
 
 	function initializeCaptcha() {
 		// Reset states
@@ -366,7 +376,7 @@
     title: i('page_title'),
     description: i("page_description"),
     image: "https://" + String(curUrl) + "/images/logo-header.png",
-    url: {curUrl},
+    url: String(curUrl),
     type: "website",
     images: [
       {
@@ -579,7 +589,7 @@
 						>
 							{#each countries as country}
 								<option value={country}>
-									{country} (+{parsePhoneNumberFromString('', country)?.countryCallingCode})
+									{country} (+{parsePhoneNumberFromString('+1', country)?.countryCallingCode || ''})
 								</option>
 							{/each}
 						</select>
