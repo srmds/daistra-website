@@ -4,7 +4,7 @@
     import {i, language } from '@inlang/sdk-js';
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
-    import { parsePhoneNumberFromString, CountryCode, getCountries } from 'libphonenumber-js';
+    import { parsePhoneNumberFromString, CountryCode, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 
     var curUrl = ``;
 	// strip off localization path
@@ -569,7 +569,7 @@
 						>
 							{#each countries as country}
 								<option value={country}>
-									{country} (+{parsePhoneNumberFromString('+1', country)?.countryCallingCode || ''})
+									{country} (+{getCountryCallingCode(country)})
 								</option>
 							{/each}
 						</select>
