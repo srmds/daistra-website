@@ -4,6 +4,7 @@
     import {i, language } from '@inlang/sdk-js';
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
+    import { parsePhoneNumberFromString, CountryCode, getCountries } from 'libphonenumber-js';
 
     var curUrl = ``;
 	// strip off localization path
@@ -21,6 +22,11 @@
 	let formSubmitted = false;
 	let submissionTimeout: ReturnType<typeof setTimeout> | null = null;
 	let status = "";
+
+	let selectedCountry: CountryCode = 'NL';
+	let phoneNumber = '';
+	let phoneError = '';
+	let countries = getCountries();
 
 	// Add type declaration for hCaptcha
 	declare global {
@@ -101,6 +107,80 @@
 		}, 100);
 	}
 
+	function isValidName(name: string): boolean {
+		// Remove extra spaces
+		name = name.trim();
+		
+		// Check minimum and maximum length
+		if (name.length < 2 || name.length > 50) return false;
+		
+		// Check for suspicious patterns
+		const suspiciousPatterns = [
+			/^[a-z0-9]+$/i,  // Only alphanumeric
+			/^[a-z]+$/i,     // Only letters
+			/^[0-9]+$/,      // Only numbers
+			/^[a-z]{1,2}[0-9]{1,2}$/i,  // Short alphanumeric combinations
+			/^[a-z]+[0-9]+$/i,  // Letters followed by numbers
+			/^[0-9]+[a-z]+$/i,  // Numbers followed by letters
+			/^[a-z]{8,}$/i,     // Long single words
+			/^[a-z]{1,2}$/i,    // Very short names
+			/^[0-9]{1,2}$/,     // Very short numbers
+			/^[a-z]+[0-9]+[a-z]+$/i,  // Alternating letters and numbers
+			/^[0-9]+[a-z]+[0-9]+$/i   // Alternating numbers and letters
+		];
+
+		// Check if name matches any suspicious pattern
+		if (suspiciousPatterns.some(pattern => pattern.test(name))) {
+			return false;
+		}
+
+		// Check for common name patterns
+		const validNamePattern = /^[a-zA-ZÀ-ÿ\s'-]{2,50}$/;
+		return validNamePattern.test(name);
+	}
+
+	function validatePhoneNumber(phone: string, country: CountryCode): boolean {
+		try {
+			const phoneNumberObj = parsePhoneNumberFromString(phone, country);
+			return phoneNumberObj?.isValid() ?? false;
+		} catch (error) {
+			return false;
+		}
+	}
+
+	function formatPhoneNumber(phone: string, country: CountryCode): string {
+		try {
+			const phoneNumberObj = parsePhoneNumberFromString(phone, country);
+			return phoneNumberObj?.format('INTERNATIONAL') ?? phone;
+		} catch (error) {
+			return phone;
+		}
+	}
+
+	function handlePhoneInput(event: Event) {
+		const input = event.target as HTMLInputElement;
+		phoneNumber = input.value;
+		
+		if (phoneNumber) {
+			if (validatePhoneNumber(phoneNumber, selectedCountry)) {
+				phoneError = '';
+				phoneNumber = formatPhoneNumber(phoneNumber, selectedCountry);
+			} else {
+				phoneError = 'Please enter a valid phone number';
+			}
+		} else {
+			phoneError = '';
+		}
+	}
+
+	function handleCountryChange(event: Event) {
+		const select = event.target as HTMLSelectElement;
+		selectedCountry = select.value as CountryCode;
+		if (phoneNumber) {
+			handlePhoneInput({ target: { value: phoneNumber } } as any);
+		}
+	}
+
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
 		
@@ -120,12 +200,25 @@
 			return;
 		}
 		
-		status = 'Submitting...'
-		formSubmitted = true;
-		
 		const form = event.target as HTMLFormElement;
 		const formData = new FormData(form);
 		const object = Object.fromEntries(formData);
+		
+		// Validate name
+		const name = (object.name as string).trim();
+		if (!isValidName(name)) {
+			status = 'Please enter a valid name';
+			return;
+		}
+
+		// Validate phone
+		if (!validatePhoneNumber(phoneNumber, selectedCountry)) {
+			status = 'Please enter a valid phone number';
+			return;
+		}
+		
+		status = 'Submitting...'
+		formSubmitted = true;
 		
 		// Sanitize inputs
 		Object.keys(object).forEach(key => {
@@ -133,6 +226,9 @@
 				object[key] = (object[key] as string).trim();
 			}
 		});
+
+		// Add formatted phone number
+		object.phone = formatPhoneNumber(phoneNumber, selectedCountry);
 
 		const json = JSON.stringify(object);
 
@@ -387,17 +483,35 @@
 						required
 				/>
 				</div>
-				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
+				<label for="phone" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
 				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<input
-						type="text"
-						id="phone"
-						name="phone"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="+316 0000 0000"
-						required
-				/>
+					<div class="flex gap-2 w-full">
+						<select
+							bind:value={selectedCountry}
+							on:change={handleCountryChange}
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 w-32"
+						>
+							{#each countries as country}
+								<option value={country}>
+									{country} (+{parsePhoneNumberFromString('', country).countryCallingCode})
+								</option>
+							{/each}
+						</select>
+						<input
+							type="tel"
+							id="phone"
+							name="phone"
+							bind:value={phoneNumber}
+							on:input={handlePhoneInput}
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
+							placeholder="+316 0000 0000"
+							required
+						/>
+					</div>
 				</div>
+				{#if phoneError}
+					<div class="text-red-500 text-sm mb-4">{phoneError}</div>
+				{/if}
 				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("message")}</label>
 				<textarea
 					id="message"
