@@ -150,20 +150,32 @@
 				status = result.message || "Success"
 				// Reset form after successful submission
 				form.reset();
+				// Clear all input fields
+				const inputs = form.querySelectorAll('input[type="text"], input[type="email"], textarea');
+				inputs.forEach(input => {
+					if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+						input.value = '';
+					}
+				});
 				// Reset CAPTCHA
 				if (window.hcaptcha) {
 					window.hcaptcha.reset();
 				}
+				// Reset form state
+				formSubmitted = false;
+				if (submissionTimeout) {
+					clearTimeout(submissionTimeout);
+				}
+				submissionTimeout = setTimeout(() => {
+					formSubmitted = false;
+				}, 30000);
 			} else {
 				status = "Error: " + (result.message || "Something went wrong")
+				formSubmitted = false;
 			}
 		} catch (error) {
 			status = "Error submitting form. Please try again."
-		} finally {
-			// Prevent multiple submissions within 30 seconds
-			submissionTimeout = setTimeout(() => {
-				formSubmitted = false;
-			}, 30000);
+			formSubmitted = false;
 		}
 	}
     
@@ -340,7 +352,7 @@
 			  </p>
 			<p class="font-light text-sm mb-3 text-gray-500">
 			</p>
-			<form id="form" class="space-y-4">
+			<form id="form" class="space-y-4" on:submit|preventDefault={handleSubmit}>
 				<input type="hidden" name="subject" value="New website contact submission">
 				<input type="hidden" name="redirect" value="https://web3forms.com/success">
 				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
