@@ -33,6 +33,9 @@
 	let captchaContainer: HTMLElement | null = null;
 	let captchaLoaded = false;
 
+	let hcaptchaReady = false;
+	let hcaptchaWidgetId: string | null = null;
+
 	// Watch for language changes
 	$: if (language) {
 		// Reset form state
@@ -186,72 +189,81 @@
 	const handleSubmit = async (event: SubmitEvent) => {
 		event.preventDefault();
 		
-		if (formSubmitted) {
-			status = 'Please wait before submitting again...';
-			return;
-		}
-
-		const form = event.target as HTMLFormElement;
-		const formData = new FormData(form);
-		const object = Object.fromEntries(formData);
-		
-		// Get hCaptcha token
-		const hcaptchaToken = (window as any).hcaptcha.getResponse();
-		if (!hcaptchaToken) {
-			status = 'Please complete the CAPTCHA';
-			return;
-		}
-		
-		// Add hCaptcha token to the submission
-		object['h-captcha-response'] = hcaptchaToken;
-		
-		// Validate name
-		const name = (object.name as string).trim();
-		if (!isValidName(name)) {
-			status = 'Please enter a valid name';
-			return;
-		}
-
-		// Validate email
-		const email = (object['email-address'] as string).trim();
-		if (!isValidEmail(email)) {
-			status = 'Please enter a valid email address';
-			return;
-		}
-
-		// Validate phone
-		if (!validatePhoneNumber(phoneNumber, selectedCountry)) {
-			status = 'Please enter a valid phone number';
-			return;
-		}
-		
-		status = 'Submitting...'
-		formSubmitted = true;
-		
-		// Sanitize inputs
-		Object.keys(object).forEach(key => {
-			if (typeof object[key] === 'string') {
-				object[key] = (object[key] as string).trim();
-			}
-		});
-
-		// Add formatted phone number
-		object.phone = formatPhoneNumber(phoneNumber, selectedCountry);
-
-		const json = JSON.stringify(object);
-
 		try {
+			if (!hcaptchaReady) {
+				status = 'Please complete the CAPTCHA';
+				return;
+			}
+
+			if (formSubmitted) {
+				status = 'Please wait before submitting again...';
+				return;
+			}
+
+			const form = event.target as HTMLFormElement;
+			const formData = new FormData(form);
+			const object = Object.fromEntries(formData);
+			
+			// Get hCaptcha token
+			const hcaptchaResponse = (window as any).hcaptcha.getResponse();
+			if (!hcaptchaResponse) {
+				status = 'Please complete the CAPTCHA';
+				return;
+			}
+
+			// Add hCaptcha token to the submission
+			object['h-captcha-response'] = hcaptchaResponse;
+			
+			// Validate name
+			const name = (object.name as string).trim();
+			if (!isValidName(name)) {
+				status = 'Please enter a valid name';
+				return;
+			}
+
+			// Validate email
+			const email = (object['email-address'] as string).trim();
+			if (!isValidEmail(email)) {
+				status = 'Please enter a valid email address';
+				return;
+			}
+
+			// Validate phone
+			if (!validatePhoneNumber(phoneNumber, selectedCountry)) {
+				status = 'Please enter a valid phone number';
+				return;
+			}
+			
+			status = 'Submitting...';
+			formSubmitted = true;
+			
+			// Sanitize inputs
+			Object.keys(object).forEach(key => {
+				if (typeof object[key] === 'string') {
+					object[key] = (object[key] as string).trim();
+				}
+			});
+
+			// Add formatted phone number
+			object.phone = formatPhoneNumber(phoneNumber, selectedCountry);
+
 			const response = await fetch("https://api.web3forms.com/submit", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 					Accept: "application/json",
 				},
-				body: json
+				body: JSON.stringify(object)
 			});
+			
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			
 			const result = await response.json();
+			
 			if (result.success) {
-				status = result.message || "Success"
+				status = result.message || "Success";
 				// Reset form after successful submission
 				form.reset();
 				// Clear all input fields
@@ -273,11 +285,11 @@
 				// Redirect to success page
 				window.location.href = 'https://web3forms.com/success#form';
 			} else {
-				status = "Error: " + (result.message || "Something went wrong")
-				formSubmitted = false;
+				throw new Error(result.message || "Something went wrong");
 			}
 		} catch (error) {
-			status = "Error submitting form. Please try again."
+			console.error('Form submission error:', error);
+			status = error instanceof Error ? `Error: ${error.message}` : "Error submitting form. Please try again.";
 			formSubmitted = false;
 		}
 	}
@@ -315,19 +327,30 @@
         }
     }
 
-    // Initialize on mount
+    // Initialize hCaptcha on mount
     onMount(() => {
-        // Load hCaptcha script if not already loaded
-        if (!document.querySelector('script[src*="hcaptcha"]')) {
-            const script = document.createElement('script');
-            script.src = 'https://js.hcaptcha.com/1/api.js';
-            script.async = true;
-            script.defer = true;
-            script.onload = initializeCaptcha;
-            document.head.appendChild(script);
-        } else {
-            initializeCaptcha();
-        }
+        // Add hCaptcha script to head
+        const script = document.createElement('script');
+        script.src = 'https://js.hcaptcha.com/1/api.js';
+        script.async = true;
+        script.defer = true;
+        
+        script.onload = () => {
+            // Initialize hCaptcha with explicit render
+            (window as any).hcaptcha.render('hcaptcha-container', {
+                sitekey: '10000000-ffff-ffff-ffff-000000000001',
+                callback: (token: string) => {
+                    hcaptchaReady = true;
+                    console.log('hCaptcha rendered successfully');
+                },
+                'expired-callback': () => {
+                    hcaptchaReady = false;
+                    console.log('hCaptcha expired');
+                }
+            });
+        };
+
+        document.head.appendChild(script);
     });
 
 </script>
@@ -491,122 +514,122 @@
 	</div>
 </section>
 
-<section id="contact" class="px-6 py-12 bg-gray-100">
-	<div class="grid max-w-screen-xxl grid-cols-1 px-4 py-8 mx-auto gap-3 lg:py-16 md:grid-cols-2">
-        <!-- <div class="flex flex-col items-start px-20 bg-gray">
-			<div>
-               
-		    </div>
-		</div> -->
-		<div class="flex flex-col items-start bg-gray">
-			<div style="position: relative; position: relative; width: 100%; height: 100%; top: 0; left: 0; border: white; padding: 0; margin: 0 0 50px 0;">
-				<a href="https://www.linkedin.com/in/srmds" target="_blank">
-                <img 
-					src="images/business-card-steven-ramdas.png" 
-					alt="Steven Ramdas | Founder | AI Solution architect | Senior Data- & ML Engineer"/>
-				</a>
-		    </div>
-		</div>
-		<div class="max-w-2xl items-start max-w-4xl bg-gray">
-			<h3 class="font-bold text-3xl">{i("contact_us")}</h3>
-			<p class="text-gray-400 dark:text-gray-400 text-2xl">
-				{i("fill_form")}
-			  </p>
-			<p class="font-light text-sm mb-3 text-gray-500">
-			</p>
-			<form id="form" class="space-y-4" method="POST" action="https://api.web3forms.com/submit" on:submit|preventDefault={handleSubmit}>
-				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
-				<input type="hidden" name="subject" value="New website contact submission">
-				<input type="hidden" name="redirect" value="https://web3forms.com/success#form">
-				<input type="hidden" name="from_name" value="Daistra Contact Form">
-				<input type="hidden" name="form_id" value="daistra_contact">
-				<!-- Enhanced bot protection -->
-				<input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
-				<input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("full_name")}</label>
-				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<input
-						type="text"
-						id="name"
-						name="name"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-						placeholder="Jane Doe"
-						required
-					/>
-				</div>
-				<label for="email" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("email_address")}</label>
-				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<div class="w-full">
-						<input
-							type="email"
-							id="email"
-							name="email-address"
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-							placeholder="you@domain.com"
-							required
-							title="Please enter a valid email address"
-							on:input={handleEmailInput}
-						/>
-						{#if isCheckingDomain}
-							<div class="text-gray-500 text-sm mt-1">Checking domain...</div>
-						{/if}
-						{#if emailWarning}
-							<div class="text-yellow-600 text-sm mt-1">{emailWarning}</div>
-						{/if}
-					</div>
-				</div>
-				<label for="phone" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("phone_number")}</label>
-				<div class="mb-6 flex flex-col md:flex-row gap-5">
-					<div class="flex gap-2 w-full">
-						<select
-							bind:value={selectedCountry}
-							on:change={handleCountryChange}
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5 w-32"
-						>
-							{#each countries as country}
-								<option value={country}>
-									{country} (+{getCountryCallingCode(country)})
-								</option>
-							{/each}
-						</select>
-						<input
-							type="tel"
-							id="phone"
-							name="phone"
-							bind:value={phoneNumber}
-							on:input={handlePhoneInput}
-							class="bg-gray-50 border border-gray-300 text-gray-900 text-lg rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"
-							placeholder="612345678"
-							required
-						/>
-					</div>
-				</div>
-				{#if phoneError}
-					<div class="text-red-500 text-sm mb-4">{phoneError}</div>
-				{/if}
-				<label for="name" class="block mb-2 text-lg text-gray-600 dark:text-gray-400">{i("message")}</label>
-				<textarea
-					id="message"
-					name="message"
-					rows="4"
-					class="w-full px-3 py-3 text-lg text-gray-900 bg-gray-50 border rounded-lg border-gray-300 focus:ring-0"
-					placeholder={i("message_text")}
-					required
-				/>
-				<p class="font-light text-gray-500 mb-6"></p>
-				<!-- hCaptcha widget -->
-				<div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-captcha="true"></div>
-				{#if status}
-					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
-						{status}
-					</div>
-				{/if}
-				<button
-					type="submit"
-					class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-bold rounded-lg text-xl px-4 py-4 text-center mr-3 md:mr-0 my-5"
-					disabled={formSubmitted}
-				>{i("send_message")}</button>
-			</form>
-		</div>
-	</div>
+<section id="contact" class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">{i("contact_us")}</h2>
+            <p class="text-xl text-gray-600">{i("fill_form")}</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <form id="form" method="POST" action="https://api.web3forms.com/submit" on:submit|preventDefault={handleSubmit} class="space-y-6">
+                <!-- Hidden fields -->
+                <input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
+                <input type="hidden" name="subject" value="New website contact submission">
+                <input type="hidden" name="redirect" value="https://web3forms.com/success#form">
+                <input type="hidden" name="from_name" value="Daistra Contact Form">
+                <input type="hidden" name="form_id" value="daistra_contact">
+                <input type="text" name="website" style="display:none" tabindex="-1" autocomplete="off">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+                <!-- Name field -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700 mb-1">{i("full_name")}</label>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                        placeholder="Jane Doe"
+                        required
+                    />
+                </div>
+
+                <!-- Email field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">{i("email_address")}</label>
+                    <div class="relative">
+                        <input
+                            type="email"
+                            id="email"
+                            name="email-address"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                            placeholder="you@domain.com"
+                            required
+                            on:input={handleEmailInput}
+                        />
+                        {#if isCheckingDomain}
+                            <div class="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-500">Checking...</div>
+                        {/if}
+                    </div>
+                    {#if emailWarning}
+                        <p class="mt-1 text-sm text-yellow-600">{emailWarning}</p>
+                    {/if}
+                </div>
+
+                <!-- Phone field -->
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">{i("phone_number")}</label>
+                    <div class="flex gap-3">
+                        <select
+                            bind:value={selectedCountry}
+                            on:change={handleCountryChange}
+                            class="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                        >
+                            {#each countries as country}
+                                <option value={country}>
+                                    {country} (+{getCountryCallingCode(country)})
+                                </option>
+                            {/each}
+                        </select>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            bind:value={phoneNumber}
+                            on:input={handlePhoneInput}
+                            class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                            placeholder="612345678"
+                            required
+                        />
+                    </div>
+                    {#if phoneError}
+                        <p class="mt-1 text-sm text-red-600">{phoneError}</p>
+                    {/if}
+                </div>
+
+                <!-- Message field -->
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-700 mb-1">{i("message")}</label>
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="4"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                        placeholder={i("message_text")}
+                        required
+                    ></textarea>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div id="hcaptcha-container" class="mb-4"></div>
+
+                <!-- Status message -->
+                {#if status}
+                    <div class="text-sm {status.includes('Error') ? 'text-red-600' : 'text-green-600'}">
+                        {status}
+                    </div>
+                {/if}
+
+                <!-- Submit button -->
+                <button
+                    type="submit"
+                    class="w-full px-6 py-3 text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={formSubmitted}
+                >
+                    {i("send_message")}
+                </button>
+            </form>
+        </div>
+    </div>
 </section>
