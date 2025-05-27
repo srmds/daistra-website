@@ -31,6 +31,7 @@
 	let isCheckingDomain = false;
 
 	let captchaContainer: HTMLElement | null = null;
+	let captchaLoaded = false;
 
 	// Watch for language changes
 	$: if (language) {
@@ -41,9 +42,6 @@
 			submissionTimeout = null;
 		}
 		status = "";
-		
-		// Re-initialize CAPTCHA after a short delay to ensure DOM is ready
-		setTimeout(initializeCaptcha, 100);
 	}
 
 	function isValidName(name: string): boolean {
@@ -271,6 +269,9 @@
 				submissionTimeout = setTimeout(() => {
 					formSubmitted = false;
 				}, 30000);
+				
+				// Redirect to success page
+				window.location.href = 'https://web3forms.com/success#form';
 			} else {
 				status = "Error: " + (result.message || "Something went wrong")
 				formSubmitted = false;
@@ -288,6 +289,13 @@
     function initializeCaptcha() {
         if (typeof window === 'undefined') return;
         
+        // Check if hCaptcha is loaded
+        if (!(window as any).hcaptcha) {
+            console.log('hCaptcha not loaded yet, waiting...');
+            setTimeout(initializeCaptcha, 100);
+            return;
+        }
+        
         // Remove existing hCaptcha if it exists
         if (captchaContainer) {
             captchaContainer.innerHTML = '';
@@ -303,12 +311,23 @@
         const submitButton = form?.querySelector('button[type="submit"]');
         if (form && submitButton) {
             form.insertBefore(captchaContainer, submitButton);
+            captchaLoaded = true;
         }
     }
 
     // Initialize on mount
     onMount(() => {
-        initializeCaptcha();
+        // Load hCaptcha script if not already loaded
+        if (!document.querySelector('script[src*="hcaptcha"]')) {
+            const script = document.createElement('script');
+            script.src = 'https://js.hcaptcha.com/1/api.js';
+            script.async = true;
+            script.defer = true;
+            script.onload = initializeCaptcha;
+            document.head.appendChild(script);
+        } else {
+            initializeCaptcha();
+        }
     });
 
 </script>
@@ -354,22 +373,35 @@
 		gtag('config', 'G-73RC0XF497');
   </script>
   <script src="https://web3forms.com/client/script.js" async defer></script>
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 </svelte:head>
 
 <section id="about" class="z-[-1]">
 	<h1 class="hidden font-bold ">{i("seo_h1")}</h1>
-	<div id="banner" class="relative before:absolute before:w-full before:h-full before:inset-0 before:bg-black before:opacity-0 ">
-		
-		<div class="grid max-w-screen grid-cols-1 md:grid-cols-1 bg-black opacity-100" style="height: 650px; background-image: linear-gradient(to right, rgb(55, 65, 81), rgb(17, 24, 39), rgb(0, 0, 0))">
-				<p class="absolute my-40 font-venus justify-self-center tracking-wider sm:text-7xl lg:text-9xl font-bold mb-6 text-center text-white inset-0" style="">DAISTRA<p>
-				<p class="absolute my-80 font-venus justify-self-center tracking-widest sm:text-6xl lg:text-6xl font-thin mb-6 text-center text-white inset-0" style="padding-top: 0px">data & ai<br>{i("banner_subscript")}<p>
+	<div id="banner" class="relative overflow-hidden">
+		<div class="relative h-[650px] w-full bg-gradient-to-br from-gray-900 via-indigo-900 to-black">
+			<!-- Animated background elements -->
+			<div class="absolute inset-0 opacity-20">
+				<div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-indigo-500/30 via-transparent to-transparent"></div>
+				<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent"></div>
+			</div>
+			
+			<!-- Main content -->
+			<div class="relative h-full flex flex-col items-center justify-center text-center px-4">
+				<h2 class="font-venus tracking-wider text-7xl md:text-8xl lg:text-9xl font-bold text-white mb-4 transform hover:scale-105 transition-transform duration-300">
+					DAISTRA
+				</h2>
+				<p class="font-venus tracking-widest text-4xl md:text-5xl lg:text-6xl font-thin text-white/90 transform hover:scale-105 transition-transform duration-300">
+					data & ai<br>
+					<span class="text-indigo-300">{i("banner_subscript")}</span>
+				</p>
+			</div>
 		</div>
-		
-	<script>
-	</script>
-	<div class="grid max-w-screen-xl grid-cols-1 py-8 px-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
+	</div>
+	
+	<div class="grid max-w-screen-xl grid-cols-1 py-12 px-8 mx-auto gap-2 xl:gap-4 md:grid-cols-1">
 		<div class="flex flex-col items-start">
-			<p class=" text-2xl ">{i("about_extended")}</p>
+			<p class="text-2xl text-gray-700 leading-relaxed">{i("about_extended")}</p>
 		</div>
 	</div>
 </section>
@@ -485,7 +517,7 @@
 			<form id="form" class="space-y-4" method="POST" action="https://api.web3forms.com/submit" on:submit|preventDefault={handleSubmit}>
 				<input type="hidden" name="access_key" value={PUBLIC_API_KEY}>
 				<input type="hidden" name="subject" value="New website contact submission">
-				<input type="hidden" name="redirect" value="https://web3forms.com/success">
+				<input type="hidden" name="redirect" value="https://web3forms.com/success#form">
 				<input type="hidden" name="from_name" value="Daistra Contact Form">
 				<input type="hidden" name="form_id" value="daistra_contact">
 				<!-- Enhanced bot protection -->
@@ -562,7 +594,8 @@
 					required
 				/>
 				<p class="font-light text-gray-500 mb-6"></p>
-				<!-- hCaptcha will be inserted here by JavaScript -->
+				<!-- hCaptcha widget -->
+				<div class="h-captcha" data-sitekey="10000000-ffff-ffff-ffff-000000000001" data-captcha="true"></div>
 				{#if status}
 					<div class="text-sm {status.includes('Error') ? 'text-red-500' : 'text-green-500'} mb-4">
 						{status}
