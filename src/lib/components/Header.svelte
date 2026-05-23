@@ -1,7 +1,10 @@
 <script lang="ts">
-	import { i, language, languages, switchLanguage } from '@inlang/sdk-js';
 	import { page } from '$app/stores';
+	import { i, languages, localeFromParam, localizedPath, setLanguage, switchLanguage } from '$lib/i18n';
 	import { onMount } from 'svelte';
+
+	$: lang = localeFromParam($page.params.lang);
+	$: setLanguage(lang);
 
 	let scrolled = false;
 	let mobileOpen = false;
@@ -65,7 +68,7 @@
 						: 'border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20'}"
 					>{i('contact_us')}</a
 				>
-				{#if language == 'en'}
+				{#if lang == 'en'}
 					<button
 						class="inline-flex h-10 w-10 items-center justify-center rounded-lg transition {scrolled
 							? 'hover:bg-slate-100'
@@ -76,7 +79,7 @@
 						<img src="/images/dutch-language-icon.svg" class="h-5 w-5" alt="" />
 					</button>
 				{/if}
-				{#if language == 'nl'}
+				{#if lang == 'nl'}
 					<button
 						class="inline-flex h-10 w-10 items-center justify-center rounded-lg transition {scrolled
 							? 'hover:bg-slate-100'
@@ -90,7 +93,7 @@
 			</nav>
 
 			<div class="flex items-center gap-1 md:hidden">
-				{#if language == 'en'}
+				{#if lang == 'en'}
 					<button
 						class="inline-flex h-10 w-10 items-center justify-center rounded-lg {scrolled
 							? 'hover:bg-slate-100'
@@ -101,7 +104,7 @@
 						<img src="/images/dutch-language-icon.svg" class="h-5 w-5" alt="" />
 					</button>
 				{/if}
-				{#if language == 'nl'}
+				{#if lang == 'nl'}
 					<button
 						class="inline-flex h-10 w-10 items-center justify-center rounded-lg {scrolled
 							? 'hover:bg-slate-100'
@@ -167,7 +170,7 @@
 		</nav>
 	{/if}
 
-	{#each languages as lang}
-		<link rel="alternate" hreflang={lang} href={$page.url.pathname + '/' + lang} />
+	{#each languages as altLang}
+		<link rel="alternate" hreflang={altLang} href={localizedPath($page.url.pathname, altLang)} />
 	{/each}
 </header>

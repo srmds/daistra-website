@@ -1,5 +1,8 @@
 <script>
-	import { i } from '@inlang/sdk-js';
+	import { page } from '$app/stores';
+	import { i, localeFromParam, setLanguage } from '$lib/i18n';
+
+	$: setLanguage(localeFromParam($page.params.lang));
 	let year = new Date().getFullYear();
 </script>
 

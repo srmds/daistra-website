@@ -1,19 +1,78 @@
 <script lang="ts">
 	import { PUBLIC_API_KEY } from '$env/static/public';
 	import GoToTop from "$lib/components/GoToTop.svelte"
-    import {i, language } from '@inlang/sdk-js';
+	import { page } from '$app/stores';
+	import { i, localeFromParam, setLanguage } from '$lib/i18n';
+
+	$: lang = localeFromParam($page.params.lang);
+	$: setLanguage(lang);
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
     import { parsePhoneNumberFromString, getCountries, getCountryCallingCode } from 'libphonenumber-js';
     import type { CountryCode } from 'libphonenumber-js';
 
+	// Shared Web3Forms free-plan hCaptcha sitekey (public, not your access key)
+	// https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha
+	const WEB3FORMS_HCAPTCHA_SITEKEY = '50b2fe65-b00b-4b9e-ad62-3ba471098be2';
+
+	let captchaContainer: HTMLDivElement | undefined;
+	let captchaWidgetId: string | undefined;
+	let captchaLang: string | undefined;
+
+	async function loadHcaptchaScript(): Promise<void> {
+		if (window.hcaptcha) return;
+
+		const existing = document.querySelector('script[src*="js.hcaptcha.com/1/api.js"]');
+		if (existing) {
+			await new Promise<void>((resolve) => {
+				const timer = window.setInterval(() => {
+					if (window.hcaptcha) {
+						window.clearInterval(timer);
+						resolve();
+					}
+				}, 50);
+			});
+			return;
+		}
+
+		await new Promise<void>((resolve, reject) => {
+			const script = document.createElement('script');
+			script.src = 'https://js.hcaptcha.com/1/api.js?recaptchacompat=off';
+			script.async = true;
+			script.defer = true;
+			script.onload = () => resolve();
+			script.onerror = () => reject(new Error('Failed to load hCaptcha'));
+			document.head.appendChild(script);
+		});
+	}
+
+	async function renderCaptcha(locale: string) {
+		if (!captchaContainer || captchaLang === locale) return;
+
+		await loadHcaptchaScript();
+		if (!window.hcaptcha) return;
+
+		captchaContainer.replaceChildren();
+		captchaWidgetId = window.hcaptcha.render(captchaContainer, {
+			sitekey: WEB3FORMS_HCAPTCHA_SITEKEY,
+			hl: locale
+		});
+		captchaLang = locale;
+	}
+
     var curUrl = ``;
 	// strip off localization path
-    onMount(() => curUrl = window.location.hostname);
+    onMount(() => {
+		curUrl = window.location.hostname;
+	});
+
+	$: if (captchaContainer && lang) {
+		renderCaptcha(lang);
+	}
 
 	// if language is nl, then we have removed the nl domain, add it back, yes this is ugly and buggy
 	if (curUrl.includes(".nl") === false) {
-		curUrl = String(curUrl).replace(language, '')
+		curUrl = String(curUrl).replace(lang, '')
 	} else {
 		curUrl = String(curUrl).substring(0, curUrl.length - 2);
 	}
@@ -31,7 +90,7 @@
 	let isCheckingDomain = false;
 
 	// Watch for language changes
-	$: if (language) {
+	$: if (lang) {
 		// Reset form state
 		formSubmitted = false;
 		selectedCountry = 'NL';
@@ -319,18 +378,6 @@
     site_name: i('page_title'),
   }}
 />
-
-<svelte:head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-73RC0XF497"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-73RC0XF497');
-  </script>
-  <script src="https://web3forms.com/client/script.js" async defer></script>
-</svelte:head>
 
 <section id="about">
 	<h1 class="sr-only">{i("seo_h1")}</h1>
@@ -626,11 +673,7 @@
 						{#if phoneError}<p class="mt-1 text-sm text-red-600">{phoneError}</p>{/if}
 					</div>
 					<div><label for="message" class="mb-1.5 block text-sm font-medium text-slate-700">{i("message")}</label><textarea id="message" name="message" rows="4" class="form-input" placeholder={i("message_text")} required></textarea></div>
-					<div
-						class="h-captcha mb-2"
-						data-captcha="true"
-						data-lang={language === 'nl' ? 'nl' : 'en'}
-					></div>
+					<div bind:this={captchaContainer} class="mb-2 min-h-[78px]"></div>
 					{#if status}<div class="text-sm {status.includes('Error') ? 'text-red-600' : 'text-emerald-600'}">{status}</div>{/if}
 					<button type="submit" class="btn-primary w-full !rounded-xl disabled:cursor-not-allowed disabled:opacity-50" disabled={formSubmitted}>{i("send_message")}</button>
 				</form>
