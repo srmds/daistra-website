@@ -3,14 +3,15 @@
 	import { page } from '$app/stores';
 	import { i, localeFromParam, setLanguage } from '$lib/i18n';
 
-	export let data: { web3formsAccessKey: string };
-
 	$: lang = localeFromParam($page.params.lang);
 	$: setLanguage(lang);
     import SvelteSeo from "svelte-seo";
     import { onMount } from 'svelte';
     import { parsePhoneNumberFromString, getCountries, getCountryCallingCode } from 'libphonenumber-js';
     import type { CountryCode } from 'libphonenumber-js';
+
+	// Web3Forms access key (public per https://docs.web3forms.com/getting-started/installation)
+	const WEB3FORMS_ACCESS_KEY = '40863508-069e-4a2b-bd58-343c719452e3';
 
 	// Shared Web3Forms free-plan hCaptcha sitekey (public, not your access key)
 	// https://docs.web3forms.com/getting-started/customizations/spam-protection/hcaptcha
@@ -245,11 +246,6 @@
 		event.preventDefault();
 		
 		try {
-			if (!data.web3formsAccessKey) {
-				status = 'Error: Form is not configured. Please try again later.';
-				return;
-			}
-
 			if (formSubmitted) {
 				status = 'Please wait before submitting again...';
 				return;
@@ -654,7 +650,7 @@
 			</div>
 			<div class="card-surface p-8 md:p-10">
 				<form id="form" method="POST" action="https://api.web3forms.com/submit" on:submit|preventDefault={handleSubmit} class="space-y-5">
-					<input type="hidden" name="access_key" value={data.web3formsAccessKey}>
+					<input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY}>
 					<input type="hidden" name="subject" value="New website contact submission">
 					<input type="hidden" name="redirect" value="https://web3forms.com/success#form">
 					<input type="hidden" name="from_name" value="Daistra Contact Form">
