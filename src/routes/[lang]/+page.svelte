@@ -365,14 +365,6 @@
         alt: "Daistra Data & AI Strategy",
       },
       {
-        url: "https://" + String(curUrl) + "/images/business-data-ai-strategy.svg",
-        alt: "Business-led data and AI alignment with DataOps, MLOps, LLMOps, AIOps and AI governance",
-      },
-      {
-        url: "https://" + String(curUrl) + "/images/data-ai-strategy.svg",
-        alt: "Data and AI operating model with governance and XOps execution layers"
-      },
-      {
         url: "https://" + String(curUrl) + "/images/business-card-steven-ramdas.png",
         alt: "Steven Ramdas, Founder and AI Solution Architect at Daistra"
       },
@@ -557,12 +549,6 @@
 					<p class="text-sm leading-relaxed text-slate-700">{i("aiops_main")}</p>
 				</article>
 			</div>
-			<figure class="mx-auto mt-14 max-w-4xl">
-				<div class="diagram-frame">
-					<img class="w-full" src="/images/business-data-ai-strategy.svg" alt={i("alignment_diagram_caption")} />
-				</div>
-				<figcaption class="mt-4 text-center text-sm leading-relaxed text-slate-500">{i("alignment_diagram_caption")}</figcaption>
-			</figure>
 		</div>
 
 		<div class="mb-20">
@@ -579,17 +565,11 @@
 		</div>
 
 		<div>
-			<div class="mb-10 text-center">
+			<div class="mb-10 text-center max-w-4xl mx-auto">
 				<h3 class="section-title mb-4">{i("business_alignment_title")}</h3>
 				<p class="section-intro mx-auto mb-4">{i("business_alignment_intro")}</p>
-				<p class="mx-auto max-w-4xl text-lg leading-relaxed text-slate-700">{i("business_alignment_main")}</p>
+				<p class="text-lg leading-relaxed text-slate-700">{i("business_alignment_main")}</p>
 			</div>
-			<figure class="mx-auto max-w-6xl">
-				<div class="diagram-frame">
-					<img class="w-full" src="/images/data-ai-strategy.svg" alt={i("operating_model_caption")} />
-				</div>
-				<figcaption class="mt-4 text-center text-sm leading-relaxed text-slate-500">{i("operating_model_caption")}</figcaption>
-			</figure>
 		</div>
 	</div>
 </section>
@@ -604,15 +584,17 @@
 				<h2 class="font-display mb-6 text-3xl font-bold md:text-4xl lg:text-5xl">{i("contact_us")}</h2>
 				<p class="mb-8 text-lg leading-relaxed text-slate-300">{i("fill_form")}</p>
 
-				<div class="mb-8 flex gap-5 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm sm:items-center">
-					<img
-						src="/images/business-card-steven-ramdas.png"
-						alt={i("founder_name")}
-						class="h-28 w-24 shrink-0 rounded-xl object-cover object-top shadow-md sm:h-32 sm:w-28"
-						width="444"
-						height="600"
-						loading="lazy"
-					/>
+				<div class="mb-8 flex items-start gap-5 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
+					<div class="w-28 shrink-0 overflow-hidden rounded-xl bg-slate-900/40 shadow-md sm:w-32 aspect-[444/600]">
+						<img
+							src="/images/business-card-steven-ramdas.png"
+							alt={i("founder_name")}
+							class="h-full w-full object-contain"
+							width="444"
+							height="600"
+							loading="lazy"
+						/>
+					</div>
 					<div class="min-w-0">
 						<p class="font-display text-xl font-bold text-white">{i("founder_name")}</p>
 						<p class="mt-1 text-sm font-medium text-cyan-light">{i("founder_title")}</p>
@@ -634,12 +616,6 @@
 				</div>
 
 				<div class="space-y-4">
-					<div class="flex items-center gap-3 text-slate-300">
-						<span class="flex h-10 w-10 items-center justify-center rounded-full bg-brand-500/20 text-cyan-light">
-							<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-						</span>
-						<span>{i("footer_mail_us")}</span>
-					</div>
 					<div class="flex items-start gap-3 text-slate-300">
 						<span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-500/20 text-cyan-light">
 							<svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>

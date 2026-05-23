@@ -9,54 +9,31 @@
 <footer class="relative overflow-hidden bg-brand-950 text-slate-300">
 	<div class="absolute inset-x-0 top-0 h-1 bg-brand-bar" aria-hidden="true"></div>
 	<div class="section-shell py-14 lg:py-16">
-		<div class="grid gap-10 md:grid-cols-[1.4fr_1fr] md:gap-16">
-			<div>
+		<div class="grid grid-cols-1 gap-8 md:grid-cols-[1.4fr_1fr] md:items-center md:gap-x-16">
+			<div class="space-y-5">
 				<img
 					src="/images/daistra-logo-full.png"
-					class="mb-6 h-14 w-auto rounded-lg bg-white px-3 py-2"
+					class="h-14 w-auto rounded-lg bg-white px-3 py-2"
 					width="723"
 					height="660"
 					alt="Daistra Data &amp; AI Strategy"
 				/>
-				<ul class="space-y-3 text-base">
-					<li class="flex items-start gap-3">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="mt-0.5 h-5 w-5 shrink-0 text-cyan-brand"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
-							/>
-						</svg>
-						<p>{i('footer_address')}</p>
-					</li>
-					<li class="flex items-start gap-3">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							class="mt-0.5 h-5 w-5 shrink-0 text-cyan-brand"
-							viewBox="0 0 24 24"
-							fill="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
-							/>
-						</svg>
-						<a
-							class="transition hover:text-white"
-							href="mailto:{i('footer_email_address')}"
-							target="_blank"
-							onmouseover="this.href=this.href.replace('@+@','.')"
-						>
-							{i('footer_mail_us')}
-						</a>
-					</li>
-				</ul>
+				<p class="flex items-start gap-3 text-base leading-relaxed">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						class="mt-0.5 h-5 w-5 shrink-0 text-cyan-brand"
+						viewBox="0 0 24 24"
+						fill="currentColor"
+						aria-hidden="true"
+					>
+						<path
+							d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
+						/>
+					</svg>
+					<span>{i('footer_address')}</span>
+				</p>
 			</div>
-			<div class="space-y-2 text-base text-slate-400">
+			<div class="space-y-1 text-base text-slate-400 md:text-right">
 				<p>{i('footer_chamber_of_commerce')}: 91660165</p>
 				<p>{i('footer_value_added_tax')}: NL865728318B01</p>
 			</div>

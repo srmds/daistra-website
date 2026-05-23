@@ -54,7 +54,6 @@
     "aiops_title": "AIOps",
     "aiops_intro": "AIOps houdt uw AI-systemen gezond in productie, over data platforms, ML-services en LLM-applicaties. Het combineert observability, SLO's, incident response, automatisering, capacity planning en FinOps zodat AI-workloads betrouwbaar, kosteneffectief en continu geoptimaliseerd blijven.",
     "aiops_main": "Wij richten AIOps-praktijken in die teams en platforms verbinden: unified monitoring, runbooks, auto-remediation waar passend en feedback loops naar DataOps, MLOps en LLMOps. Uw AI-landschap blijft operationeel, niet fragiel.",
-    "alignment_diagram_caption": "Hoe businessstrategie, data- en AI-strategie, AI governance en XOps samenkomen voor meetbare resultaten",
     "engagement_title": "Onze Engagement Journey",
     "engagement_intro": "Elke engagement volgt een bewezen pad, afgestemd op uw context en volwassenheid, van eerste discovery tot sustained value.",
     "engagement_discover": "Discover: beoordeel data- en AI-readiness, stem stakeholders af en definieer ambitie",
@@ -65,12 +64,9 @@
     "business_alignment_title": "Afgestemd op uw business, end to end",
     "business_alignment_intro": "Data en AI zijn geen IT-projecten. Het zijn business capabilities die strategische doelen moeten dienen, governance respecteren en waarde bewijzen in productie.",
     "business_alignment_main": "Ons operating model verbindt businessstrategie met datastrategie, AI-strategie, AI governance en XOps-executie in één coherent framework. Zo bewegen organisaties van ambitie naar resultaat met helderheid op elke laag.",
-    "operating_model_caption": "Het Daistra operating model, van businessstrategie via governance en XOps naar continue businesswaarde",
     "seo_h1": "Data strategie | AI strategie | DataOps | MLOps | LLMOps | AIOps | AI Governance | Data engineers | ML engineers",
     "footer_chamber_of_commerce": "KVK",
     "footer_value_added_tax": "BTW",
     "footer_address": "Scheveningseweg 60-8, 2517 KW, Den Haag",
-    "footer_email_address": "info@daistra@+@nl?subject=Verzoek om contact",
-    "footer_mail_us": "Stuur ons een bericht",
     "footer_copyright": "Alle rechten voorbehouden"
 }
