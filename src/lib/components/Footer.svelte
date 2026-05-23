@@ -2,7 +2,8 @@
 	import { page } from '$app/stores';
 	import { i, localeFromParam, setLanguage } from '$lib/i18n';
 
-	$: setLanguage(localeFromParam($page.params.lang));
+	$: lang = localeFromParam($page.params.lang);
+	$: setLanguage(lang);
 	let year = new Date().getFullYear();
 </script>
 
@@ -30,12 +31,12 @@
 							d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"
 						/>
 					</svg>
-					<span>{i('footer_address')}</span>
+					<span>{i('footer_address', lang)}</span>
 				</p>
 			</div>
 			<div class="space-y-1 text-base text-slate-400 md:text-right">
-				<p>{i('footer_chamber_of_commerce')}: 91660165</p>
-				<p>{i('footer_value_added_tax')}: NL865728318B01</p>
+				<p>{i('footer_chamber_of_commerce', lang)}: 91660165</p>
+				<p>{i('footer_value_added_tax', lang)}: NL865728318B01</p>
 			</div>
 		</div>
 		<hr class="my-8 border-slate-800" />
@@ -43,7 +44,7 @@
 			<span class="text-sm text-slate-500">
 				© {year}
 				<a href="/" class="text-slate-300 transition hover:text-white">Daistra</a>.
-				{i('footer_copyright')}
+				{i('footer_copyright', lang)}
 			</span>
 			<div class="flex gap-4">
 				<a
