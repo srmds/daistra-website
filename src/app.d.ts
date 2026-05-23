@@ -21,6 +21,7 @@ declare global {
 	namespace App {
         interface Platform {
           env: {
+            PUBLIC_API_KEY?: string;
             COUNTER: DurableObjectNamespace;
           };
           context: {
