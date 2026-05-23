@@ -9,7 +9,7 @@
 		document.documentElement.lang = language
 	}
 </script>
-<br />
+
 {#key lang}
 	<slot />
 {/key}

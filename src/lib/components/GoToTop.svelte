@@ -1,64 +1,58 @@
 <!-- Originally posted on https://webjeda.com/blog/back-to-top-svelte-component/ -->
 <script>
-    export let showAtPixel = 600;
-  
-    let scrollHeight = 0;
-  
-    const gotoTop = () => {
-          window.scrollTo({ top: 0, behavior: 'smooth' })
-    };
-  
-    $: showGotoTop = scrollHeight > showAtPixel;
-  </script>
-  
-  {#if showGotoTop}
-    <button on:click={gotoTop} class="goto__top" title="Go to top"
-      ><svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="48"
-        height="48"
-        viewBox="0 0 32 32">
-        <g 
-            fill="blue" 
-            stroke="grey" 
-            stroke-width="2.5">
-          <path
-            fill="white"
-            d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/>
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="m15 13.5l-3-3l-3 3"
-        />
-        </g>
-      </svg></button
-    >
-   <path 
-       stroke-linecap="round" 
-       stroke-linejoin="round" 
-       d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" 
-       fill="currentColor"
-   />
-  {/if}
-  
-  <svelte:window bind:scrollY={scrollHeight} />
-  
-  <style>
-    .goto__top {
-      position: fixed;
-      right: 1rem;
-      bottom: 5rem;
-      cursor: pointer;
-      color: #999;
-      border-radius: 0.15rem;
-      transition-duration: 300ms;
-      z-index: 999;
-          background: none;
-          border: none;
-          padding: 0;
-    }
-    .goto__top:hover {
-      transform: translateY(-10px);
-    }
-  </style>
-  
+	export let showAtPixel = 600;
+
+	let scrollHeight = 0;
+
+	const gotoTop = () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
+
+	$: showGotoTop = scrollHeight > showAtPixel;
+</script>
+
+{#if showGotoTop}
+	<button on:click={gotoTop} class="goto__top" title="Go to top" aria-label="Go to top">
+		<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+			<defs>
+				<linearGradient id="topGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#22d3ee" />
+					<stop offset="50%" stop-color="#3b82f6" />
+					<stop offset="100%" stop-color="#1e40af" />
+				</linearGradient>
+			</defs>
+			<circle cx="24" cy="24" r="22" fill="white" stroke="url(#topGrad)" stroke-width="2" />
+			<path
+				d="M24 30V18M24 18l-6 6M24 18l6 6"
+				stroke="url(#topGrad)"
+				stroke-width="2.5"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				fill="none"
+			/>
+		</svg>
+	</button>
+{/if}
+
+<svelte:window bind:scrollY={scrollHeight} />
+
+<style>
+	.goto__top {
+		position: fixed;
+		right: 1.25rem;
+		bottom: 1.25rem;
+		cursor: pointer;
+		border: none;
+		background: none;
+		padding: 0;
+		border-radius: 9999px;
+		box-shadow: 0 12px 32px rgba(37, 99, 235, 0.28);
+		transition: transform 300ms ease, box-shadow 300ms ease;
+		z-index: 999;
+	}
+
+	.goto__top:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 40px rgba(34, 211, 238, 0.35);
+	}
+</style>

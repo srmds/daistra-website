@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 220" role="img" aria-labelledby="title desc">
+  <title id="title">Daistra Engagement Journey</title>
+  <desc id="desc">Five-phase engagement model: Discover, Define, Design, Deliver, and Develop for data and AI strategy.</desc>
+  <defs>
+    <style type="text/css"><![CDATA[
+      text { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+      .title { font-size: 16px; font-weight: 700; fill: #312e81; }
+      .phase { font-size: 15px; font-weight: 700; }
+      .body { font-size: 11px; fill: #4b5563; }
+      .tag { font-size: 10px; font-weight: 600; }
+      .step { font-size: 12px; font-weight: 700; fill: #ffffff; }
+      .caption { font-size: 11px; fill: #6b7280; }
+    ]]></style>
+    <linearGradient id="jBg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#eef2ff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <marker id="jArrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/>
+    </marker>
+    <filter id="jShadow">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#312e81" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="1100" height="220" fill="url(#jBg)" rx="12"/>
+
+  <text x="550" y="28" text-anchor="middle" class="title">Daistra Engagement Journey</text>
+
+  <!-- Phase 1 -->
+  <g filter="url(#jShadow)">
+    <rect x="24" y="52" width="188" height="130" rx="10" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
+    <circle cx="48" cy="76" r="14" fill="#6366f1"/>
+    <text x="48" y="81" text-anchor="middle" class="step">1</text>
+    <text x="118" y="80" text-anchor="middle" class="phase" fill="#312e81">Discover</text>
+    <text x="118" y="108" text-anchor="middle" class="body">Assess readiness</text>
+    <text x="118" y="126" text-anchor="middle" class="body">Stakeholder alignment</text>
+    <text x="118" y="144" text-anchor="middle" class="body">Current-state review</text>
+    <text x="118" y="166" text-anchor="middle" class="tag" fill="#6366f1">Discovery &amp; vision</text>
+  </g>
+
+  <line x1="212" y1="117" x2="232" y2="117" stroke="#6366f1" stroke-width="2" marker-end="url(#jArrow)"/>
+
+  <!-- Phase 2 -->
+  <g filter="url(#jShadow)">
+    <rect x="232" y="52" width="188" height="130" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+    <circle cx="256" cy="76" r="14" fill="#2563eb"/>
+    <text x="256" y="81" text-anchor="middle" class="step">2</text>
+    <text x="326" y="80" text-anchor="middle" class="phase" fill="#1e40af">Define</text>
+    <text x="326" y="108" text-anchor="middle" class="body">Data &amp; AI strategy</text>
+    <text x="326" y="126" text-anchor="middle" class="body">Roadmap &amp; priorities</text>
+    <text x="326" y="144" text-anchor="middle" class="body">Business case &amp; ROI</text>
+    <text x="326" y="166" text-anchor="middle" class="tag" fill="#2563eb">Strategy design</text>
+  </g>
+
+  <line x1="420" y1="117" x2="440" y2="117" stroke="#6366f1" stroke-width="2" marker-end="url(#jArrow)"/>
+
+  <!-- Phase 3 -->
+  <g filter="url(#jShadow)">
+    <rect x="440" y="52" width="188" height="130" rx="10" fill="#ffffff" stroke="#312e81" stroke-width="2"/>
+    <circle cx="464" cy="76" r="14" fill="#312e81"/>
+    <text x="464" y="81" text-anchor="middle" class="step">3</text>
+    <text x="534" y="80" text-anchor="middle" class="phase" fill="#312e81">Design</text>
+    <text x="534" y="108" text-anchor="middle" class="body">Architecture &amp; platform</text>
+    <text x="534" y="126" text-anchor="middle" class="body">AI governance framework</text>
+    <text x="534" y="144" text-anchor="middle" class="body">Operating model &amp; teams</text>
+    <text x="534" y="166" text-anchor="middle" class="tag" fill="#312e81">Governance &amp; ethics</text>
+  </g>
+
+  <line x1="628" y1="117" x2="648" y2="117" stroke="#6366f1" stroke-width="2" marker-end="url(#jArrow)"/>
+
+  <!-- Phase 4 -->
+  <g filter="url(#jShadow)">
+    <rect x="648" y="52" width="188" height="130" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2"/>
+    <circle cx="672" cy="76" r="14" fill="#059669"/>
+    <text x="672" y="81" text-anchor="middle" class="step">4</text>
+    <text x="742" y="80" text-anchor="middle" class="phase" fill="#047857">Deliver</text>
+    <text x="742" y="108" text-anchor="middle" class="body">DataOps &#183; MLOps &#183; LLMOps</text>
+    <text x="742" y="126" text-anchor="middle" class="body">AIOps in production</text>
+    <text x="742" y="144" text-anchor="middle" class="body">Pilot to scale</text>
+    <text x="742" y="166" text-anchor="middle" class="tag" fill="#059669">Implementation</text>
+  </g>
+
+  <line x1="836" y1="117" x2="856" y2="117" stroke="#6366f1" stroke-width="2" marker-end="url(#jArrow)"/>
+
+  <!-- Phase 5 -->
+  <g filter="url(#jShadow)">
+    <rect x="856" y="52" width="220" height="130" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
+    <circle cx="880" cy="76" r="14" fill="#7c3aed"/>
+    <text x="880" y="81" text-anchor="middle" class="step">5</text>
+    <text x="966" y="80" text-anchor="middle" class="phase" fill="#5b21b6">Develop</text>
+    <text x="966" y="108" text-anchor="middle" class="body">Enable teams &amp; literacy</text>
+    <text x="966" y="126" text-anchor="middle" class="body">Measure &amp; optimize</text>
+    <text x="966" y="144" text-anchor="middle" class="body">Continuous value</text>
+    <text x="966" y="166" text-anchor="middle" class="tag" fill="#7c3aed">Scale &amp; sustain</text>
+  </g>
+
+  <text x="550" y="208" text-anchor="middle" class="caption">From business alignment to governed, operational AI, with measurable outcomes at every stage</text>
+</svg>
