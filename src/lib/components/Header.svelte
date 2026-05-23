@@ -52,21 +52,21 @@
 					class="inline-flex h-10 items-center rounded-lg px-4 text-sm font-medium transition {scrolled
 						? 'text-slate-600 hover:bg-slate-100 hover:text-brand-700'
 						: 'text-slate-200 hover:bg-white/10 hover:text-white'}"
-					>{i('about')}</a
+					>{i('about', lang)}</a
 				>
 				<a
 					href="#service"
 					class="inline-flex h-10 items-center rounded-lg px-4 text-sm font-medium transition {scrolled
 						? 'text-slate-600 hover:bg-slate-100 hover:text-brand-700'
 						: 'text-slate-200 hover:bg-white/10 hover:text-white'}"
-					>{i('services_title')}</a
+					>{i('services_title', lang)}</a
 				>
 				<a
 					href="#contact"
 					class="inline-flex h-10 items-center rounded-full px-5 text-sm font-semibold transition {scrolled
 						? 'bg-brand-gradient text-white shadow-brand hover:scale-[1.02]'
 						: 'border border-white/30 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20'}"
-					>{i('contact_us')}</a
+					>{i('contact_us', lang)}</a
 				>
 				{#if lang == 'en'}
 					<button
@@ -151,7 +151,7 @@
 						class="block rounded-lg px-3 py-3 text-base font-medium {scrolled
 							? 'text-slate-700 hover:bg-slate-100'
 							: 'text-slate-100 hover:bg-white/10'}"
-						on:click={closeMobile}>{i('about')}</a
+						on:click={closeMobile}>{i('about', lang)}</a
 					>
 				</li>
 				<li>
@@ -160,11 +160,11 @@
 						class="block rounded-lg px-3 py-3 text-base font-medium {scrolled
 							? 'text-slate-700 hover:bg-slate-100'
 							: 'text-slate-100 hover:bg-white/10'}"
-						on:click={closeMobile}>{i('services_title')}</a
+						on:click={closeMobile}>{i('services_title', lang)}</a
 					>
 				</li>
 				<li>
-					<a href="#contact" class="btn-primary mt-2 w-full" on:click={closeMobile}>{i('contact_us')}</a>
+					<a href="#contact" class="btn-primary mt-2 w-full" on:click={closeMobile}>{i('contact_us', lang)}</a>
 				</li>
 			</ul>
 		</nav>
