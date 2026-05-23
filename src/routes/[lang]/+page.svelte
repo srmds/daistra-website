@@ -365,6 +365,14 @@
         alt: "Daistra Data & AI Strategy",
       },
       {
+        url: "https://" + String(curUrl) + "/images/business-data-ai-strategy.svg",
+        alt: "Business-led data and AI alignment with DataOps, MLOps, LLMOps, AIOps and AI governance",
+      },
+      {
+        url: "https://" + String(curUrl) + "/images/data-ai-strategy.svg",
+        alt: "Data and AI operating model with governance and XOps execution layers"
+      },
+      {
         url: "https://" + String(curUrl) + "/images/business-card-steven-ramdas.png",
         alt: "Steven Ramdas, Founder and AI Solution Architect at Daistra"
       },
@@ -549,6 +557,12 @@
 					<p class="text-sm leading-relaxed text-slate-700">{i("aiops_main")}</p>
 				</article>
 			</div>
+			<figure class="mx-auto mt-14 max-w-4xl">
+				<div class="diagram-frame">
+					<img class="w-full" src="/images/business-data-ai-strategy.svg" alt={i("alignment_diagram_caption")} />
+				</div>
+				<figcaption class="mt-4 text-center text-sm leading-relaxed text-slate-500">{i("alignment_diagram_caption")}</figcaption>
+			</figure>
 		</div>
 
 		<div class="mb-20">
@@ -565,11 +579,17 @@
 		</div>
 
 		<div>
-			<div class="mb-10 text-center max-w-4xl mx-auto">
+			<div class="mb-10 text-center">
 				<h3 class="section-title mb-4">{i("business_alignment_title")}</h3>
 				<p class="section-intro mx-auto mb-4">{i("business_alignment_intro")}</p>
-				<p class="text-lg leading-relaxed text-slate-700">{i("business_alignment_main")}</p>
+				<p class="mx-auto max-w-4xl text-lg leading-relaxed text-slate-700">{i("business_alignment_main")}</p>
 			</div>
+			<figure class="mx-auto max-w-6xl">
+				<div class="diagram-frame">
+					<img class="w-full" src="/images/data-ai-strategy.svg" alt={i("operating_model_caption")} />
+				</div>
+				<figcaption class="mt-4 text-center text-sm leading-relaxed text-slate-500">{i("operating_model_caption")}</figcaption>
+			</figure>
 		</div>
 	</div>
 </section>
