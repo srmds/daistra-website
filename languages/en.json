@@ -93,7 +93,8 @@
   "privacy_form_body": "When you submit the contact form, your name, email, phone number, and message are sent to Web3Forms so we can respond. Do not include sensitive personal data unless necessary.",
   "privacy_form_link": "Web3Forms privacy policy",
   "privacy_rights_title": "Your rights & questions",
-  "privacy_rights_body": "Under the GDPR you may request access, correction, or deletion of personal data we hold from your contact request. For privacy questions, email info@daistra.com.",
+  "privacy_rights_body": "Under the GDPR you may request access, correction, or deletion of personal data we hold from your contact request. For privacy questions, please use our ",
+  "privacy_rights_contact_link": "contact form",
   "privacy_back_home": "Back to home",
   "privacy_last_updated": "Last updated: March 2026"
 }

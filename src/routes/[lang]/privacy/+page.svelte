@@ -87,7 +87,12 @@
 
 		<section class="rounded-2xl border border-brand-100 bg-brand-50/60 p-6 md:p-8">
 			<h2 class="mb-3 text-xl font-bold text-brand-950">{i('privacy_rights_title', lang)}</h2>
-			<p class="leading-relaxed text-slate-600">{i('privacy_rights_body', lang)}</p>
+			<p class="leading-relaxed text-slate-600">
+				{i('privacy_rights_body', lang)}
+				<a href="/{lang}#contact" class="font-semibold text-brand-600 hover:text-brand-800">
+					{i('privacy_rights_contact_link', lang)}
+				</a>.
+			</p>
 		</section>
 
 		<p class="text-sm text-slate-500">{i('privacy_last_updated', lang)}</p>
