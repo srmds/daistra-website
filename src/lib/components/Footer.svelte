@@ -43,8 +43,12 @@
 		<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 			<span class="text-sm text-slate-500">
 				© {year}
-				<a href="/" class="text-slate-300 transition hover:text-white">Daistra</a>.
+				<a href="/{lang}" class="text-slate-300 transition hover:text-white">Daistra</a>.
 				{i('footer_copyright', lang)}
+				<span class="mx-2 text-slate-600" aria-hidden="true">·</span>
+				<a href="/{lang}/privacy" class="text-slate-300 transition hover:text-white hover:underline">
+					{i('footer_privacy_link', lang)}
+				</a>
 			</span>
 			<div class="flex gap-4">
 				<a

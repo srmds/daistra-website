@@ -2,8 +2,6 @@
 // for information about these interfaces
 declare global {
 	interface Window {
-		dataLayer: unknown[];
-		gtag: (...args: unknown[]) => void;
 		hcaptcha?: {
 			reset: (widgetId?: string) => void;
 			render: (

@@ -4,6 +4,21 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
 		<meta name="viewport" content="width=device-width" />
+		<script>
+			(function () {
+				var host = location.hostname;
+				var isNl =
+					host === 'daistra.nl' || host.endsWith('.daistra.nl');
+				var websiteId = isNl
+					? '07874ce1-7a1a-45e3-a6c0-5a87ce3a1b02'
+					: '169259d2-b925-40ee-b55c-94592749b0cf';
+				var script = document.createElement('script');
+				script.defer = true;
+				script.src = 'https://cloud.umami.is/script.js';
+				script.dataset.websiteId = websiteId;
+				document.head.appendChild(script);
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
