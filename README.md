@@ -41,7 +41,7 @@ npm run build
 You can preview the _production_ build with:
 
 ```bash
-npm run preview
+npm run preview -- --open
 ```
 
-Then open browser link: http://localhost:4173 to preview the build
+The browser will open the preview of the site: http://localhost:4173

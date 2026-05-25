@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" role="img" aria-labelledby="title desc">
   <title id="title">Business-led Data and AI Alignment</title>
-  <desc id="desc">Business strategy aligns data strategy and AI strategy through a shared foundation, executed via DataOps, MLOps, LLMOps, and AIOps under AI governance, delivering measurable business outcomes.</desc>
+  <desc id="desc">Business strategy aligns data strategy and AI strategy through a shared foundation, governed by integrated Data Governance and AI Governance, executed via DataOps, MLOps, LLMOps, and AIOps, delivering measurable business outcomes.</desc>
   <defs>
     <style type="text/css"><![CDATA[
       text { font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
@@ -8,6 +8,12 @@
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#f8fafc"/>
       <stop offset="100%" stop-color="#eef2ff"/>
+    </linearGradient>
+    <linearGradient id="mlopsAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="50%" stop-color="#0d9488"/>
+      <stop offset="50%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#6366f1"/>
     </linearGradient>
     <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
       <path d="M0,0 L8,4 L0,8 Z" fill="#6366f1"/>
@@ -17,7 +23,7 @@
     </filter>
   </defs>
 
-  <rect width="900" height="720" fill="url(#bg)" rx="16"/>
+  <rect width="900" height="760" fill="url(#bg)" rx="16"/>
 
   <!-- Business Strategy -->
   <g filter="url(#shadow)">
@@ -26,84 +32,98 @@
     <text x="450" y="90" text-anchor="middle" font-size="13" fill="#b45309">Goals · KPIs · Use-case portfolio · ROI</text>
   </g>
 
-  <line x1="450" y1="108" x2="450" y2="138" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="450" y1="108" x2="450" y2="142" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
 
   <!-- Strategy row -->
   <g filter="url(#shadow)">
-    <rect x="48" y="148" width="240" height="100" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-    <text x="168" y="182" text-anchor="middle" font-size="17" font-weight="700" fill="#1e40af">Data Strategy</text>
-    <text x="168" y="206" text-anchor="middle" font-size="12" fill="#1d4ed8">Governance · Quality</text>
-    <text x="168" y="224" text-anchor="middle" font-size="12" fill="#1d4ed8">Architecture · Culture</text>
+    <rect x="48" y="152" width="240" height="100" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="168" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#1e40af">Data Strategy</text>
+    <text x="168" y="210" text-anchor="middle" font-size="12" fill="#1d4ed8">Quality · Architecture</text>
+    <text x="168" y="228" text-anchor="middle" font-size="12" fill="#1d4ed8">Culture · Data as product</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="330" y="148" width="240" height="100" rx="12" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
-    <text x="450" y="182" text-anchor="middle" font-size="17" font-weight="700" fill="#3730a3">Shared Foundation</text>
-    <text x="450" y="206" text-anchor="middle" font-size="12" fill="#4338ca">Platform · Data products</text>
-    <text x="450" y="224" text-anchor="middle" font-size="12" fill="#4338ca">Catalog · Lineage · Security</text>
+    <rect x="330" y="152" width="240" height="100" rx="12" fill="#e0e7ff" stroke="#6366f1" stroke-width="2"/>
+    <text x="450" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#3730a3">Shared Foundation</text>
+    <text x="450" y="210" text-anchor="middle" font-size="12" fill="#4338ca">Platform · Data products</text>
+    <text x="450" y="228" text-anchor="middle" font-size="12" fill="#4338ca">Catalog · Lineage · Security</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="612" y="148" width="240" height="100" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
-    <text x="732" y="182" text-anchor="middle" font-size="17" font-weight="700" fill="#5b21b6">AI Strategy</text>
-    <text x="732" y="206" text-anchor="middle" font-size="12" fill="#6d28d9">Use cases · Build / buy</text>
-    <text x="732" y="224" text-anchor="middle" font-size="12" fill="#6d28d9">Responsible AI · EU AI Act</text>
+    <rect x="612" y="152" width="240" height="100" rx="12" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="732" y="186" text-anchor="middle" font-size="17" font-weight="700" fill="#5b21b6">AI Strategy</text>
+    <text x="732" y="210" text-anchor="middle" font-size="12" fill="#6d28d9">Use cases · Build / buy</text>
+    <text x="732" y="228" text-anchor="middle" font-size="12" fill="#6d28d9">Responsible AI · EU AI Act</text>
   </g>
 
-  <!-- AI Governance band -->
-  <rect x="48" y="278" width="804" height="56" rx="10" fill="#312e81" opacity="0.95"/>
-  <text x="450" y="304" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff">AI Governance</text>
-  <text x="450" y="324" text-anchor="middle" font-size="12" fill="#c7d2fe">Policy · Risk register · Model registry · Ethics · Compliance · Human oversight</text>
+  <line x1="168" y1="252" x2="252" y2="278" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="450" y1="252" x2="450" y2="278" stroke="#6366f1" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="732" y1="252" x2="648" y2="278" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#arrow)"/>
 
-  <!-- Operations row -->
-  <text x="450" y="368" text-anchor="middle" font-size="14" font-weight="600" fill="#4b5563">Operations &amp; Execution</text>
+  <!-- Governance -->
+  <rect x="48" y="278" width="804" height="120" rx="12" fill="#f8fafc" stroke="#4338ca" stroke-width="2"/>
+  <text x="450" y="304" text-anchor="middle" font-size="15" font-weight="700" fill="#312e81">Data &amp; AI Governance</text>
+  <text x="450" y="324" text-anchor="middle" font-size="11" fill="#6366f1">Shared controls · Policy · Risk · Compliance · Oversight</text>
+
+  <rect x="64" y="340" width="376" height="48" rx="8" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+  <rect x="460" y="340" width="376" height="48" rx="8" fill="#312e81" stroke="#4338ca" stroke-width="2"/>
+
+  <text x="252" y="360" text-anchor="middle" font-size="14" font-weight="700" fill="#115e59">Data Governance</text>
+  <text x="252" y="378" text-anchor="middle" font-size="10" fill="#0f766e">Quality · Catalog · Privacy · Ownership · Lineage</text>
+
+  <text x="648" y="360" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">AI Governance</text>
+  <text x="648" y="378" text-anchor="middle" font-size="10" fill="#c7d2fe">Model registry · Ethics · Risk · Compliance · Human oversight</text>
+
+  <!-- Operations zone -->
+  <text x="450" y="424" text-anchor="middle" font-size="13" font-weight="600" fill="#64748b">Operations &amp; Execution</text>
+
+  <rect x="64" y="436" width="376" height="172" rx="10" fill="#ecfdf5" opacity="0.55"/>
+  <rect x="460" y="436" width="376" height="172" rx="10" fill="#eef2ff" opacity="0.65"/>
 
   <g filter="url(#shadow)">
-    <rect x="32" y="384" width="196" height="120" rx="10" fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
-    <text x="130" y="416" text-anchor="middle" font-size="15" font-weight="700" fill="#1e40af">DataOps</text>
-    <text x="130" y="440" text-anchor="middle" font-size="11" fill="#374151">Ingestion · Transform</text>
-    <text x="130" y="458" text-anchor="middle" font-size="11" fill="#374151">Orchestration · Quality</text>
-    <text x="130" y="476" text-anchor="middle" font-size="11" fill="#374151">Monitoring · Deployment</text>
+    <rect x="32" y="452" width="196" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <line x1="32" y1="452" x2="228" y2="452" stroke="#0d9488" stroke-width="4" stroke-linecap="round"/>
+    <text x="130" y="484" text-anchor="middle" font-size="15" font-weight="700" fill="#1e40af">DataOps</text>
+    <text x="130" y="508" text-anchor="middle" font-size="11" fill="#374151">Ingestion · Transform</text>
+    <text x="130" y="526" text-anchor="middle" font-size="11" fill="#374151">Orchestration · Quality</text>
+    <text x="130" y="544" text-anchor="middle" font-size="11" fill="#374151">Monitoring · Deployment</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="244" y="384" width="196" height="120" rx="10" fill="#ffffff" stroke="#059669" stroke-width="2"/>
-    <text x="342" y="416" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">MLOps</text>
-    <text x="342" y="440" text-anchor="middle" font-size="11" fill="#374151">Model lifecycle</text>
-    <text x="342" y="458" text-anchor="middle" font-size="11" fill="#374151">Training · Evaluation</text>
-    <text x="342" y="476" text-anchor="middle" font-size="11" fill="#374151">Serving · Drift monitoring</text>
+    <rect x="244" y="452" width="196" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <line x1="244" y1="452" x2="440" y2="452" stroke="url(#mlopsAccent)" stroke-width="4" stroke-linecap="round"/>
+    <text x="342" y="484" text-anchor="middle" font-size="15" font-weight="700" fill="#047857">MLOps</text>
+    <text x="342" y="508" text-anchor="middle" font-size="11" fill="#374151">Model lifecycle</text>
+    <text x="342" y="526" text-anchor="middle" font-size="11" fill="#374151">Training · Evaluation</text>
+    <text x="342" y="544" text-anchor="middle" font-size="11" fill="#374151">Serving · Drift monitoring</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="456" y="384" width="196" height="120" rx="10" fill="#ffffff" stroke="#7c3aed" stroke-width="2"/>
-    <text x="554" y="416" text-anchor="middle" font-size="15" font-weight="700" fill="#6d28d9">LLMOps</text>
-    <text x="554" y="440" text-anchor="middle" font-size="11" fill="#374151">RAG pipelines · Prompts</text>
-    <text x="554" y="458" text-anchor="middle" font-size="11" fill="#374151">Eval · Guardrails · Cost</text>
-    <text x="554" y="476" text-anchor="middle" font-size="11" fill="#374151">Agents · Human-in-loop</text>
+    <rect x="456" y="452" width="196" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <line x1="456" y1="452" x2="652" y2="452" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
+    <text x="554" y="484" text-anchor="middle" font-size="15" font-weight="700" fill="#6d28d9">LLMOps</text>
+    <text x="554" y="508" text-anchor="middle" font-size="11" fill="#374151">RAG pipelines · Prompts</text>
+    <text x="554" y="526" text-anchor="middle" font-size="11" fill="#374151">Eval · Guardrails · Cost</text>
+    <text x="554" y="544" text-anchor="middle" font-size="11" fill="#374151">Agents · Human-in-loop</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="668" y="384" width="196" height="120" rx="10" fill="#ffffff" stroke="#6366f1" stroke-width="2"/>
-    <text x="766" y="416" text-anchor="middle" font-size="15" font-weight="700" fill="#4338ca">AIOps</text>
-    <text x="766" y="440" text-anchor="middle" font-size="11" fill="#374151">AI system observability</text>
-    <text x="766" y="458" text-anchor="middle" font-size="11" fill="#374151">Incident response · SLOs</text>
-    <text x="766" y="476" text-anchor="middle" font-size="11" fill="#374151">Automation · FinOps</text>
+    <rect x="668" y="452" width="196" height="120" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <line x1="668" y1="452" x2="864" y2="452" stroke="#6366f1" stroke-width="4" stroke-linecap="round"/>
+    <text x="766" y="484" text-anchor="middle" font-size="15" font-weight="700" fill="#4338ca">AIOps</text>
+    <text x="766" y="508" text-anchor="middle" font-size="11" fill="#374151">AI system observability</text>
+    <text x="766" y="526" text-anchor="middle" font-size="11" fill="#374151">Incident response · SLOs</text>
+    <text x="766" y="544" text-anchor="middle" font-size="11" fill="#374151">Automation · FinOps</text>
   </g>
 
-  <!-- Connectors -->
-  <line x1="168" y1="248" x2="130" y2="384" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="5 4"/>
-  <line x1="450" y1="248" x2="450" y2="278" stroke="#a5b4fc" stroke-width="1.5"/>
-  <line x1="732" y1="248" x2="766" y2="384" stroke="#c4b5fd" stroke-width="1.5" stroke-dasharray="5 4"/>
-  <line x1="450" y1="334" x2="450" y2="384" stroke="#6366f1" stroke-width="1.5" stroke-dasharray="5 4"/>
-
-  <line x1="450" y1="504" x2="450" y2="544" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="450" y1="572" x2="450" y2="612" stroke="#6366f1" stroke-width="2" marker-end="url(#arrow)"/>
 
   <!-- Outcomes -->
   <g filter="url(#shadow)">
-    <rect x="200" y="554" width="500" height="72" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
-    <text x="450" y="586" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">Business Outcomes</text>
-    <text x="450" y="608" text-anchor="middle" font-size="13" fill="#047857">Measured value · Scaled capability · Continuous improvement</text>
+    <rect x="200" y="622" width="500" height="72" rx="12" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="450" y="654" text-anchor="middle" font-size="18" font-weight="700" fill="#065f46">Business Outcomes</text>
+    <text x="450" y="676" text-anchor="middle" font-size="13" fill="#047857">Measured value · Scaled capability · Continuous improvement</text>
   </g>
 
-  <text x="450" y="680" text-anchor="middle" font-size="13" font-weight="600" fill="#6366f1">Daistra: Data &amp; AI Strategy</text>
+  <text x="450" y="736" text-anchor="middle" font-size="13" font-weight="600" fill="#6366f1">Daistra: Data &amp; AI Strategy</text>
 </svg>
