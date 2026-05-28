@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daistra | ML Project Lifecycle — executive layers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #070d18;
+      --muted: #64748b;
+      --line: #0f172a;
+      --grid: #d8dee9;
+      --white: #ffffff;
+      --discover: #fffbeb;
+      --discover-border: #fbbf24;
+      --discover-head: #fbbf24;
+      --plan: #eff6ff;
+      --plan-border: #60a5fa;
+      --plan-head: #60a5fa;
+      --model: #eef2ff;
+      --model-border: #818cf8;
+      --model-head: #818cf8;
+      --deploy: #fff7ed;
+      --deploy-border: #fb923c;
+      --deploy-head: #fb923c;
+      --operate: #ecfdf5;
+      --operate-border: #34d399;
+      --operate-head: #34d399;
+      --gov: #ede9fe;
+      --gov-border: #a78bfa;
+      --gov-h: #6d28d9;
+      --steward: #e0f2fe;
+      --steward-h: #0369a1;
+      --layer-label: #94a3b8;
+      --radius: 12px;
+      --shadow: 0 10px 40px rgba(15, 23, 42, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(0deg, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 22px),
+        repeating-linear-gradient(90deg, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 22px),
+        #e8edf4;
+      padding: 16px;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .canvas { box-shadow: none; max-width: none; }
+      .hero-nav { display: none; }
+    }
+    .canvas {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px 28px;
+      padding: 24px 28px 20px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: white;
+      text-align: left;
+      border-bottom: 2px solid var(--line);
+    }
+    .hero-brand {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding-top: 2px;
+    }
+    .hero-logo {
+      display: block;
+      margin: 0;
+      height: 72px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: left center;
+    }
+    .hero-content {
+      flex: 1;
+      min-width: 0;
+    }
+    @media (max-width: 540px) {
+      .hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
+      }
+      .hero-brand { padding-top: 0; }
+      .hero-logo { height: 56px; max-width: min(240px, 70vw); }
+      .hero-nav { justify-content: center; }
+    }
+    .hero h1 {
+      font-size: clamp(1.45rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .hero-brand { font-weight: 800; }
+    .hero-sep { opacity: 0.5; font-weight: 500; margin: 0 0.12em; }
+    .hero-sub {
+      margin-top: 8px;
+      font-size: 0.95rem;
+      opacity: 0.85;
+      font-weight: 500;
+    }
+    .hero-meta {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      opacity: 0.75;
+    }
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .hero-nav a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .hero-nav a:hover { background: rgba(255,255,255,0.22); }
+    .hero-nav a:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
+
+    .diagram-body {
+      padding: 28px 24px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .layer-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .layer-label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--layer-label);
+      line-height: 1.2;
+      text-align: right;
+    }
+
+    .layer-content { min-width: 0; }
+
+    .box {
+      border: 2px solid var(--box-border, var(--line));
+      border-radius: var(--radius);
+      background: var(--box-bg, white);
+      padding: 16px 20px;
+    }
+    .box-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+    .box-title .phase-range {
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-left: 6px;
+    }
+    .box-points {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #334155;
+      line-height: 1.5;
+    }
+    .box-points .dot {
+      margin: 0 0.35em;
+      opacity: 0.45;
+      font-weight: 700;
+    }
+    .box-tags {
+      margin-top: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1.5px solid var(--line);
+      background: white;
+    }
+    .tag--mat { background: #f1f5f9; }
+    .tag--mlops { background: #fef9c3; color: #713f12; border-color: #ca8a04; }
+    .tag--gov-dst { background: var(--steward-h); color: white; border-color: var(--steward-h); }
+    .tag--gov-gc { background: var(--gov-h); color: white; border-color: var(--gov-h); }
+
+    .box--discover { --box-bg: var(--discover); --box-border: var(--discover-border); }
+    .box--plan { --box-bg: var(--plan); --box-border: var(--plan-border); }
+    .box--model { --box-bg: var(--model); --box-border: var(--model-border); }
+    .box--deploy { --box-bg: var(--deploy); --box-border: var(--deploy-border); }
+    .box--operate { --box-bg: var(--operate); --box-border: var(--operate-border); }
+
+    .layer-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .layer-cols { grid-template-columns: 1fr; }
+      .layer-row { grid-template-columns: 56px 1fr; gap: 10px; }
+    }
+
+    .gov-container {
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      padding: 14px 16px 16px;
+    }
+    .gov-container__head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px dashed #cbd5e1;
+    }
+    .gov-container__title {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .gov-container__sub {
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .gov-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 640px) {
+      .gov-inner { grid-template-columns: 1fr; }
+    }
+
+    .layer-arrow {
+      grid-column: 2;
+      display: flex;
+      justify-content: center;
+      padding: 6px 0;
+      color: var(--muted);
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .arrow-wrap {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .arrow-wrap { grid-template-columns: 56px 1fr; gap: 10px; }
+    }
+
+    .bottom-section {
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 2px solid var(--line);
+    }
+    .bottom-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--layer-label);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border: 2px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    @media (max-width: 800px) {
+      .pillar-grid { grid-template-columns: 1fr; }
+    }
+    .pillar-col {
+      display: flex;
+      flex-direction: column;
+      border-right: 2px solid var(--line);
+    }
+    .pillar-col:last-child { border-right: none; }
+    @media (max-width: 800px) {
+      .pillar-col { border-right: none; border-bottom: 2px solid var(--line); }
+      .pillar-col:last-child { border-bottom: none; }
+    }
+    .pillar-head {
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      border-bottom: 2px solid var(--line);
+    }
+    .pillar-head--discover { background: var(--discover-head); color: #422006; }
+    .pillar-head--plan { background: var(--plan-head); color: #172554; }
+    .pillar-head--model { background: var(--model-head); color: #312e81; }
+    .pillar-head--deploy { background: var(--deploy-head); color: #431407; }
+    .pillar-head--operate { background: var(--operate-head); color: #022c22; }
+    .pillar-body {
+      padding: 12px 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: center;
+    }
+    .pillar-col--discover .pillar-body { background: var(--discover); }
+    .pillar-col--plan .pillar-body { background: var(--plan); }
+    .pillar-col--model .pillar-body { background: var(--model); }
+    .pillar-col--deploy .pillar-body { background: var(--deploy); }
+    .pillar-col--operate .pillar-body { background: var(--operate); }
+    .pillar-phases {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--muted);
+    }
+    .pillar-mlops {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(15,23,42,0.15);
+      align-self: center;
+    }
+
+    .mlops-strip {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 2fr 2fr 1fr 3fr;
+      gap: 0;
+      border: 2px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    @media (max-width: 800px) {
+      .mlops-strip { grid-template-columns: 1fr 1fr; }
+    }
+    .mlops-cell {
+      padding: 10px 12px;
+      text-align: center;
+      border-right: 1.5px solid var(--line);
+    }
+    .mlops-cell:last-child { border-right: none; }
+    .mlops-cell--a { background: #fef9c3; color: #713f12; }
+    .mlops-cell--b { background: #dbeafe; color: #1e3a8a; }
+    .mlops-cell--c { background: #e0e7ff; color: #312e81; }
+    .mlops-cell--d { background: #ffedd5; color: #9a3412; }
+    .mlops-cell span {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      margin-top: 2px;
+      opacity: 0.85;
+    }
+
+    .maturity-strip {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      align-items: center;
+    }
+    .mat-pill {
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--line);
+    }
+    .mat-intake { background: #e2e8f0; }
+    .mat-poc { background: #fef08a; }
+    .mat-proto { background: #fed7aa; }
+    .mat-pilot { background: #93c5fd; }
+    .mat-mvp { background: #fcd34d; }
+    .mat-prod { background: #6ee7b7; }
+    .mat-op { background: #a5b4fc; }
+    .mat-ret { background: #cbd5e1; }
+
+    .fti-ribbon {
+      margin-top: 14px;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1.5px dashed #6366f1;
+      background: linear-gradient(90deg, #eef2ff, #e0e7ff);
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #312e81;
+    }
+    .fti-ribbon .fti-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 4px;
+      background: #4f46e5;
+      color: white;
+      font-size: 0.85em;
+      margin: 0 2px;
+    }
+
+    .legend {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      justify-content: center;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .legend strong { color: var(--ink); }
+  </style>
+</head>
+<body>
+  <article class="canvas" aria-label="Daistra ML Project Lifecycle — executive layered view">
+    <header class="hero">
+      <div class="hero-brand">
+        <img class="hero-logo" src="assets/daistra-logo-full.png" alt="Daistra Data &amp; AI Strategy" width="723" height="660" decoding="async" />
+      </div>
+      <div class="hero-content">
+        <h1>ML Project Lifecycle</h1>
+        <p class="hero-sub">Executive view — layered stack</p>
+        <p class="hero-meta">13 phases (0–12) · 5 delivery pillars · FTI F→T→I · MLOps A–D · DST + GC governance</p>
+        <nav class="hero-nav" aria-label="Related diagrams">
+          <a href="ml-lifecycle-mental-model.html">Mental model</a>
+          <a href="ml-lifecycle-e2e-poster.html">Interactive poster</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="diagram-body">
+      <!-- Layer 1 -->
+      <div class="layer-row">
+        <div class="layer-label">Layer 1</div>
+        <div class="layer-content">
+          <div class="box box--discover">
+            <h2 class="box-title">Business &amp; demand <span class="phase-range">phases 0–2</span></h2>
+            <p class="box-points">
+              Vision<span class="dot">·</span>DAPS intake<span class="dot">·</span>KPI / SLA<span class="dot">·</span>Sponsor mandate<span class="dot">·</span>Registry &amp; risk sketch
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">Maturity: Intake</span>
+              <span class="tag tag--mlops">MLOps A</span>
+              <span class="tag tag--gov-gc">GC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap" aria-hidden="true"><span></span><div class="layer-arrow">↓</div></div>
+
+      <!-- Layer 2 -->
+      <div class="layer-row">
+        <div class="layer-label">Layer 2</div>
+        <div class="layer-content layer-cols">
+          <div class="box box--discover">
+            <h2 class="box-title">Discover &amp; feasibility <span class="phase-range">0–3</span></h2>
+            <p class="box-points">
+              Envision<span class="dot">·</span>DAPS workshop<span class="dot">·</span>Business case<span class="dot">·</span>Data landscape<span class="dot">·</span>POC gate
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">Intake → POC</span>
+              <span class="tag tag--mlops">MLOps A</span>
+            </div>
+          </div>
+          <div class="box box--plan">
+            <h2 class="box-title">Plan &amp; architecture <span class="phase-range">4</span></h2>
+            <p class="box-points">
+              AI BOM<span class="dot">·</span>FTI plan<span class="dot">·</span>MLOps topology<span class="dot">·</span>Policy pack<span class="dot">·</span>Solution design
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">POC</span>
+              <span class="tag tag--mlops">MLOps A–B</span>
+              <span class="tag tag--gov-dst">DST</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap" aria-hidden="true"><span></span><div class="layer-arrow">↓</div></div>
+
+      <!-- Layer 3 -->
+      <div class="layer-row">
+        <div class="layer-label">Layer 3</div>
+        <div class="layer-content">
+          <div class="gov-container">
+            <div class="gov-container__head">
+              <div>
+                <h2 class="gov-container__title">Governed build</h2>
+                <p class="gov-container__sub">FTI track · cards · lineage · policy conformance</p>
+              </div>
+              <div class="box-tags" style="margin-top:0">
+                <span class="tag tag--gov-dst">DST</span>
+                <span class="tag tag--gov-gc">GC</span>
+              </div>
+            </div>
+            <div class="gov-inner">
+              <div class="box box--model">
+                <h3 class="box-title">FTI — Feature <span class="phase-range">5–6</span></h3>
+                <p class="box-points">
+                  EDA &amp; quality<span class="dot">·</span>Feature pipelines<span class="dot">·</span>Data contract<span class="dot">·</span>Data card
+                </p>
+                <div class="box-tags">
+                  <span class="tag tag--mat">POC → Prototype</span>
+                  <span class="tag tag--mlops">MLOps B</span>
+                </div>
+              </div>
+              <div class="box box--model">
+                <h3 class="box-title">FTI — Train &amp; Infer <span class="phase-range">7–8</span></h3>
+                <p class="box-points">
+                  Train &amp; register<span class="dot">·</span>Model card<span class="dot">·</span>Pilot inference<span class="dot">·</span>Gateway pilot
+                </p>
+                <div class="box-tags">
+                  <span class="tag tag--mat">Pilot</span>
+                  <span class="tag tag--mlops">MLOps C</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap" aria-hidden="true"><span></span><div class="layer-arrow">↓</div></div>
+
+      <!-- Layer 4 -->
+      <div class="layer-row">
+        <div class="layer-label">Layer 4</div>
+        <div class="layer-content layer-cols">
+          <div class="box box--deploy">
+            <h2 class="box-title">Deploy / PRD <span class="phase-range">9</span></h2>
+            <p class="box-points">
+              PRR gate<span class="dot">·</span>Prod CI/CD<span class="dot">·</span>Gateway enforced<span class="dot">·</span>Tech docs &amp; cards final
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">MVP / PRD</span>
+              <span class="tag tag--mlops">MLOps D</span>
+            </div>
+          </div>
+          <div class="box box--operate">
+            <h2 class="box-title">Integrated production <span class="phase-range">10</span></h2>
+            <p class="box-points">
+              Consumer integrations<span class="dot">·</span>SLO dashboard<span class="dot">·</span>Adoption vs KPI<span class="dot">·</span>Handoff T→I complete
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">Production</span>
+              <span class="tag tag--mlops">MLOps D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="arrow-wrap" aria-hidden="true"><span></span><div class="layer-arrow">↓</div></div>
+
+      <!-- Layer 5 run -->
+      <div class="layer-row">
+        <div class="layer-label">Layer 5</div>
+        <div class="layer-content">
+          <div class="box box--operate">
+            <h2 class="box-title">Operate &amp; retire <span class="phase-range">11–12</span></h2>
+            <p class="box-points">
+              Monitor &amp; drift<span class="dot">·</span>Retrain triggers<span class="dot">·</span>Audit &amp; incidents<span class="dot">·</span>Improve loop 11→6/7<span class="dot">·</span>Retire &amp; renew 12→0
+            </p>
+            <div class="box-tags">
+              <span class="tag tag--mat">Operate · Retire</span>
+              <span class="tag tag--mlops">MLOps D · FTI-I</span>
+              <span class="tag tag--gov-gc">GC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="bottom-section" aria-label="Five delivery pillars and MLOps zones">
+        <p class="bottom-label">Delivery pillars · phases 0–12</p>
+        <div class="pillar-grid">
+          <div class="pillar-col pillar-col--discover">
+            <div class="pillar-head pillar-head--discover">① Discover</div>
+            <div class="pillar-body">
+              <span class="pillar-phases">0–3</span>
+              <span>Intake · POC</span>
+              <span class="pillar-mlops">MLOps A</span>
+            </div>
+          </div>
+          <div class="pillar-col pillar-col--plan">
+            <div class="pillar-head pillar-head--plan">② Plan</div>
+            <div class="pillar-body">
+              <span class="pillar-phases">4</span>
+              <span>Architecture</span>
+              <span class="pillar-mlops">MLOps A–B</span>
+            </div>
+          </div>
+          <div class="pillar-col pillar-col--model">
+            <div class="pillar-head pillar-head--model">③ Modelling</div>
+            <div class="pillar-body">
+              <span class="pillar-phases">5–8</span>
+              <span>FTI F→T→I</span>
+              <span class="pillar-mlops">MLOps B–C</span>
+            </div>
+          </div>
+          <div class="pillar-col pillar-col--deploy">
+            <div class="pillar-head pillar-head--deploy">④ Deploy</div>
+            <div class="pillar-body">
+              <span class="pillar-phases">9</span>
+              <span>PRD / MVP</span>
+              <span class="pillar-mlops">MLOps D</span>
+            </div>
+          </div>
+          <div class="pillar-col pillar-col--operate">
+            <div class="pillar-head pillar-head--operate">⑤ Operate</div>
+            <div class="pillar-body">
+              <span class="pillar-phases">10–12</span>
+              <span>Run · improve · retire</span>
+              <span class="pillar-mlops">MLOps D</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="mlops-strip" aria-label="MLOps zones A through D">
+          <div class="mlops-cell mlops-cell--a">MLOps A<span>Intake · 0–3</span></div>
+          <div class="mlops-cell mlops-cell--b">MLOps B<span>Data · 4–6</span></div>
+          <div class="mlops-cell mlops-cell--c">MLOps C<span>Train · 7–8</span></div>
+          <div class="mlops-cell mlops-cell--d">MLOps D<span>Deploy · ops · 9–12</span></div>
+        </div>
+
+        <p class="fti-ribbon" aria-label="FTI build track">
+          FTI build track:
+          <span class="fti-badge">F</span> Feature (6)
+          →
+          <span class="fti-badge">T</span> Train (7)
+          →
+          <span class="fti-badge">I</span> Infer (8)
+        </p>
+
+        <div class="maturity-strip" aria-label="Maturity stages">
+          <span class="mat-pill mat-intake">Intake 0–2</span>
+          <span class="mat-pill mat-poc">POC 3–5</span>
+          <span class="mat-pill mat-proto">Prototype 6</span>
+          <span class="mat-pill mat-pilot">Pilot 7–8</span>
+          <span class="mat-pill mat-mvp">PRD 9</span>
+          <span class="mat-pill mat-prod">Production 10</span>
+          <span class="mat-pill mat-op">Operate 11</span>
+          <span class="mat-pill mat-ret">Retire 12</span>
+        </div>
+      </section>
+
+      <footer class="legend">
+        <span><strong>Build</strong> phases 0–9 · <strong>Run</strong> 10–12</span>
+        <span><strong>DST</strong> data steward · <strong>GC</strong> governance chief</span>
+      </footer>
+    </div>
+  </article>
+</body>
+</html>
