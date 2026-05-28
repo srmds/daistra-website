@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daistra | ML Project Lifecycle — mental model</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #070d18;
+      --muted: #475569;
+      --line: #0f172a;
+      --grid: #d8dee9;
+      --white: #ffffff;
+      --discover: #fffbeb;
+      --discover-head: #fbbf24;
+      --plan: #eff6ff;
+      --plan-head: #60a5fa;
+      --model: #eef2ff;
+      --model-head: #818cf8;
+      --deploy: #fff7ed;
+      --deploy-head: #fb923c;
+      --operate: #ecfdf5;
+      --operate-head: #34d399;
+      --gov: #ede9fe;
+      --gov-h: #6d28d9;
+      --steward: #bae6fd;
+      --steward-h: #0369a1;
+      --build-bg: #f8fafc;
+      --run-bg: #f0fdf4;
+      --radius: 10px;
+      --shadow: 0 8px 32px rgba(15, 23, 42, 0.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.45;
+      color: var(--ink);
+      background:
+        repeating-linear-gradient(0deg, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 20px),
+        repeating-linear-gradient(90deg, var(--grid) 0, var(--grid) 1px, transparent 1px, transparent 20px),
+        #e8edf4;
+      padding: 12px;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .canvas { box-shadow: none; max-width: none; }
+      .tooltip { display: none !important; }
+      a[href]::after { content: " (" attr(href) ")"; font-size: 0.75rem; }
+    }
+    .canvas {
+      max-width: 1280px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      overflow: visible;
+    }
+    .hero {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px 28px;
+      padding: 22px 24px 18px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: white;
+      text-align: left;
+      border-bottom: 2px solid var(--line);
+    }
+    .hero-brand {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding-top: 2px;
+    }
+    .hero-logo {
+      display: block;
+      margin: 0;
+      height: 72px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      object-position: left center;
+    }
+    .hero-content {
+      flex: 1;
+      min-width: 0;
+    }
+    @media (max-width: 540px) {
+      .hero {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 14px;
+      }
+      .hero-brand { padding-top: 0; }
+      .hero-logo { height: 56px; max-width: min(240px, 70vw); }
+      .hero-tagline { margin-left: auto; margin-right: auto; }
+      .hero-nav { justify-content: center; }
+    }
+    .hero h1 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .hero-brand { font-weight: 800; }
+    .hero-sep { opacity: 0.5; font-weight: 500; margin: 0 0.15em; }
+    .hero-tagline {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      opacity: 0.8;
+      max-width: 52rem;
+    }
+    .hero-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .hero-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .hero-link:hover { background: rgba(255,255,255,0.22); }
+    .hero-link:focus-visible { outline: 2px solid #93c5fd; outline-offset: 2px; }
+
+    .roles-band {
+      padding: 14px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+    .roles-band__label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .roles-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .role-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1.5px solid #cbd5e1;
+      background: white;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: default;
+    }
+    .role-pill[data-tip]:hover,
+    .role-pill[data-tip]:focus-visible { border-color: #64748b; box-shadow: 0 2px 8px rgba(15,23,42,0.08); }
+    .role-pill--gov { border-color: #c4b5fd; background: var(--gov); }
+    .role-pill--steward { border-color: #7dd3fc; background: var(--steward); }
+    .role-pill abbr {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      min-height: 420px;
+    }
+    .gov-rail {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 12px 6px;
+      background: linear-gradient(180deg, var(--steward) 0%, var(--gov) 55%, #ddd6fe 100%);
+      border-right: 2px solid var(--line);
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      transform: rotate(180deg);
+      gap: 8px;
+    }
+    .gov-rail__title {
+      font-size: 0.65rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gov-h);
+    }
+    .gov-tag {
+      transform: rotate(180deg);
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.04em;
+    }
+    .gov-tag--dst { background: var(--steward-h); color: white; }
+    .gov-tag--gc { background: var(--gov-h); color: white; }
+
+    .spine-wrap {
+      padding: 16px 16px 12px;
+      overflow: visible;
+    }
+    .diagram-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: visible;
+    }
+    .diagram-cols {
+      display: grid;
+      grid-template-columns: 3fr 1fr 4fr 1fr 3fr;
+      gap: 4px;
+      align-items: stretch;
+    }
+    .build-run-labels {
+      display: grid;
+      grid-template-columns: 9fr 3fr;
+      gap: 4px;
+      margin-bottom: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .build-run-labels span {
+      text-align: center;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .build-run-labels .build-label { background: #e2e8f0; color: #334155; }
+    .build-run-labels .run-label { background: #bbf7d0; color: #14532d; }
+
+    .pillar-headers {
+      margin-bottom: 0;
+    }
+    .pillar-head {
+      text-align: center;
+      padding: 6px 4px;
+      border-radius: 6px 6px 0 0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      line-height: 1.25;
+      border: 1.5px solid var(--line);
+      border-bottom: none;
+    }
+    .pillar-head--discover { background: var(--discover-head); color: #422006; }
+    .pillar-head--plan { background: var(--plan-head); color: #172554; }
+    .pillar-head--model { background: var(--model-head); color: #312e81; }
+    .pillar-head--deploy { background: var(--deploy-head); color: #431407; }
+    .pillar-head--operate { background: var(--operate-head); color: #022c22; }
+    .pillar-head__num { opacity: 0.85; margin-right: 2px; }
+
+    .phase-stage {
+      position: relative;
+      overflow: visible;
+      padding-bottom: 52px;
+    }
+    .phase-spine {
+      position: relative;
+      z-index: 1;
+      min-height: 112px;
+    }
+    .pillar-col {
+      display: flex;
+      gap: 4px;
+      padding: 8px 4px 12px;
+      border: 1.5px solid var(--line);
+      border-top: none;
+      min-height: 112px;
+      align-items: stretch;
+    }
+    .pillar-col--discover { background: var(--discover); }
+    .pillar-col--plan { background: var(--plan); }
+    .pillar-col--model { background: var(--model); }
+    .pillar-col--deploy { background: var(--deploy); }
+    .pillar-col--operate { background: var(--operate); }
+
+    .phase-node {
+      position: relative;
+      z-index: 2;
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 8px 4px;
+      border: 1.5px solid var(--box-line, #64748b);
+      border-radius: 8px;
+      background: white;
+      text-align: center;
+      cursor: default;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .phase-node:hover,
+    .phase-node:focus-visible {
+      box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+      transform: translateY(-1px);
+      outline: none;
+    }
+    .phase-node__num {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 1.35rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--line);
+    }
+    .phase-node__name {
+      font-size: 0.72rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--ink);
+    }
+    .phase-node--fti-f { border-color: #6366f1; box-shadow: inset 0 0 0 2px rgba(99,102,241,0.2); }
+    .phase-node--fti-t { border-color: #4f46e5; }
+    .phase-node--fti-i { border-color: #4338ca; }
+
+    .fti-row,
+    .mlops-band {
+      position: relative;
+      z-index: 2;
+    }
+    .fti-row {
+      margin-top: 2px;
+    }
+    .fti-ribbon {
+      grid-column: 3;
+      margin: 0;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(90deg, #eef2ff, #e0e7ff);
+      border: 1.5px dashed #6366f1;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #312e81;
+    }
+    .fti-ribbon .fti-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 6px;
+      background: #4f46e5;
+      color: white;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .fti-arrow { color: #6366f1; font-weight: 700; }
+
+    .mlops-band {
+      margin: 0;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .mlops-zone {
+      text-align: center;
+      padding: 6px 4px;
+      border-radius: 4px;
+      border: 1px dashed #94a3b8;
+      align-self: stretch;
+    }
+    .mlops-zone--a { background: #fef9c3; color: #713f12; grid-column: 1; }
+    .mlops-zone--b { background: #dbeafe; color: #1e3a8a; grid-column: 2 / 4; }
+    .mlops-zone--c { background: #e0e7ff; color: #312e81; grid-column: 3; }
+    .mlops-zone--d { background: #ffedd5; color: #9a3412; grid-column: 4 / 6; }
+
+    .feedback-svg {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+      z-index: 0;
+      overflow: visible;
+    }
+    .feedback-labels {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 6px;
+      height: 40px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .feedback-label {
+      position: absolute;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748b;
+      white-space: nowrap;
+    }
+    .feedback-svg path {
+      fill: none;
+      stroke: #94a3b8;
+      stroke-width: 1.5;
+      stroke-dasharray: 6 4;
+    }
+    .feedback-svg text {
+      font-family: "DM Sans", sans-serif;
+      font-size: 10px;
+      fill: #64748b;
+      font-weight: 600;
+    }
+
+    .maturity-band {
+      position: relative;
+      z-index: 1;
+      border-top: 2px solid var(--line);
+      padding: 0;
+    }
+    .maturity-band__label {
+      padding: 8px 20px 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .maturity-track {
+      display: grid;
+      grid-template-columns: 3fr 3fr 1fr 2fr 1fr 1fr 1fr 1fr;
+      margin: 0 16px 16px;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 44px;
+    }
+    .mat-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 4px;
+      text-align: center;
+      border-right: 1px solid rgba(15,23,42,0.12);
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .mat-cell:last-child { border-right: none; }
+    .mat-cell__range { font-size: 0.65rem; font-weight: 500; opacity: 0.85; margin-top: 2px; }
+    .mat-intake { background: #e2e8f0; color: #334155; }
+    .mat-poc { background: #fef08a; color: #713f12; }
+    .mat-proto { background: #fed7aa; color: #9a3412; }
+    .mat-pilot { background: #93c5fd; color: #1e3a8a; }
+    .mat-mvp { background: #fcd34d; color: #78350f; }
+    .mat-prod { background: #6ee7b7; color: #065f46; }
+    .mat-op { background: #a5b4fc; color: #3730a3; }
+    .mat-ret { background: #cbd5e1; color: #334155; }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      padding: 12px 20px 18px;
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .legend strong { color: var(--ink); }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+    .legend-swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+    }
+
+    .tooltip {
+      position: fixed;
+      z-index: 1000;
+      max-width: 280px;
+      padding: 10px 12px;
+      background: var(--line);
+      color: white;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.12s;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    }
+    .tooltip.visible { opacity: 1; }
+    .tooltip strong {
+      display: block;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+    .tooltip .meta {
+      font-size: 0.75rem;
+      opacity: 0.75;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 1200px) {
+      .phase-node__num { font-size: 1.15rem; }
+      .phase-node__name { font-size: 0.68rem; }
+      .pillar-col { min-height: 100px; }
+      .phase-spine { min-height: 100px; }
+    }
+    @media (max-width: 900px) {
+      .diagram-cols { grid-template-columns: 1fr; }
+      .pillar-col { flex-direction: column; }
+      .build-run-labels { grid-template-columns: 1fr; }
+      .maturity-track { grid-template-columns: repeat(4, 1fr); }
+      .fti-ribbon { grid-column: auto; }
+      .mlops-zone--a,
+      .mlops-zone--b,
+      .mlops-zone--c,
+      .mlops-zone--d { grid-column: auto; }
+      .phase-stage { padding-bottom: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <article class="canvas" aria-label="Daistra ML lifecycle mental model">
+    <header class="hero">
+      <div class="hero-brand">
+        <img class="hero-logo" src="assets/daistra-logo-full.png" alt="Daistra Data &amp; AI Strategy" width="723" height="660" decoding="async" />
+      </div>
+      <div class="hero-content">
+        <h1>ML Project Lifecycle — mental model</h1>
+        <p class="hero-tagline">
+          13 phases (0–12) · 5 delivery pillars · FTI build track · MLOps zones A–D · governance thread (DST + GC)
+        </p>
+        <nav class="hero-nav" aria-label="Related diagrams">
+          <a class="hero-link" href="ml-lifecycle-executive-layers.html">Executive layers</a>
+          <a class="hero-link" href="ml-lifecycle-e2e-poster.html">Interactive poster</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="roles-band" aria-label="Key delivery roles">
+      <p class="roles-band__label">Who — delivery roles (hover for detail)</p>
+      <div class="roles-row" id="rolesRow">
+        <span class="role-pill" tabindex="0" data-tip="BS|Business Sponsor|Funding, mandate, sponsor sign-off on intake and retire."> <abbr title="Business Sponsor">BS</abbr> Sponsor </span>
+        <span class="role-pill" tabindex="0" data-tip="AT|Analytics Translator|Business–analytics bridge; DAPS workshops and KPI framing."> <abbr>AT</abbr> Translator </span>
+        <span class="role-pill" tabindex="0" data-tip="PM|Product Manager|Registry, intake thread, portfolio and PRD accountability."> <abbr>PM</abbr> Product </span>
+        <span class="role-pill" tabindex="0" data-tip="DS|Data Scientist|EDA, features, experiments, drift analysis and retrain."> <abbr>DS</abbr> Scientist </span>
+        <span class="role-pill" tabindex="0" data-tip="DE|Data Engineer|Landing zones, orchestration, batch/stream pipelines."> <abbr>DE</abbr> Engineer </span>
+        <span class="role-pill" tabindex="0" data-tip="MLE|ML Engineer|Train, deploy, monitor, FTI pipelines and gateway wiring."> <abbr>MLE</abbr> ML Eng </span>
+        <span class="role-pill" tabindex="0" data-tip="SD|Solution Designer|Solution and MLOps architecture, integration patterns."> <abbr>SD</abbr> Designer </span>
+        <span class="role-pill role-pill--gov" tabindex="0" data-tip="GC|Governance Chief|Policy packs, card reviews, gateway conformance, audit."> <abbr>GC</abbr> Governance </span>
+        <span class="role-pill role-pill--steward" tabindex="0" data-tip="DST|Data Steward|Catalog, contracts, PII/masking, retention and lineage."> <abbr>DST</abbr> Steward </span>
+      </div>
+    </section>
+
+    <div class="main-grid">
+      <aside class="gov-rail" aria-label="Governance thread">
+        <span class="gov-rail__title">Governance</span>
+        <span class="gov-tag gov-tag--dst">DST</span>
+        <span class="gov-tag gov-tag--gc">GC</span>
+      </aside>
+
+      <div class="spine-wrap">
+        <div class="diagram-stack">
+        <div class="build-run-labels" aria-hidden="true">
+          <span class="build-label">Build · phases 0–9</span>
+          <span class="run-label">Run · phases 10–12</span>
+        </div>
+
+        <div class="pillar-headers diagram-cols" aria-label="Five delivery pillars">
+          <div class="pillar-head pillar-head--discover"><span class="pillar-head__num">①</span>Discover &amp; Intake <span style="font-weight:500">0–3</span></div>
+          <div class="pillar-head pillar-head--plan"><span class="pillar-head__num">②</span>Plan &amp; Arch <span style="font-weight:500">4</span></div>
+          <div class="pillar-head pillar-head--model"><span class="pillar-head__num">③</span>Modelling &amp; FTI <span style="font-weight:500">5–8</span></div>
+          <div class="pillar-head pillar-head--deploy"><span class="pillar-head__num">④</span>Deploy &amp; Delivery <span style="font-weight:500">9</span></div>
+          <div class="pillar-head pillar-head--operate"><span class="pillar-head__num">⑤</span>Operate <span style="font-weight:500">10–12</span></div>
+        </div>
+
+        <div class="phase-stage" id="phaseStage">
+        <div class="phase-spine diagram-cols" id="phaseSpine" aria-label="Phase spine 0 to 12">
+          <div class="pillar-col pillar-col--discover">
+            <div class="phase-node" tabindex="0" data-tip="0|Envision|Corporate strategy → governable demand · MLOps A · Intake"><span class="phase-node__num">0</span><span class="phase-node__name">Envision</span></div>
+            <div class="phase-node" tabindex="0" data-tip="1|DAPS|Ideation, registry, Art. 6 risk sketch · MLOps A · Intake"><span class="phase-node__num">1</span><span class="phase-node__name">DAPS</span></div>
+            <div class="phase-node" tabindex="0" data-tip="2|KPI / SLA|Business case, KPI targets, draft SLA · MLOps A · Intake"><span class="phase-node__num">2</span><span class="phase-node__name">KPI / SLA</span></div>
+            <div class="phase-node" tabindex="0" data-tip="3|Feasibility|Go/no-go, data landscape · MLOps A · POC"><span class="phase-node__num">3</span><span class="phase-node__name">Feasibility</span></div>
+          </div>
+          <div class="pillar-col pillar-col--plan">
+            <div class="phase-node" tabindex="0" data-tip="4|Architecture|AI BOM, FTI plan, policy pack · MLOps A–B · POC"><span class="phase-node__num">4</span><span class="phase-node__name">Architecture</span></div>
+          </div>
+          <div class="pillar-col pillar-col--model">
+            <div class="phase-node" tabindex="0" data-tip="5|EDA|Exploratory data, quality report · MLOps B · POC"><span class="phase-node__num">5</span><span class="phase-node__name">EDA</span></div>
+            <div class="phase-node phase-node--fti-f" tabindex="0" data-tip="6|Feature (F)|FTI-F · feature pipeline · Prototype"><span class="phase-node__num">6</span><span class="phase-node__name">Feature (F)</span></div>
+            <div class="phase-node phase-node--fti-t" tabindex="0" data-tip="7|Training (T)|FTI-T · train &amp; register · Pilot"><span class="phase-node__num">7</span><span class="phase-node__name">Training (T)</span></div>
+            <div class="phase-node phase-node--fti-i" tabindex="0" data-tip="8|Inference (I)|FTI-I · scoring build · Pilot"><span class="phase-node__num">8</span><span class="phase-node__name">Inference (I)</span></div>
+          </div>
+          <div class="pillar-col pillar-col--deploy">
+            <div class="phase-node" tabindex="0" data-tip="9|Deploy / PRD|CI/CD prod, gateway, PRR · MLOps D · PRD/MVP"><span class="phase-node__num">9</span><span class="phase-node__name">Deploy / PRD</span></div>
+          </div>
+          <div class="pillar-col pillar-col--operate">
+            <div class="phase-node" tabindex="0" data-tip="10|Integrated|Consumer sign-off, cards final · Production"><span class="phase-node__num">10</span><span class="phase-node__name">Integrated</span></div>
+            <div class="phase-node" tabindex="0" data-tip="11|Monitor|Drift, retrain triggers, SLOs · Operate"><span class="phase-node__num">11</span><span class="phase-node__name">Monitor</span></div>
+            <div class="phase-node" tabindex="0" data-tip="12|Retire|Decommission, archive, lineage closure · Retire"><span class="phase-node__num">12</span><span class="phase-node__name">Retire</span></div>
+          </div>
+        </div>
+
+        <svg class="feedback-svg" id="feedbackSvg" aria-hidden="true">
+          <defs>
+            <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+              <polygon points="0 0, 8 3, 0 6" fill="#94a3b8" />
+            </marker>
+          </defs>
+        </svg>
+        <div class="feedback-labels" id="feedbackLabels" aria-hidden="true"></div>
+        </div>
+
+        <div class="fti-row diagram-cols" aria-label="FTI build track">
+          <p class="fti-ribbon">
+            <span>FTI build track</span>
+            <span class="fti-badge">F</span><span class="fti-arrow">→</span>
+            <span class="fti-badge">T</span><span class="fti-arrow">→</span>
+            <span class="fti-badge">I</span>
+            <span style="font-weight:500;color:#64748b">· phases 6 → 7 → 8</span>
+          </p>
+        </div>
+
+        <div class="mlops-band diagram-cols" aria-label="MLOps zones">
+          <div class="mlops-zone mlops-zone--a">MLOps A · intake</div>
+          <div class="mlops-zone mlops-zone--b">MLOps B · data</div>
+          <div class="mlops-zone mlops-zone--c">MLOps C · train</div>
+          <div class="mlops-zone mlops-zone--d">MLOps D · deploy / ops</div>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="maturity-band" aria-label="Maturity stages aligned to phases">
+      <p class="maturity-band__label">When — maturity stages (aligned to phases)</p>
+      <div class="maturity-track">
+        <div class="mat-cell mat-intake">Intake<span class="mat-cell__range">0–2</span></div>
+        <div class="mat-cell mat-poc">POC<span class="mat-cell__range">3–5</span></div>
+        <div class="mat-cell mat-proto">Prototype<span class="mat-cell__range">6</span></div>
+        <div class="mat-cell mat-pilot">Pilot<span class="mat-cell__range">7–8</span></div>
+        <div class="mat-cell mat-mvp">PRD / MVP<span class="mat-cell__range">9</span></div>
+        <div class="mat-cell mat-prod">Production<span class="mat-cell__range">10</span></div>
+        <div class="mat-cell mat-op">Operate<span class="mat-cell__range">11</span></div>
+        <div class="mat-cell mat-ret">Retire<span class="mat-cell__range">12</span></div>
+      </div>
+    </section>
+
+    <footer class="legend">
+      <span class="legend-item"><span class="legend-swatch" style="background:var(--discover-head)"></span> <strong>①–⑤</strong> delivery pillars</span>
+      <span class="legend-item"><span class="legend-swatch" style="background:#e2e8f0"></span> Build 0–9 · Run 10–12</span>
+      <span class="legend-item"><span style="border-bottom:2px dashed #94a3b8;padding-bottom:2px">↺</span> Improve <strong>11→6/7</strong> · Renew <strong>12→0</strong></span>
+    </footer>
+  </article>
+
+  <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+
+  <script>
+    (function () {
+      const tip = document.getElementById("tooltip");
+      const tipped = document.querySelectorAll("[data-tip]");
+
+      function showTip(el, clientX, clientY) {
+        const parts = el.getAttribute("data-tip").split("|");
+        const title = parts[1] || parts[0];
+        const body = parts[2] || "";
+        const meta = parts[3] || "";
+        tip.innerHTML = "<strong>" + (parts[0] ? parts[0] + " · " : "") + title + "</strong>" +
+          (body ? body : "") +
+          (meta ? '<div class="meta">' + meta + "</div>" : "");
+        tip.hidden = false;
+        tip.classList.add("visible");
+        const pad = 12;
+        let left = clientX + pad;
+        let top = clientY + pad;
+        tip.style.left = left + "px";
+        tip.style.top = top + "px";
+        const rect = tip.getBoundingClientRect();
+        if (rect.right > window.innerWidth - 8) left = clientX - rect.width - pad;
+        if (rect.bottom > window.innerHeight - 8) top = clientY - rect.height - pad;
+        tip.style.left = Math.max(8, left) + "px";
+        tip.style.top = Math.max(8, top) + "px";
+      }
+
+      function hideTip() {
+        tip.classList.remove("visible");
+        tip.hidden = true;
+      }
+
+      tipped.forEach(function (el) {
+        el.addEventListener("mouseenter", function (e) { showTip(el, e.clientX, e.clientY); });
+        el.addEventListener("mousemove", function (e) { showTip(el, e.clientX, e.clientY); });
+        el.addEventListener("mouseleave", hideTip);
+        el.addEventListener("focus", function (e) {
+          const r = el.getBoundingClientRect();
+          showTip(el, r.left + r.width / 2, r.top);
+        });
+        el.addEventListener("blur", hideTip);
+      });
+
+      function drawFeedbackLoops() {
+        const spine = document.getElementById("phaseSpine");
+        const svg = document.getElementById("feedbackSvg");
+        const labels = document.getElementById("feedbackLabels");
+        if (!spine || !svg) return;
+        const nodes = spine.querySelectorAll(".phase-node");
+        const n6 = nodes[5];
+        const n7 = nodes[6];
+        const n11 = nodes[11];
+        const n0 = nodes[0];
+        const n12 = nodes[12];
+        if (!n6 || !n11 || !n0 || !n12) return;
+
+        const wrap = document.getElementById("phaseStage") || spine.parentElement;
+        const wr = wrap.getBoundingClientRect();
+        const sr = spine.getBoundingClientRect();
+        const spineH = sr.bottom - wr.top;
+        const gutter = Math.max(44, wr.height - spineH);
+
+        function center(el) {
+          const r = el.getBoundingClientRect();
+          return {
+            x: r.left + r.width / 2 - wr.left,
+            y: r.top + r.height / 2 - wr.top
+          };
+        }
+
+        const c11 = center(n11);
+        const c6 = center(n6);
+        const c7 = center(n7);
+        const c0 = center(n0);
+        const c12 = center(n12);
+        const bottomY = spineH + 10;
+        const renewY = bottomY + 22;
+
+        const pathImprove = "M" + c11.x + "," + c11.y +
+          " C" + c11.x + "," + bottomY + " " + c6.x + "," + bottomY + " " + c6.x + "," + c6.y;
+        const pathImprove7 = "M" + c11.x + "," + c11.y +
+          " C" + (c11.x + 20) + "," + bottomY + " " + c7.x + "," + bottomY + " " + c7.x + "," + c7.y;
+        const pathRenew = "M" + c12.x + "," + c12.y +
+          " C" + c12.x + "," + renewY + " " + c0.x + "," + renewY + " " + c0.x + "," + c0.y;
+
+        const svgH = Math.max(spineH, renewY + 6);
+        svg.setAttribute("viewBox", "0 0 " + wr.width + " " + svgH);
+        svg.style.height = svgH + "px";
+        svg.innerHTML = '<defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">' +
+          '<polygon points="0 0, 8 3, 0 6" fill="#94a3b8"/></marker></defs>' +
+          '<path d="' + pathImprove + '" marker-end="url(#arrowhead)"/>' +
+          '<path d="' + pathImprove7 + '" marker-end="url(#arrowhead)"/>' +
+          '<path d="' + pathRenew + '" marker-end="url(#arrowhead)"/>';
+
+        if (labels) {
+          labels.style.height = gutter + "px";
+          labels.innerHTML =
+            '<span class="feedback-label" style="left:' + ((c11.x + c6.x) / 2 / wr.width * 100) +
+            '%;top:4px">11→6 improve</span>' +
+            '<span class="feedback-label" style="left:' + ((c12.x + c0.x) / 2 / wr.width * 100) +
+            '%;top:22px">12→0 renew</span>';
+        }
+      }
+
+      window.addEventListener("load", drawFeedbackLoops);
+      window.addEventListener("resize", function () {
+        clearTimeout(window._mmResize);
+        window._mmResize = setTimeout(drawFeedbackLoops, 120);
+      });
+    })();
+  </script>
+</body>
+</html>
